@@ -12,16 +12,6 @@ Create a browser-based endless runner with a memorable world, tight controls, an
 
 > Create one complete HTML file for a fast, polished endless runner using HTML5 Canvas. Set it in a visually distinctive world and give the player a character with responsive running, jumping, and optional slide controls. Use arrow keys or WASD, with tap or click support where practical. Add varied obstacles, collectible items, score, distance, a gradual difficulty curve, and a clear high-score display. Include a title screen, short in-game instructions, pause control, game-over screen, and restart action. Use layered scrolling scenery, expressive animation, particles, and browser-native sound effects to make success, collection, and collision feel immediate. The game should be self-contained, responsive, and smooth in a modern browser. Return only the complete working HTML with all CSS and JavaScript included.
 
-## Heuristic
-
-| Criterion | Weight | What good looks like |
-| --- | ---: | --- |
-| Game feel | 30% | Movement and jumping feel immediate, controlled, and satisfying. |
-| Core loop | 25% | Obstacles, score, difficulty, loss, and restart work as one coherent system. |
-| Visual direction | 20% | The world has a clear identity that supports the action. |
-| Feedback | 15% | Animation, sound, UI, and collision responses communicate state well. |
-| Technical quality | 10% | The browser artifact is stable and self-contained. |
-
 ## Run protocol
 
 Run one documented attempt per model before comparing. Record exact model identity, provider, prompt, settings, token use, cost, and whether the result was manually played.
@@ -30,12 +20,12 @@ Run one documented attempt per model before comparing. Record exact model identi
 
 | Model | Input tokens | Output tokens | Cost |
 | --- | ---: | ---: | ---: |
-| No runs recorded | | | |
+| No runs recorded | | |
 
 ## Results
 
-| Model | Result | Heuristic score | Notes |
-| --- | --- | ---: | --- |
+| Model | Result | Notes |
+| --- | --- | --- |
 | No runs recorded | | | |
 
 ## Verdict

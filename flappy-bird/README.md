@@ -14,31 +14,27 @@ Build a Flappy Bird style game that makes a simple one-button loop feel precise,
 
 Record any system prompt, attached assets, or follow-up instruction alongside the model run. Do not change the shared prompt between models.
 
-## Heuristic
-
-| Criterion | Weight | What good looks like |
-| --- | ---: | --- |
-| Input precision | 30% | Flaps feel immediate and consistent across keyboard, pointer, and touch when required. |
-| Balance | 25% | Gravity, obstacle gaps, and speed create a fair but demanding rhythm. |
-| Game loop | 20% | Start, play, score, collision, game-over, and restart states are complete. |
-| Feedback and polish | 15% | Visual and sound feedback make success and failure legible and rewarding. |
-| Technical quality | 10% | The result loads reliably and has no hidden dependencies. |
-
 ## Run protocol
 
 Use the same prompt and assets for every run. Record exact model identity, provider, settings, tokens, cost, and a short manual-playtest note.
 
-## Costs
+## Token usage and costs
 
-| Model | Input tokens | Output tokens | Cost |
-| --- | ---: | ---: | ---: |
-| No runs recorded | | | |
+Aggregated from agent-mode runs only. The `title-gen` and `taste-1` runs are intentionally excluded.
+
+| Model | Runs | Input tokens | Cached input tokens | Output tokens | Total tokens | Cost |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Codex 5.6 Terra | 1 | 21,818 | 131,584 | 4,259 | 26,077 | Not reported |
+| DeepSeek V4 Flash (`deepseek/deepseek-v4-flash`) | 9 | 276,009 | — | 27,083 | 303,092 | $0.026754 |
+| Kimi K3 (`moonshotai/Kimi-K3`) | 6 | 173,137 | — | 7,490 | 180,627 | $0.226800 |
+
+For Codex, the reported total is 26,077 tokens (21,818 input + 4,259 output); its 131,584 cached input tokens are listed separately and are not included in that total.
 
 ## Results
 
-| Model | Result | Heuristic score | Notes |
-| --- | --- | ---: | --- |
-| No runs recorded | | | |
+| Model | Result | Notes |
+| --- | --- | --- |
+| No runs recorded | | |
 
 ## Verdict
 
