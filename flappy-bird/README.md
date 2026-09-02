@@ -20,8 +20,6 @@ Use the same prompt and assets for every run. Record exact model identity, provi
 
 ## Token usage and costs
 
-Aggregated from agent-mode runs only. The `title-gen` and `taste-1` runs are intentionally excluded.
-
 | Model | Runs | Input tokens | Cached input tokens | Output tokens | Total tokens | Cost |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Codex 5.6 Terra | 1 | 21,818 | 131,584 | 4,259 | 26,077 | Not reported |
