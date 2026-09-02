@@ -8,9 +8,11 @@ Build a Flappy Bird style game that makes a simple one-button loop feel precise,
 
 ## Prompt
 
-The shared prompt is not finalized. Add the exact prompt before the first model run and keep it unchanged across the comparison.
+**Prompt used for this test:**
 
-The prompt should define input methods, gravity and flap behavior, obstacle generation, score, collision, start and restart states, visual direction, sound, and expected delivery format.
+> Create a complete single HTML file for a cute Flappy Bird style game using Canvas. Smooth gravity, flapping animation, parallax background, score, pipe obstacles, game over screen.
+
+Record any system prompt, attached assets, or follow-up instruction alongside the model run. Do not change the shared prompt between models.
 
 ## Heuristic
 
