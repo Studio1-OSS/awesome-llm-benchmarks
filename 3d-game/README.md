@@ -8,9 +8,9 @@ Create an interactive 3D solar-system experience that makes exploration feel cle
 
 ## Prompt
 
-The shared prompt is not finalized. Add the exact prompt before running models, then keep it unchanged across the test.
+**Prompt used for this test:**
 
-The prompt should define the scene, required interactions, camera behavior, information hierarchy, visual direction, browser constraints, and expected delivery format.
+> Create one complete HTML file for an interactive 3D solar-system explorer. Use Three.js from a CDN and make the experience feel like a small observatory rather than a technical demo. Include a sun, the major planets with distinct scale and color treatment, orbital motion, a starfield, ambient lighting, and a focused information panel that updates when a planet is selected. Provide smooth orbit and zoom controls, a guided default camera view, readable labels, and a compact help cue for first-time visitors. The scene should be visually cinematic but remain understandable, responsive, and stable on a modern desktop browser. Return only the complete working HTML with all styling and JavaScript included.
 
 ## Heuristic
 

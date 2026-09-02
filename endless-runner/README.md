@@ -8,9 +8,9 @@ Create a browser-based endless runner with a memorable world, tight controls, an
 
 ## Prompt
 
-The shared prompt is not finalized. Add it verbatim before the first run and keep it identical across models.
+**Prompt used for this test:**
 
-The prompt should define movement, obstacles, scoring, difficulty progression, restart behavior, visual direction, input support, sound, responsiveness, and expected delivery format.
+> Create one complete HTML file for a fast, polished endless runner using HTML5 Canvas. Set it in a visually distinctive world and give the player a character with responsive running, jumping, and optional slide controls. Use arrow keys or WASD, with tap or click support where practical. Add varied obstacles, collectible items, score, distance, a gradual difficulty curve, and a clear high-score display. Include a title screen, short in-game instructions, pause control, game-over screen, and restart action. Use layered scrolling scenery, expressive animation, particles, and browser-native sound effects to make success, collection, and collision feel immediate. The game should be self-contained, responsive, and smooth in a modern browser. Return only the complete working HTML with all CSS and JavaScript included.
 
 ## Heuristic
 

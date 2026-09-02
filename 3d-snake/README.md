@@ -8,9 +8,9 @@ Build a playable snake game where 3D space improves the game rather than making 
 
 ## Prompt
 
-The shared prompt is not finalized. Before testing, add the verbatim prompt and keep it identical for every model.
+**Prompt used for this test:**
 
-The prompt should define controls, board rules, food, growth, collision behavior, camera, score, restart state, visual direction, and expected delivery format.
+> Create one complete HTML file for a playable 3D Snake game. Use Three.js from a CDN to render a clear, stylish game board with a slightly angled camera that keeps the snake, food, and boundaries easy to read. Support arrow keys and WASD, with movement that is grid-based and cannot instantly reverse into the snake's body. Include food collection, visible growth, score, increasing speed, wall and self-collision, a start screen, game-over state, and restart control. Give the game a confident neon arcade visual system with restrained motion and feedback that helps the player understand each event. Keep the experience responsive and reliable in a modern browser. Return only the complete working HTML with all styling and JavaScript included.
 
 ## Heuristic
 
