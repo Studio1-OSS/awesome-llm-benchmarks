@@ -30,7 +30,7 @@ The Fable 5.1 run received the same text, pasted with terminal quote markers (`â
 
 ## Run protocol
 
-Every model got the same prompt in an empty directory, with no follow-up instructions. Each output was then loaded in Chrome exactly as generated, with no edits, and play-tested by hand.
+The GLM 5.3 Flash and Kimi K3 runs received the prompt above verbatim. The Fable 5.1 run received the same prompt with terminal quote markers (`â–Ž`) at the start of each line, followed by one extra line: `Build this as a single html page`.
 
 | Model | Provider | Interface | Run date |
 | --- | --- | --- | --- |
