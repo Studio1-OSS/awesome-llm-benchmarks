@@ -8,6 +8,7 @@ A clean, evidence-first home for comparing model-generated web experiences. Test
 | --- | --- | --- |
 | [2D Breakout](2d-breakout/README.md) | Ready for runs | Responsive arcade-game craft |
 | [3D Game](3d-game/README.md) | Ready for runs | Interactive 3D scene design |
+| [3D GTA Game](3d-gta-game/README.md) | Comparison complete | Open-world systems depth and long-build reliability |
 | [3D Snake](3d-snake/README.md) | Ready for runs | 3D game loop and spatial clarity |
 | [Design Portfolio](design-portfolio/README.md) | Ready for runs | Editorial visual design and interaction |
 | [Endless Runner](endless-runner/README.md) | Ready for runs | Game feel, pacing, and visual direction |
