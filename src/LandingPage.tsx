@@ -30,24 +30,7 @@ export default function LandingPage() {
       <main className="pt-24 pb-32">
         {/* Hero Section */}
         <div className="max-w-[1040px] mx-auto px-6 text-center">
-          <div className="relative mx-auto w-full max-w-4xl aspect-[2/1] bg-[#F5F5F5] rounded-[16px] border border-[#EAEAEA] mb-12 flex items-center justify-center overflow-hidden shadow-[inset_0_0_0_1px_rgba(0,0,0,0.02)]">
-            <div className="absolute inset-0 bg-[radial-gradient(#E5E5E5_1px,transparent_1px)] [background-size:24px_24px] opacity-60"></div>
-            <div className="z-10 w-24 h-24 opacity-[0.05]">
-              <img src="/icon.png" alt="LLM Arena Icon" className="w-full h-full object-contain grayscale" />
-            </div>
-            
-            {/* Dock */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 px-6 py-3 bg-white rounded-full border border-[#EAEAEA] shadow-sm">
-               <img src="/logos/openai.svg" className="w-5 h-5 opacity-70 grayscale hover:grayscale-0 transition-all cursor-pointer" alt="OpenAI" />
-               <img src="/logos/anthropic.svg" className="w-5 h-5 opacity-70 grayscale hover:grayscale-0 transition-all cursor-pointer" alt="Anthropic" />
-               <img src="/logos/meta.svg" className="w-5 h-5 opacity-70 grayscale hover:grayscale-0 transition-all cursor-pointer" alt="Meta" />
-               <img src="/logos/google.svg" className="w-5 h-5 opacity-70 grayscale hover:grayscale-0 transition-all cursor-pointer" alt="Google" />
-               <img src="/logos/deepseek.svg" className="w-5 h-5 opacity-70 grayscale hover:grayscale-0 transition-all cursor-pointer" alt="DeepSeek" />
-               <img src="/logos/github.svg" className="w-5 h-5 opacity-70 grayscale hover:grayscale-0 transition-all cursor-pointer" alt="GitHub" />
-            </div>
-          </div>
-
-          <h1 className="text-[48px] md:text-[64px] font-bold tracking-tight text-[#171717] leading-tight mb-5">
+          <h1 className="text-[48px] md:text-[64px] font-bold tracking-tight text-[#171717] leading-tight mb-5 mt-10">
             Awesome LLM Benchmarks
           </h1>
           <p className="text-[17px] md:text-[19px] text-[#666666] max-w-2xl mx-auto leading-relaxed mb-10 font-medium">
