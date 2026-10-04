@@ -419,13 +419,13 @@ function App() {
         {/* Sidebar Header with Brand */}
         <div className={`h-20 flex items-center ${isSidebarCollapsed ? 'justify-center px-0' : 'justify-between px-4'} shrink-0 bg-transparent`}>
           {!isSidebarCollapsed ? (
-            <div className="flex items-center min-w-0 gap-2.5">
+            <a href="#landing" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
               <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
               <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
                 <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
                 <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
               </div>
-            </div>
+            </a>
           ) : (
             <button 
               onClick={() => {
