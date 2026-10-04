@@ -18,7 +18,10 @@ export default function LandingPage() {
             <a href="#" className="hover:text-black transition-colors">Pricing</a>
           </nav>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity">
+            <img src="/logos/github.svg" alt="GitHub" className="w-[18px] h-[18px]" />
+          </a>
           <a href="#dashboard" className="text-[13px] font-medium text-black bg-white border border-[#EAEAEA] px-4 py-1.5 rounded-md hover:bg-[#F5F5F5] transition-all shadow-sm">Dashboard</a>
         </div>
       </header>
