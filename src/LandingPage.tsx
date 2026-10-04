@@ -19,11 +19,7 @@ export default function LandingPage() {
           </nav>
         </div>
         <div className="flex items-center gap-3">
-          <a href="#" className="text-[13px] font-medium text-[#666666] hover:text-black hidden md:block px-3 py-1.5 border border-[#EAEAEA] rounded-md transition-all bg-white hover:bg-[#F5F5F5]">Ask AI</a>
           <a href="#dashboard" className="text-[13px] font-medium text-black bg-white border border-[#EAEAEA] px-4 py-1.5 rounded-md hover:bg-[#F5F5F5] transition-all shadow-sm">Dashboard</a>
-          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-gray-200 to-gray-400 border border-[#EAEAEA] overflow-hidden ml-2 cursor-pointer">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Felix" alt="Avatar" className="w-full h-full object-cover" />
-          </div>
         </div>
       </header>
 
@@ -40,10 +36,6 @@ export default function LandingPage() {
             <a href="#dashboard" className="px-6 py-2.5 rounded-full bg-black text-white text-[14.5px] font-medium hover:bg-black/90 transition-colors shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] flex items-center gap-2">
               Start Comparing
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="px-6 py-2.5 rounded-full bg-white text-[#171717] text-[14.5px] font-medium border border-[#EAEAEA] hover:bg-[#F5F5F5] transition-colors flex items-center gap-2">
-              <img src="/logos/github.svg" alt="GitHub" className="w-4 h-4 opacity-80" />
-              View Source
             </a>
           </div>
         </div>
