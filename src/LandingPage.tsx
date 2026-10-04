@@ -4,19 +4,13 @@ export default function LandingPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
-          <a href="#" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
-            <img src="/icon.png" alt="LLM Arena Icon" className="h-6 w-6 object-contain" />
-            <div className="flex flex-col text-[#171717] tracking-tighter font-semibold min-w-0 justify-center">
-              <span className="text-[14px] leading-none whitespace-nowrap">llm</span>
-              <span className="text-[14px] leading-none whitespace-nowrap -mt-[1px]">benchmark</span>
+          <a href="#" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+            <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+            <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
+              <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
+              <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
             </div>
           </a>
-          <nav className="hidden md:flex items-center gap-6 text-[14px] font-medium text-[#666666]">
-            <a href="#" className="hover:text-black transition-colors">Products</a>
-            <a href="#" className="hover:text-black transition-colors">Resources</a>
-            <a href="#" className="hover:text-black transition-colors">Enterprise</a>
-            <a href="#" className="hover:text-black transition-colors">Pricing</a>
-          </nav>
         </div>
         <div className="flex items-center gap-4">
           <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity">
