@@ -1,16 +1,14 @@
-import { ChevronRight, ExternalLink } from 'lucide-react';
-
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA]">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-6 h-6 flex items-center justify-center">
-              <svg width="24" height="24" viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#000000"/>
-              </svg>
+          <a href="#" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+            <img src="/icon.png" alt="LLM Arena Icon" className="h-6 w-6 object-contain" />
+            <div className="flex flex-col text-[#171717] tracking-tighter font-semibold min-w-0 justify-center">
+              <span className="text-[14px] leading-none whitespace-nowrap">llm</span>
+              <span className="text-[14px] leading-none whitespace-nowrap -mt-[1px]">benchmark</span>
             </div>
           </a>
           <nav className="hidden md:flex items-center gap-6 text-[14px] font-medium text-[#666666]">
@@ -34,10 +32,8 @@ export default function LandingPage() {
         <div className="max-w-[1040px] mx-auto px-6 text-center">
           <div className="relative mx-auto w-full max-w-4xl aspect-[2/1] bg-[#F5F5F5] rounded-[16px] border border-[#EAEAEA] mb-12 flex items-center justify-center overflow-hidden shadow-[inset_0_0_0_1px_rgba(0,0,0,0.02)]">
             <div className="absolute inset-0 bg-[radial-gradient(#E5E5E5_1px,transparent_1px)] [background-size:24px_24px] opacity-60"></div>
-            <div className="z-10 w-24 h-24 opacity-[0.03]">
-              <svg width="100%" height="100%" viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#000000"/>
-              </svg>
+            <div className="z-10 w-24 h-24 opacity-[0.05]">
+              <img src="/icon.png" alt="LLM Arena Icon" className="w-full h-full object-contain grayscale" />
             </div>
             
             {/* Dock */}
@@ -54,13 +50,13 @@ export default function LandingPage() {
           <h1 className="text-[48px] md:text-[64px] font-bold tracking-tight text-[#171717] leading-tight mb-5">
             Awesome LLM Benchmarks
           </h1>
-          <p className="text-[17px] md:text-[19px] text-[#666666] max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-[17px] md:text-[19px] text-[#666666] max-w-2xl mx-auto leading-relaxed mb-10 font-medium">
             We invest in frameworks, runtimes, and evaluations that power agentic software through curated side-by-side benchmarks we maintain, depend on, or meaningfully contribute to.
           </p>
           <div className="flex items-center justify-center gap-4">
             <a href="#dashboard" className="px-6 py-2.5 rounded-full bg-black text-white text-[14.5px] font-medium hover:bg-black/90 transition-colors shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] flex items-center gap-2">
               Start Comparing
-              <ChevronRight className="w-4 h-4" />
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </a>
             <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="px-6 py-2.5 rounded-full bg-white text-[#171717] text-[14.5px] font-medium border border-[#EAEAEA] hover:bg-[#F5F5F5] transition-colors flex items-center gap-2">
               <img src="/logos/github.svg" alt="GitHub" className="w-4 h-4 opacity-80" />
@@ -91,7 +87,8 @@ export default function LandingPage() {
                   <p className="text-[13.5px] text-[#666666] leading-relaxed mb-4">{item.desc}</p>
                   <a href="#dashboard" className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#171717] hover:text-[#666666] transition-colors">
                     <img src="/logos/github.svg" alt="GitHub" className="w-3.5 h-3.5 opacity-80" />
-                    Explore benchmark <ExternalLink className="w-3 h-3 ml-0.5 opacity-50" />
+                    Explore benchmark 
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 ml-0.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
                   </a>
                 </div>
               </div>
@@ -105,9 +102,13 @@ export default function LandingPage() {
         <div className="max-w-[1040px] mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-16">
             <div className="col-span-2">
-              <svg width="24" height="24" viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-6 opacity-80">
-                <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#000000"/>
-              </svg>
+              <div className="flex items-center min-w-0 gap-2.5 mb-6 opacity-80">
+                <img src="/icon.png" alt="LLM Arena Icon" className="h-[28px] w-[28px] object-contain shrink-0 grayscale" />
+                <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
+                  <span className="text-[14px] leading-none whitespace-nowrap">llm</span>
+                  <span className="text-[14px] leading-none whitespace-nowrap -mt-[1px]">benchmark</span>
+                </div>
+              </div>
             </div>
             
             <div>
