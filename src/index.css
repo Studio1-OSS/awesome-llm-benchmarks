@@ -1,0 +1,289 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Variable.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url('/fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}
+
+@theme inline {
+  --font-sans: 'Switzer', ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(158, 157, 154, 0.3) transparent;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    user-select: none;
+  }
+}
+
+/* The app is select:none by default (feels more "app-like"), but chat
+   message text should still be selectable/copyable like any real chat. */
+.selectable-text {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Hide scrollbars globally for elements with the .no-scrollbar utility class */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Custom Scrollbar for professional look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(158, 157, 154, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(158, 157, 154, 0.5);
+}
+
+/* Ambient bottom glowing shimmer line styling */
+@keyframes ambient-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Monochrome shimmer for in-progress text (e.g. the "Thinking..." indicator),
+   reusing the ambient-shimmer sweep but with the app's grayscale tokens. */
+.shimmer-text {
+  background-image: linear-gradient(
+    90deg,
+    var(--muted-foreground) 40%,
+    var(--foreground) 50%,
+    var(--muted-foreground) 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ambient-shimmer 2s ease-in-out infinite;
+}
+
+/* Sweeping highlight for a loading skeleton (e.g. the image-generation
+   placeholder) -- a translated gradient band passing left to right. */
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shimmer {
+  animation: skeleton-shimmer 1.6s infinite;
+}
+
+@keyframes atlas-pixel-on {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  18%,
+  42% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 0.15;
+  }
+}
+
+.atlas-loading-cell {
+  opacity: 0.15;
+  animation: atlas-pixel-on 650ms ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-loading-cell {
+    animation: none;
+  }
+  .shimmer-text {
+    animation: none;
+    background-image: none;
+    color: var(--foreground);
+  }
+}
+
+.ambient-glow-line {
+  background: linear-gradient(
+    90deg,
+    rgb(255, 136, 0.2),
+    rgb(194, 224, 255),
+    rgba(71, 181, 255, 0.6),
+    rgba(255, 176, 101, 0.5),
+    rgba(255, 227, 135, 0.8)
+  );
+  background-size: 200% 100%;
+  animation: ambient-shimmer 10s ease infinite;
+  /* Vertical mask to fade the gradient out smoothly, leaving no line divisions */
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
+/* Restrained highlight.js theme -- muted, desaturated accents rather than a
+   loud bundled theme, so code blocks stay in the app's neutral register. */
+.hljs-comment,
+.hljs-quote {
+  color: #8a8a86;
+  font-style: italic;
+}
+.dark .hljs-comment,
+.dark .hljs-quote {
+  color: #7a7a76;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag {
+  color: #8a6ab8;
+}
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-literal,
+.dark .hljs-doctag {
+  color: #b39ddb;
+}
+
+.hljs-string,
+.hljs-attr,
+.hljs-regexp {
+  color: #4f8a5b;
+}
+.dark .hljs-string,
+.dark .hljs-attr,
+.dark .hljs-regexp {
+  color: #8fc78f;
+}
+
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet {
+  color: #b06a3a;
+}
+.dark .hljs-number,
+.dark .hljs-symbol,
+.dark .hljs-bullet {
+  color: #d3956a;
+}
+
+.hljs-title,
+.hljs-name,
+.hljs-attribute {
+  color: #3d7ab8;
+}
+.dark .hljs-title,
+.dark .hljs-name,
+.dark .hljs-attribute {
+  color: #85b8e6;
+}
+
+.hljs-built_in,
+.hljs-type {
+  color: #2e7d7d;
+}
+.dark .hljs-built_in,
+.dark .hljs-type {
+  color: #7ccdcd;
+}
+
