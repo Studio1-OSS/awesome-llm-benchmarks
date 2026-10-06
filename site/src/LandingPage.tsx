@@ -663,8 +663,8 @@ export default function LandingPage() {
         </div>
 
         {/* Trusted By Static Grid */}
-        <div className="w-full relative mt-8 mb-24 px-4 sm:px-6 lg:px-8">
-          <Reveal delay={0} className="w-full text-center mb-12">
+        <div className="w-full relative mt-8 mb-32 px-4 sm:px-6 lg:px-8">
+          <Reveal delay={0} className="w-full text-center mb-8">
             <p className="text-[14px] text-[#888888] font-medium tracking-tight">Evaluating the most capable models from world-class AI labs</p>
           </Reveal>
           <div className="max-w-[1200px] mx-auto grid grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
@@ -680,7 +680,7 @@ export default function LandingPage() {
                         <img 
                           src={logo} 
                           alt="Partner Logo" 
-                          className={`max-w-[80%] max-h-[50%] sm:max-w-[110px] sm:max-h-[34px] object-contain ${isChatGpt ? 'scale-[1.3]' : ''}`} 
+                          className={`max-w-[80%] max-h-[50%] sm:max-w-[110px] sm:max-h-[34px] object-contain rounded-[6px] ${isChatGpt ? 'scale-150' : ''}`} 
                         />
                       </div>
                     );
