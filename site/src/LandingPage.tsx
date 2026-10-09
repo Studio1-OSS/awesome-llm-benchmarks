@@ -16,7 +16,7 @@ import React, { useState, useEffect } from 'react';const AI_LOGOS = [
 
 const TRUSTED_LOGOS = [
   '/logos/cursor.png',
-  '/logos/antigravity.jpg',
+  '/logos/antigravity.svg',
   '/logos/openai.svg',
   '/logos/aws.svg',
   '/logos/microsoft.svg',
