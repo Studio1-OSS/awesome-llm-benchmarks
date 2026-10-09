@@ -258,6 +258,7 @@ export default function ContentPage() {
                   <li><Link onClick={() => window.scrollTo(0, 0)} to="/documentation" className="hover:text-[#111111] transition-colors">Documentation</Link></li>
                   <li><Link onClick={() => window.scrollTo(0, 0)} to="/updates" className="hover:text-[#111111] transition-colors">Updates</Link></li>
                   <li><Link onClick={() => window.scrollTo(0, 0)} to="/faq" className="hover:text-[#111111] transition-colors">FAQ</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/404" className="hover:text-[#111111] transition-colors">404 Page</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
