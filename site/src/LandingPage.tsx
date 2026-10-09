@@ -898,15 +898,15 @@ export default function LandingPage() {
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Product</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Benchmarks</Link></li>
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Methodologies</Link></li>
+                  <li><Link to="/dashboard" className="hover:text-[#111111] transition-colors">Benchmarks</Link></li>
+                  <li><Link to="/methodologies" className="hover:text-[#111111] transition-colors">Methodologies</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Company</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">About</Link></li>
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Contributors</Link></li>
+                  <li><Link to="/about" className="hover:text-[#111111] transition-colors">About</Link></li>
+                  <li><Link to="/contributors" className="hover:text-[#111111] transition-colors">Contributors</Link></li>
                   <li><a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#111111] transition-colors">GitHub</a></li>
                   <li><Link to="/blog" className="hover:text-[#111111] transition-colors">Blog</Link></li>
                 </ul>
@@ -914,16 +914,16 @@ export default function LandingPage() {
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Resources</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Documentation</Link></li>
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Updates</Link></li>
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">FAQ</Link></li>
+                  <li><Link to="/documentation" className="hover:text-[#111111] transition-colors">Documentation</Link></li>
+                  <li><Link to="/updates" className="hover:text-[#111111] transition-colors">Updates</Link></li>
+                  <li><Link to="/faq" className="hover:text-[#111111] transition-colors">FAQ</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Legal</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Privacy Policy</Link></li>
-                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Terms of Service</Link></li>
+                  <li><Link to="/privacy" className="hover:text-[#111111] transition-colors">Privacy Policy</Link></li>
+                  <li><Link to="/terms" className="hover:text-[#111111] transition-colors">Terms of Service</Link></li>
                 </ul>
               </div>
             </div>
