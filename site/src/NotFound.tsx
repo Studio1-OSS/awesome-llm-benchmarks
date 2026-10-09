@@ -1,62 +1,40 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const GithubIcon = ({ size = 20, className = "" }: { size?: number, className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
 );
 
 const ALL_LOGOS = [
-  '/logos/cursor.png',
-  '/logos/antigravity.svg',
-  '/logos/claude.png',
   '/logos/openai.svg',
+  '/logos/anthropic.svg',
   '/logos/google.svg',
   '/logos/meta.svg',
-  '/logos/zhipu.png',
-  '/logos/ibm.png',
-  '/logos/qwen.svg',
   '/logos/mistral.svg',
-  '/logos/microsoft.svg',
+  '/logos/xai.svg',
   '/logos/aws.svg',
+  '/logos/microsoft.svg',
   '/logos/perplexity.svg',
   '/logos/huggingface.svg',
-  '/logos/xai.svg',
   '/logos/github.svg',
-  '/logos/ollama.svg',
-  '/logos/primalabs.svg',
-  '/logos/grok.png',
-  '/logos/inclusionai_small.webp',
-  '/logos/kilo.png',
-  '/logos/kimi.png',
-  '/logos/maincode.png',
-  '/logos/openclaw.jpeg',
-  '/logos/opencode.png',
-  '/logos/gemma.png',
   '/logos/cohere.png',
-  '/logos/ai21.png',
   '/logos/alibaba.png',
   '/logos/nvidia.png',
   '/logos/baidu.png',
   '/logos/tencent.png',
-  '/logos/sarvam.png'
+  '/logos/zhipu.png',
+  '/logos/qwen.svg',
+  '/logos/deepseek.svg',
+  '/logos/gemma.png',
+  '/logos/claude.svg',
+  '/logos/ollama.svg',
+  '/logos/primalabs.svg',
+  '/logos/ibm.png',
+  '/logos/sktelecom.png',
+  '/logos/upstage.png',
+  '/logos/reka.png',
+  '/logos/ai21.png'
 ];
-
-const NUMBER_GRIDS = {
-  four: [
-    [0, 0, 1, 0],
-    [0, 1, 1, 0],
-    [1, 0, 1, 0],
-    [1, 1, 1, 1],
-    [0, 0, 1, 0],
-  ],
-  zero: [
-    [0, 1, 1, 0],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [0, 1, 1, 0],
-  ]
-};
 
 export default function NotFound() {
   const [githubStars, setGithubStars] = useState<number | null>(null);
@@ -71,31 +49,6 @@ export default function NotFound() {
       })
       .catch(err => console.error('Failed to fetch github stars', err));
   }, []);
-
-  let logoIndex = 0;
-  const renderGrid = (gridPattern: number[][]) => {
-    return (
-      <div className="flex flex-col gap-0.5 sm:gap-1">
-        {gridPattern.map((row, rIdx) => (
-          <div key={rIdx} className="flex gap-0.5 sm:gap-1">
-            {row.map((cell, cIdx) => {
-              if (cell === 1) {
-                const logo = ALL_LOGOS[logoIndex % ALL_LOGOS.length];
-                logoIndex++;
-                const filterClass = logo.includes('openai') || logo.includes('xai') || logo.includes('grok') ? 'filter invert brightness-0' : '';
-                return (
-                  <div key={cIdx} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-[#EAEAEA] hover:scale-110 transition-transform duration-300 z-10 hover:z-20 relative overflow-hidden">
-                    <img src={logo} alt="logo" className={`w-full h-full object-cover ${filterClass}`} />
-                  </div>
-                );
-              }
-              return <div key={cIdx} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"></div>;
-            })}
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA] flex flex-col relative">
@@ -125,28 +78,38 @@ export default function NotFound() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col justify-center items-center py-20 md:py-32 px-6 max-w-[1240px] mx-auto w-full">
-        {/* 404 LOGO GRID */}
-        <div className="flex items-center justify-center gap-6 sm:gap-10 md:gap-16 mb-24 md:mb-32 mt-10 transition-transform duration-1000 ease-out hover:scale-[1.02]">
-          {renderGrid(NUMBER_GRIDS.four)}
-          {renderGrid(NUMBER_GRIDS.zero)}
-          {renderGrid(NUMBER_GRIDS.four)}
-        </div>
-
-        {/* Text */}
-        <div className="w-full text-left max-w-[1000px] mt-4 pl-4 sm:pl-8 md:pl-12">
-          <h1 className="text-[42px] sm:text-[54px] md:text-[64px] text-[#2E2E2D] leading-[1.1] mb-6 tracking-tight font-heading font-medium">
+      <main className="flex-1 flex flex-col justify-center items-center py-20 px-6 w-full max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto">
+        
+        {/* TOP TEXT */}
+        <div className="w-full text-center mb-16">
+          <h1 className="text-[42px] sm:text-[54px] md:text-[64px] text-[#2E2E2D] leading-[1.1] tracking-tight font-heading font-medium">
             Oops! This page doesn't exist.
           </h1>
-          <Link to="/" className="group inline-flex items-center gap-2 text-[18px] md:text-[20px] text-[#666666] hover:text-[#111111] transition-colors">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            Home page
+        </div>
+
+        {/* 404 LOGO GRID - Premium Logo Wall */}
+        <div className="w-full max-w-[800px] mx-auto grid grid-cols-4 sm:grid-cols-7 gap-2 sm:gap-4 mb-16">
+          {ALL_LOGOS.map((logo, idx) => {
+            const filterClass = logo.includes('openai') || logo.includes('xai') || logo.includes('github') ? 'filter invert brightness-0 opacity-80' : '';
+            return (
+              <div key={idx} className="aspect-square flex items-center justify-center bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-[#EAEAEA] rounded-lg relative overflow-hidden">
+                <img src={logo} alt="logo" className={`w-full h-full object-contain p-3 sm:p-4 ${filterClass}`} />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* BOTTOM BUTTON */}
+        <div className="w-full text-center mt-4">
+          <Link to="/" className="group inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#111111] text-white text-[16px] font-medium rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] hover:bg-black hover:scale-[1.02] transition-all duration-200">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to home
           </Link>
         </div>
       </main>
 
       <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA] mt-auto">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
             <div className="col-span-1 lg:col-span-2 pr-8">
               <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
