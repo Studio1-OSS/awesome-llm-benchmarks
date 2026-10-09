@@ -310,20 +310,16 @@ export default function Blog() {
             <div className="flex items-center gap-1.5"><ClockIcon /> {post.readTime}</div>
           </div>
           
-          <div
-            className="w-full relative py-8 sm:py-10 lg:py-12 px-4 sm:px-8 lg:px-12 flex items-center justify-center border border-[#EAEAEA] rounded-[16px] shadow-[0_8px_40px_rgba(0,0,0,0.06)] overflow-hidden mb-12"
-          >
-            {/* Ambient Glow Background */}
+          <div className="relative w-full mb-12 mt-4">
+            {/* Ambient Glow Background - bleeding out from behind */}
             <div 
-              className="absolute inset-0 bg-cover bg-center scale-110 blur-[60px] opacity-40 mix-blend-multiply"
+              className="absolute inset-0 bg-cover bg-center blur-[80px] opacity-40 mix-blend-multiply scale-110 translate-y-2 z-0"
               style={{ backgroundImage: `url(${post.image})` }}
             />
-            {/* Glassy border container */}
-            <div className="w-full bg-white/30 backdrop-blur-[24px] p-3 sm:p-4 rounded-lg lg:rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/50 relative z-10 overflow-hidden">
-              <div className="w-full rounded-[12px] overflow-hidden border border-white/60 shadow-[0_8px_32px_rgb(0,0,0,0.08)] bg-[#FCFAF8] flex flex-col relative">
-                {/* The blog image - TAB REMOVED AS REQUESTED */}
-                <img src={post.image} alt="" className="w-full h-auto object-cover" />
-              </div>
+            
+            {/* The Image Container - full scale */}
+            <div className="relative z-10 w-full rounded-[16px] sm:rounded-[20px] overflow-hidden border border-black/5 shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-[#FCFAF8] ring-1 ring-white/50">
+              <img src={post.image} alt="" className="w-full h-auto object-cover" />
             </div>
           </div>
 
