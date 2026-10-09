@@ -392,7 +392,7 @@ export default function Blog() {
     };
 
     return (
-      <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA]">
+      <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans selection:bg-[#EAEAEA]">
         <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
