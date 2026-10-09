@@ -401,7 +401,20 @@ export default function Blog() {
   const [githubStars, setGithubStars] = useState<number | null>(null);
   const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
   const [activeId, setActiveId] = useState<string>('');
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (windowHeight > 0) {
+        setScrollProgress(totalScroll / windowHeight);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (postId) {
@@ -498,9 +511,19 @@ export default function Blog() {
         <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 pt-12 pb-24 flex flex-col lg:flex-row lg:justify-center gap-12 lg:gap-12 relative items-start">
           
           {/* Left TOC Sidebar */}
-          <aside className="hidden lg:flex flex-col w-[240px] shrink-0 sticky top-[100px] max-h-[calc(100vh-140px)]">
-            <h3 className="text-[12px] font-semibold text-[#8C8276] uppercase tracking-wider mb-5 shrink-0">On this page</h3>
-            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA] mb-8 overflow-y-auto pr-4 flex-1 min-h-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <aside className="hidden lg:flex flex-col w-[260px] shrink-0 sticky top-[100px] max-h-[calc(100vh-140px)] lg:border-r lg:border-[#EAEAEA] lg:pr-10 relative">
+            
+            {/* CTAs */}
+            <div className="flex flex-col items-start gap-3.5 shrink-0 mb-10 pt-2">
+              <div className="text-[14px] font-medium text-[#666666] leading-snug pr-4">
+                Explore the full LLM Benchmark dataset
+              </div>
+              <Link to="/dashboard" className="inline-flex items-center justify-center gap-2 py-2 px-4 rounded-[8px] text-white text-[13px] font-medium transition-all shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.15)] bg-gradient-to-b from-[#333333]/80 to-[#111111]/80 backdrop-blur-xl hover:from-[#444444]/90 hover:to-[#222222]/90 border border-black/40 group">
+                Compare Now <span className="opacity-70 group-hover:opacity-100 transition-opacity font-normal">&rarr;</span>
+              </Link>
+            </div>
+
+            <nav className="flex flex-col gap-1.5 mb-8 overflow-y-auto pr-4 flex-1 min-h-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {headings.map(h => (
                 <a 
                   key={h.id} 
@@ -509,27 +532,17 @@ export default function Blog() {
                     e.preventDefault();
                     document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className={`text-[14px] leading-snug transition-colors duration-200 border-l-2 -ml-[1px] pl-4 py-0.5 shrink-0 ${activeId === h.id ? 'border-[#111111] text-[#111111] font-medium' : 'border-transparent text-[#8C8276] hover:text-[#111111]'}`}
+                  className={`group flex items-center gap-3 text-[13.5px] leading-snug transition-colors duration-200 py-1 px-1 rounded-md ${activeId === h.id ? 'text-[#111111] font-semibold' : 'text-[#8C8276] hover:text-[#111111]'}`}
                 >
-                  {h.text}
+                  <div className={`shrink-0 w-2 h-2 rounded-full border-[1.5px] border-solid transition-colors duration-200 ${activeId === h.id ? 'border-[#111111] bg-transparent' : 'border-[#D4D4D4] bg-transparent group-hover:border-[#8C8276]'}`}></div>
+                  <span className="flex-1">{h.text}</span>
                 </a>
               ))}
             </nav>
-
-            {/* CTAs */}
-            <div className="flex flex-col gap-3 shrink-0 pt-6 border-t border-[#EAEAEA]">
-              <Link to="/dashboard" className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-white text-[13.5px] font-medium transition-all shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#333333]/90 to-[#111111]/90 backdrop-blur-xl hover:from-[#444444]/90 hover:to-[#222222]/90 border border-black/50">
-                Compare Now
-              </Link>
-              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-[#111111] text-[13.5px] font-medium transition-all shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10">
-                <GithubIcon size={16} />
-                Contribute Now
-              </a>
-            </div>
           </aside>
 
           {/* Main Article Content */}
-          <article className="flex-1 min-w-0 max-w-[800px] lg:border-l lg:border-[#EAEAEA] lg:pl-12">
+          <article className="flex-1 min-w-0 max-w-[800px]">
           
           <div className="flex items-center justify-between mb-10 border-b border-[#EAEAEA] pb-6">
             <Link to="/blog" className="flex items-center gap-2 text-[14px] font-medium text-[#666666] hover:text-[#111111] transition-colors">
@@ -570,6 +583,27 @@ export default function Blog() {
 
           <div id="article-content" className="prose prose-lg max-w-none prose-p:text-[#6E6D6A] prose-headings:text-[#1A1A1A] prose-headings:font-semibold prose-headings:scroll-mt-28 prose-strong:text-[#1A1A1A] prose-ul:text-[#6E6D6A] prose-li:text-[#6E6D6A] prose-a:text-[#1A1A1A] selectable-text font-sans" dangerouslySetInnerHTML={{ __html: post.content }}></div>
           </article>
+          
+          {/* Right Longitudinal Scale */}
+          <div className="hidden xl:flex flex-col w-[24px] shrink-0 sticky top-[100px] h-[calc(100vh-140px)] items-end">
+            <div className="relative h-full w-full opacity-60 hover:opacity-100 transition-opacity duration-300">
+              {/* Crisp SVG Ruler Ticks */}
+              <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="ruler-pattern" width="24" height="12" patternUnits="userSpaceOnUse">
+                    <rect x="18" y="0" width="6" height="1.5" fill="#C4C4C4" rx="0.5" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#ruler-pattern)" />
+              </svg>
+              {/* Active Scroll Tracker */}
+              <div 
+                className="absolute top-0 right-0 w-[3px] bg-gradient-to-b from-[#00D4FF] to-[#0099FF] shadow-[0_0_12px_rgba(0,212,255,0.6)] transition-all duration-150 ease-out rounded-full" 
+                style={{ height: `${scrollProgress * 100}%` }}
+              ></div>
+            </div>
+          </div>
+
         </div>
         
         {/* Footer for single blog post view */}
