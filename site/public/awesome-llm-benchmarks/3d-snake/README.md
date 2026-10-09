@@ -1,0 +1,33 @@
+# 3D Snake
+
+Build a playable snake game where 3D space improves the game rather than making its rules harder to read.
+
+## Status
+
+**Ready for runs.** No model outputs have been added yet.
+
+## Prompt
+
+**Prompt used for this test:**
+
+> Create one complete HTML file for a playable 3D Snake game. Use Three.js from a CDN to render a clear, stylish game board with a slightly angled camera that keeps the snake, food, and boundaries easy to read. Support arrow keys and WASD, with movement that is grid-based and cannot instantly reverse into the snake's body. Include food collection, visible growth, score, increasing speed, wall and self-collision, a start screen, game-over state, and restart control. Give the game a confident neon arcade visual system with restrained motion and feedback that helps the player understand each event. Keep the experience responsive and reliable in a modern browser. Return only the complete working HTML with all styling and JavaScript included.
+
+## Run protocol
+
+Use one shared prompt per comparison. Record exact model identity and all generation metadata. Test a full game cycle, including growth, loss, and restart, before recording findings.
+
+## Costs
+
+| Model | Input tokens | Output tokens | Cost |
+| --- | ---: | ---: | ---: |
+| No runs recorded | | |
+
+## Results
+
+| Model | Result | Notes |
+| --- | --- | --- |
+| No runs recorded | | | |
+
+## Verdict
+
+Pending. The first result must include an exact model name before a model folder is created.
