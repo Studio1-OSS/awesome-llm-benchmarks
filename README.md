@@ -1,40 +1,36 @@
-# Awesome LLM Benchmarks
+<div align="center">
+  <img src="./site/public/icon.png" alt="LLM Arena Logo" width="120" />
+  <h1>Awesome LLM Benchmarks</h1>
+  <p><strong>The Definitive Open-Source AI Model Evaluation Platform</strong></p>
+</div>
 
-A clean, evidence-first home for comparing model-generated web experiences. Tests are defined before runs are added, so every later result can be traced to one prompt, one model, one cost record, and one explicit verdict.
+<br />
 
-## Tests
+Welcome to the **Awesome LLM Benchmarks** repository! This project serves as an open-source, interactive leaderboard and testing environment designed to push the world's most capable AI models to their absolute limits.
 
-| Test | Status | What it measures |
-| --- | --- | --- |
-| [2D Breakout](2d-breakout/README.md) | Ready for runs | Responsive arcade-game craft |
-| [3D Game](3d-game/README.md) | Ready for runs | Interactive 3D scene design |
-| [3D GTA Game](3d-gta-game/README.md) | Comparison complete | Open-world systems depth and long-build reliability |
-| [3D Snake](3d-snake/README.md) | Ready for runs | 3D game loop and spatial clarity |
-| [Design Portfolio](design-portfolio/README.md) | Ready for runs | Editorial visual design and interaction |
-| [Endless Runner](endless-runner/README.md) | Ready for runs | Game feel, pacing, and visual direction |
-| [Flappy Bird](flappy-bird/README.md) | Ready for runs | Input precision and game-loop tuning |
+Rather than relying on static multiple-choice questions, this arena stress-tests models against complex interactive game loops, bespoke UI scenarios, and dynamic coding tasks.
 
-## Result structure
+## 🚀 Features
 
-Add a model only when its exact public model name is known.
+- **Interactive Benchmarks:** Models are evaluated on their ability to generate, debug, and interact with complex game loops (e.g., 3D Snake, Flappy Bird, 2D Breakout) and rich UIs.
+- **Dynamic Leaderboard:** A fully responsive, modern web dashboard showcasing the top-performing models and their benchmark results across different capabilities.
+- **Provider Aggregation:** Compare frontier models from leading AI labs including OpenAI, Anthropic, Google, Meta, Mistral, xAI, and more.
+- **Open-Source Architectures:** Fully transparent evaluation environments that any researcher can run and verify.
 
-```text
-test-name/
-  README.md
-  exact-model-name/
-    README.md
-    index.html
-```
+## 📂 Repository Structure
 
-The test README is the comparison record. Every model README is the evidence record for one run.
+This repository is organized as a monorepo to ensure clean separation of concerns and easy extensibility:
 
-## Required model README fields
+- **`/site`**: The React + Vite + Tailwind frontend that powers the beautiful interactive dashboard and landing page.
+- **`/examples`**: The evaluation environments, containing interactive games, procedural tests, and bespoke UIs that the models are stress-tested against.
+- **`/benchmarks`**: (Coming soon) The core evaluation logic, runners, and data aggregation scripts.
 
-- Exact model and provider name
-- Verbatim prompt, including system prompt and follow-ups
-- Run date, interface, settings, and input assets
-- Input tokens, output tokens, and actual cost
-- A direct link to the runnable HTML artifact
-- Observed result, review notes, and any known limitations
+## 🤝 Contributing
 
-Do not add a model folder for an unnamed result. Do not estimate missing cost or reconstruct missing prompts.
+We strongly believe that open evaluation is critical for the future of AI. We welcome contributions from the community!
+
+Whether you want to add a new model's benchmark results, create a wildly complex new testing environment in the `/examples` folder, or improve the dashboard UI, please see our [CONTRIBUTING.md](./CONTRIBUTING.md) guide for details on how to submit a Pull Request.
+
+## 📜 License
+
+This project is fully open-source and released under the [MIT License](LICENSE). 

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <rect width="24" height="24" rx="6" fill="#000000"/>
+  <!-- Cursor logo: stylized "C" / cursor mark -->
+  <path d="M7 4 L17 12 L12 12 L12 20 L7 4Z" fill="white"/>
+  <path d="M12 12 L17 12 L14.5 16 L12 12Z" fill="white" opacity="0.5"/>
+</svg>

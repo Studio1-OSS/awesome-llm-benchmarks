@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://llmbenchmark.studio1hq.com/sitemap.xml
