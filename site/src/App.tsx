@@ -307,8 +307,8 @@ const markdownComponents: any = {
 
 
 
-const GithubIcon = ({ size = 20 }: { size?: number }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+const GithubIcon = ({ size = 20, className = "" }: { size?: number, className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
 );
 
 function App() {
@@ -628,7 +628,7 @@ function App() {
                 className="mx-4 mb-4 mt-2 bg-[#FCFBFA] border border-[#F0EFEB] p-2.5 rounded-[12px] shadow-sm flex items-center justify-between cursor-pointer hover:bg-white transition-all group"
               >
                 <div className="flex items-center gap-2.5">
-                  <img src="/logos/github.svg" alt="GitHub" className="w-4.5 h-4.5 object-contain opacity-70 group-hover:opacity-100 transition-opacity drop-shadow-sm ml-1" />
+                  <GithubIcon className="w-4.5 h-4.5 object-contain opacity-70 group-hover:opacity-100 transition-opacity drop-shadow-sm ml-1" />
                   <span className="text-[12.5px] font-bold text-[#4A3F35] group-hover:text-[#2A231C] transition-colors">Contribute</span>
                 </div>
                 <ChevronDown className="w-3.5 h-3.5 text-[#A3988E] rotate-180 group-hover:text-[#4A3F35] transition-colors mr-1" strokeWidth={2.5} />
@@ -678,7 +678,7 @@ function App() {
                   rel="noreferrer"
                   className="inline-flex items-center text-[12px] font-bold text-[#4A3F35] hover:text-[#7A6B5D] transition-colors group cursor-pointer"
                 >
-                  <img src="/logos/github.svg" alt="GitHub" className="w-3.5 h-3.5 mr-1.5 opacity-80 group-hover:opacity-100 transition-opacity" />
+                  <GithubIcon className="w-3.5 h-3.5 mr-1.5 opacity-80 group-hover:opacity-100 transition-opacity" />
                   Contribute
                   <span className="ml-1 transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
@@ -708,7 +708,7 @@ function App() {
             <div className="mt-auto flex flex-col items-center gap-4 pb-6">
               <div className="relative group">
                 <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-xl hover:bg-[#EAE8E3] flex items-center justify-center transition-colors cursor-pointer relative">
-                  <img src="/logos/github.svg" alt="GitHub" className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+                  <GithubIcon className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
                   {githubStars !== null && (
                     <span className="absolute -top-1 -right-1 bg-[#2E2E2D] text-white text-[8px] font-bold px-1 rounded-sm shadow-sm z-10">
                       {githubStars.toLocaleString()}
@@ -858,7 +858,7 @@ function App() {
             models.length === 0 && selectedGame ? (
               <div className="flex-1 flex flex-col items-center justify-center bg-white/40 backdrop-blur-sm border border-dashed border-[#E5E3DF] rounded-2xl min-h-[420px]">
                 <div className="w-14 h-14 rounded-2xl bg-[#F1EFEA] flex items-center justify-center mb-5 border border-[#E5E3DF] shadow-sm">
-                  <img src="/logos/github.svg" alt="GitHub" className="w-6 h-6 opacity-60" />
+                  <GithubIcon className="w-6 h-6 opacity-60" />
                 </div>
                 <h2 className="text-[16px] font-semibold text-[#2E2E2D] tracking-tight">No runs recorded yet</h2>
                 <p className="text-[#9E9D9A] mt-2.5 text-[13px] text-center max-w-[280px] leading-relaxed font-medium">
@@ -870,7 +870,7 @@ function App() {
                   rel="noreferrer"
                   className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-[#2E2E2D] text-white rounded-xl text-[13px] font-semibold hover:bg-black transition-colors shadow-sm"
                 >
-                  <img src="/logos/github.svg" alt="GitHub" className="w-4 h-4 brightness-0 invert" />
+                  <GithubIcon className="w-4 h-4 brightness-0 invert" />
                   Contribute Run
                 </a>
               </div>
