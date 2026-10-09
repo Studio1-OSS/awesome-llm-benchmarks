@@ -439,10 +439,10 @@ export default function Blog() {
 
             {/* CTAs */}
             <div className="flex flex-col gap-3 shrink-0">
-              <Link to="/dashboard" className="w-full text-center py-2.5 px-4 bg-[#111111] text-white text-[13.5px] font-medium rounded-lg hover:bg-[#222222] transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+              <Link to="/dashboard" className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-white text-[13.5px] font-medium transition-all shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#333333]/90 to-[#111111]/90 backdrop-blur-xl hover:from-[#444444]/90 hover:to-[#222222]/90 border border-black/50">
                 Compare Now
               </Link>
-              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#F4F4F6] border border-[#EAEAEA] text-[#111111] text-[13.5px] font-medium rounded-lg hover:bg-[#EAEAEA] transition-colors shadow-sm">
+              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-[#111111] text-[13.5px] font-medium transition-all shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10">
                 <GithubIcon size={16} />
                 Contribute Now
               </a>

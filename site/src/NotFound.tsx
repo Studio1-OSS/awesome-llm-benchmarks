@@ -80,12 +80,12 @@ export default function NotFound() {
                 const logo = ALL_LOGOS[logoIndex % ALL_LOGOS.length];
                 logoIndex++;
                 return (
-                  <div key={cIdx} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 2xl:w-20 2xl:h-20 flex items-center justify-center bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-[#EAEAEA] z-10 relative overflow-hidden rounded-[2px] sm:rounded-[4px] md:rounded-[6px]">
-                    <img src={logo} alt="logo" className="w-full h-full object-contain p-1.5 sm:p-2 2xl:p-3" />
+                  <div key={cIdx} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 flex items-center justify-center bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-[#EAEAEA] z-10 relative overflow-hidden rounded-[2px] sm:rounded-[4px] md:rounded-[6px]">
+                    <img src={logo} alt="logo" className="w-full h-full object-contain p-1 sm:p-1.5 md:p-2 2xl:p-2.5" />
                   </div>
                 );
               }
-              return <div key={cIdx} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 2xl:w-20 2xl:h-20"></div>;
+              return <div key={cIdx} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16"></div>;
             })}
           </div>
         ))}
@@ -131,7 +131,7 @@ export default function NotFound() {
         </div>
 
         {/* 404 LOGO GRID */}
-        <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-10 lg:gap-14 2xl:gap-20 mb-20 xl:mb-28 transition-transform duration-1000 ease-out">
+        <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8 lg:gap-10 2xl:gap-14 mb-20 xl:mb-28 transition-transform duration-1000 ease-out">
           {renderGrid(NUMBER_GRIDS.four)}
           {renderGrid(NUMBER_GRIDS.zero)}
           {renderGrid(NUMBER_GRIDS.four)}
