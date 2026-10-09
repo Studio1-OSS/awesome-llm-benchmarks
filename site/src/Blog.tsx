@@ -419,9 +419,9 @@ export default function Blog() {
         <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 pt-12 pb-24 flex flex-col lg:flex-row gap-12 lg:gap-24 relative items-start">
           
           {/* Left TOC Sidebar */}
-          <aside className="hidden lg:block w-[240px] shrink-0 sticky top-[100px]">
-            <h3 className="text-[12px] font-semibold text-[#8C8276] uppercase tracking-wider mb-5">On this page</h3>
-            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA] mb-12">
+          <aside className="hidden lg:flex flex-col w-[240px] shrink-0 sticky top-[100px] max-h-[calc(100vh-140px)]">
+            <h3 className="text-[12px] font-semibold text-[#8C8276] uppercase tracking-wider mb-5 shrink-0">On this page</h3>
+            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA] mb-8 overflow-y-auto pr-4 flex-1 min-h-0 [scrollbar-width:thin] [scrollbar-color:#EAEAEA_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#EAEAEA] [&::-webkit-scrollbar-thumb]:rounded-full">
               {headings.map(h => (
                 <a 
                   key={h.id} 
@@ -430,7 +430,7 @@ export default function Blog() {
                     e.preventDefault();
                     document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className={`text-[14px] leading-snug transition-colors duration-200 border-l-2 -ml-[1px] pl-4 py-0.5 ${activeId === h.id ? 'border-[#111111] text-[#111111] font-medium' : 'border-transparent text-[#8C8276] hover:text-[#111111]'}`}
+                  className={`text-[14px] leading-snug transition-colors duration-200 border-l-2 -ml-[1px] pl-4 py-0.5 shrink-0 ${activeId === h.id ? 'border-[#111111] text-[#111111] font-medium' : 'border-transparent text-[#8C8276] hover:text-[#111111]'}`}
                 >
                   {h.text}
                 </a>
@@ -438,7 +438,7 @@ export default function Blog() {
             </nav>
 
             {/* CTAs */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 shrink-0">
               <Link to="/dashboard" className="w-full text-center py-2.5 px-4 bg-[#111111] text-white text-[13.5px] font-medium rounded-lg hover:bg-[#222222] transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
                 Compare Now
               </Link>
