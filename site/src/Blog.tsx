@@ -500,7 +500,7 @@ export default function Blog() {
           {/* Left TOC Sidebar */}
           <aside className="hidden lg:flex flex-col w-[240px] shrink-0 sticky top-[100px] max-h-[calc(100vh-140px)]">
             <h3 className="text-[12px] font-semibold text-[#8C8276] uppercase tracking-wider mb-5 shrink-0">On this page</h3>
-            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA] mb-8 overflow-y-auto pr-4 flex-1 min-h-0 [scrollbar-width:thin] [scrollbar-color:#EAEAEA_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#EAEAEA] [&::-webkit-scrollbar-thumb]:rounded-full">
+            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA] mb-8 overflow-y-auto pr-4 flex-1 min-h-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {headings.map(h => (
                 <a 
                   key={h.id} 
@@ -517,7 +517,7 @@ export default function Blog() {
             </nav>
 
             {/* CTAs */}
-            <div className="flex flex-col gap-3 shrink-0">
+            <div className="flex flex-col gap-3 shrink-0 pt-6 border-t border-[#EAEAEA]">
               <Link to="/dashboard" className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-white text-[13.5px] font-medium transition-all shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#333333]/90 to-[#111111]/90 backdrop-blur-xl hover:from-[#444444]/90 hover:to-[#222222]/90 border border-black/50">
                 Compare Now
               </Link>
