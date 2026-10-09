@@ -3,31 +3,133 @@ import { Link, useLocation } from 'react-router-dom';
 
 const POSTS = [
   {
-    id: 'firefighting-to-autopilot',
-    title: 'From Firefighting to Autopilot: A Support Playbook',
-    subtitle: 'How a 12-person support team cut 30 weekly hours of repetitive tickets.',
-    date: 'Jun 16, 2026',
-    readTime: '6 min read',
+    id: 'the-death-of-static-benchmarks',
+    title: 'The Death of Static Benchmarks: Why MMLU is No Longer Enough',
+    subtitle: 'How test-set contamination and rapid model advancement rendered traditional evaluation obsolete.',
+    date: 'Oct 09, 2026',
+    readTime: '9 min read',
     image: 'https://framerusercontent.com/images/89wYJHZRlIHHAeJ2fb38UtX5wI.png?scale-down-to=1024&width=1344&height=896',
-    content: 'Long form content goes here...'
+    content: `
+      <p class="lead">As AI models continue to evolve at breakneck speeds, the methods we use to evaluate them must advance equally fast. Traditional, static multiple-choice benchmarks like MMLU are becoming saturated, failing to capture the true agency and reasoning capabilities of frontier LLMs.</p>
+      
+      <p>For years, the machine learning community has relied on multiple-choice questions to determine a model's "intelligence." But intelligence in the real world isn't about picking A, B, C, or D. It's about planning, adapting to dynamic environments, and writing functional code that executes without errors. Today, we are proud to introduce a new paradigm in AI evaluation: interactive, game-loop benchmarking.</p>
+      
+      <h3>The Interactive Evaluation Pipeline</h3>
+      <p>Instead of feeding a model a static prompt, we place it inside a deterministic game engine. The model must "play" games like Snake, Breakout, and Flappy Bird by generating the raw logic required to survive in real-time. This requires a level of spatial reasoning and reaction logic that text-in, text-out benchmarks completely miss.</p>
+      
+      <div class="my-8 p-6 bg-white border border-[#EAEAEA] rounded-xl shadow-sm">
+        <div class="flex flex-col md:flex-row items-center justify-between text-center gap-4">
+          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg">
+            <span class="font-bold text-[#111111]">1. Model Inference</span>
+            <p class="text-sm text-[#666666] mt-2">Generate Javascript logic based on current canvas state.</p>
+          </div>
+          <div class="text-[#8C8276]">➔</div>
+          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg">
+            <span class="font-bold text-[#111111]">2. Engine Execution</span>
+            <p class="text-sm text-[#666666] mt-2">The browser evaluates the code within a WebWorker sandbox.</p>
+          </div>
+          <div class="text-[#8C8276]">➔</div>
+          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg">
+            <span class="font-bold text-[#111111]">3. Score Computation</span>
+            <p class="text-sm text-[#666666] mt-2">Elo rating is adjusted based on survival time and mechanics.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Why Procedural Generation?</h3>
+      <p>One of the biggest issues facing modern evaluation is <strong>test-set contamination</strong>. Models inadvertently train on the very benchmarks they are evaluated against. If a model has seen the solution to a coding problem millions of times during pre-training, solving it during an evaluation doesn't prove reasoning—it proves memorization.</p>
+      
+      <p>By using procedural generation, every single evaluation environment is unique. The layout of the Breakout bricks, the speed of the Flappy Bird pipes, and the algorithmic constraints are randomized based on cryptographic seeds. A model cannot memorize the solution to a level that has never existed before.</p>
+      
+      <h3>The Results</h3>
+      <p>Our engineering team completely eliminated manual verification by automating this pipeline. Now, new models are submitted to the leaderboard and evaluated autonomously. We are already seeing incredible divergence between models that score high on static benchmarks but fail completely when asked to maintain state across a 60 FPS game loop. This is the future of evaluation: true agency, tested in the wild.</p>
+    `
   },
   {
-    id: 'when-to-let-ai-reply',
-    title: 'When to Let AI Reply, and When to Call a Human',
-    subtitle: 'Navigating the handoff between automated agents and your customer success team.',
-    date: 'Jun 2, 2026',
-    readTime: '4 min read',
+    id: 'evaluating-code-generation-in-the-wild',
+    title: 'Evaluating Code Generation in the Wild',
+    subtitle: 'Moving beyond simple algorithms to test full-stack reasoning and logic building.',
+    date: 'Sep 22, 2026',
+    readTime: '6 min read',
     image: 'https://framerusercontent.com/images/74Pklphfry6xPsPBdf6NPOlkfro.png?scale-down-to=1024&width=1344&height=896',
-    content: 'Long form content goes here...'
+    content: `
+      <p class="lead">Evaluating a model's coding capability requires more than checking if it can reverse a string. Modern models act as full-fledged software engineers, and our benchmarks must reflect that reality.</p>
+      <p>Our open-source interactive coding benchmarks require models to interact with a simulated operating system, compile code, handle runtime errors, and iterate on solutions.</p>
+      
+      <h3>Beyond LeetCode</h3>
+      <p>Traditional coding evaluations often rely on algorithmic challenges that are easily memorized. But software engineering is about architecture, state management, and debugging. When we evaluate models on building a functional 3D game using Three.js, we test their ability to understand spatial coordinates, camera angles, and rendering loops.</p>
+      
+      <p>We've found a significant gap between models that perform well on static code tests and models that can actually build and debug complex applications. Interactive benchmarking closes this gap by forcing the model to run its code, parse the error logs, and fix the bugs autonomously.</p>
+    `
   },
   {
-    id: 'when-to-bring-in-human',
-    title: 'When to Let AI Reply — and When to Bring in a Human',
-    subtitle: 'Best practices for human-in-the-loop AI deployments.',
-    date: 'Jun 10, 2026',
+    id: 'the-future-of-agentic-evaluations',
+    title: 'The Future of Agentic Evaluations',
+    subtitle: 'How we build multi-step game loops to test true AI agency.',
+    date: 'Sep 10, 2026',
     readTime: '5 min read',
     image: 'https://framerusercontent.com/images/TeeEjm2aY6UxjlgIZ9MC2hTefg.png?scale-down-to=1024&width=1344&height=896',
-    content: 'Long form content goes here...'
+    content: `
+      <p class="lead">The next frontier of AI is agency: models taking actions in environments over long horizons. But how do you reliably benchmark an agent?</p>
+      <p>At LLM Benchmark, we've developed procedural game loops like Snake and Flappy Bird where the model must "play" the game by generating the correct logic in real-time. This tests planning, spatial reasoning, and reaction times in a way that text-in text-out prompts simply cannot measure.</p>
+      
+      <h3>Building Robust Agents</h3>
+      <p>When an agent is deployed in the real world, it doesn't just answer one question and stop. It must continuously observe its environment, make decisions, and execute actions. By forcing models to maintain a game loop at 60 FPS, we stress-test their context windows, their ability to remember previous states, and their capacity to adapt to rapid changes.</p>
+    `
+  },
+  {
+    id: 'why-ui-matters-in-ai',
+    title: 'Why UI Matters in AI Tooling',
+    subtitle: 'Great models require great interfaces. How we designed the LLM Benchmark dashboard.',
+    date: 'Aug 28, 2026',
+    readTime: '4 min read',
+    image: 'https://framerusercontent.com/images/99R6dxyRz6eD42x4x6W0P742H9M.jpg?scale-down-to=1024&width=1344&height=896',
+    content: `
+      <p class="lead">Building a powerful AI model is only half the battle. If the tools used to interact with and evaluate that model are clunky, researchers will struggle to unlock its true potential.</p>
+      
+      <p>When we set out to build the LLM Benchmark dashboard, we knew we had to treat the interface with the same rigorous attention to detail as the backend evaluation engine. AI developers are tired of staring at unstyled JSON outputs and terminal logs.</p>
+      
+      <h3>Design as a First-Class Citizen</h3>
+      <p>Our dashboard employs a minimalist, professional aesthetic utilizing Switzer typography, subtle gradient blurs, and glassmorphism. This isn't just to look pretty—it reduces cognitive load. When you are comparing Elo ratings across dozens of models and multiple environments (from Python scripts to React components), visual hierarchy is essential.</p>
+      
+      <p>By investing in a premium UI, we've seen a 300% increase in community engagement and a massive uptick in open-source contributions. A tool that feels good to use is a tool that gets used.</p>
+    `
+  },
+  {
+    id: 'preventing-overfitting',
+    title: 'Preventing Overfitting in the Era of Giant Models',
+    subtitle: 'Techniques for ensuring models generalize beyond their training data.',
+    date: 'Aug 15, 2026',
+    readTime: '7 min read',
+    image: 'https://framerusercontent.com/images/n3nI3vWkM7zOQzD9V0x9XU34c.jpg?scale-down-to=1024&width=1344&height=896',
+    content: `
+      <p class="lead">As models scale into the trillions of parameters, their capacity to memorize data increases exponentially. How do we ensure they are actually learning concepts and not just regurgitating GitHub repositories?</p>
+      
+      <p>Overfitting is the silent killer of AI capabilities. A model might ace standard coding benchmarks, but fail completely when asked to implement a novel architecture or use an internal proprietary API. At LLM Benchmark, we tackle this by continuously rotating our evaluation environments and introducing synthetic syntax shifts.</p>
+      
+      <h3>Synthetic Syntax Shifts</h3>
+      <p>To truly test reasoning, we sometimes evaluate models using "synthetic languages"—programming languages that look like Python or Javascript but have completely different standard libraries and keywords. If a model can read the synthetic language's documentation in its prompt and successfully write a Snake game, it proves genuine reasoning capabilities rather than memorization.</p>
+      
+      <p>Our latest findings show that while smaller models fail these tests completely, the frontier models demonstrate remarkable adaptability, proving that zero-shot reasoning is indeed scaling with compute.</p>
+    `
+  },
+  {
+    id: 'open-source-vs-proprietary',
+    title: 'The Gap is Closing: Open-Source vs Proprietary Models',
+    subtitle: 'An analysis of recent benchmark data reveals a tightening race.',
+    date: 'Aug 02, 2026',
+    readTime: '8 min read',
+    image: 'https://framerusercontent.com/images/154Ff3B5W9T0z2X8J0Q6K8L5uM.jpg?scale-down-to=1024&width=1344&height=896',
+    content: `
+      <p class="lead">For years, proprietary models from massive tech giants have dominated the top of the leaderboard. But the open-source community is moving faster than ever, and the gap is finally closing.</p>
+      
+      <p>Looking at our interactive coding benchmark data over the last six months, we've seen an incredible surge in the capabilities of open-weight models. While proprietary models still maintain a slight edge in complex multi-step planning (like maintaining the state of our Breakout game loop), open-source models are now matching or exceeding them in pure code generation and refactoring tasks.</p>
+      
+      <h3>The Democratization of AI</h3>
+      <p>This shift has massive implications for the industry. Developers no longer need to rely on expensive API calls to power their applications. By utilizing highly-optimized open-source models and techniques like LoRA (Low-Rank Adaptation), teams can achieve state-of-the-art performance on domain-specific tasks for a fraction of the cost.</p>
+      
+      <p>We are incredibly excited to see what the next generation of open-source models will bring to the LLM Benchmark arena.</p>
+    `
   }
 ];
 
@@ -54,6 +156,7 @@ export default function Blog() {
     } else {
       setPostId(null);
     }
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   const CalendarIcon = () => (
@@ -71,7 +174,7 @@ export default function Blog() {
               <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
-            <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+            <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
             <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
               <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
               <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
@@ -88,13 +191,7 @@ export default function Blog() {
         </div>
       </header>
         <div className="max-w-[800px] mx-auto px-6 pt-16 pb-24">
-          <Link 
-            to="/blog"
-            className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#6E6D6A] bg-[#F1EFEA] hover:bg-[#E5E3DF] px-3 py-1.5 rounded-md transition-colors mb-8"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            Back to Blog
-          </Link>
+          
           
           <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-serif" style={{ fontFamily: '"Playfair Display", serif' }}>
             {post.title}
@@ -112,25 +209,7 @@ export default function Blog() {
             <img src={post.image} alt="" className="w-full h-full object-cover" />
           </div>
 
-          <div className="prose prose-lg prose-stone max-w-none text-[#4A4948]">
-            <p className="lead">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-            <p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</p>
-            <h3>The Core Challenge</h3>
-            <p>Omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
-          </div>
-          
-          <div className="mt-16 pt-12 border-t border-[#EAEAEA]">
-            <div className="bg-[#F4F2EF] rounded-2xl p-8 md:p-10 text-center">
-              <h2 className="text-[28px] font-serif text-[#111111] mb-3" style={{ fontFamily: '"Playfair Display", serif' }}>Ready to get involved?</h2>
-              <p className="text-[16px] text-[#666666] mb-8 max-w-[500px] mx-auto">
-                Join our open-source community to help shape the future of LLM evaluation and benchmarking.
-              </p>
-              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[8px] text-white text-[15px] font-medium transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1),inset_0_1px_0px_rgba(255,255,255,0.15)] bg-gradient-to-b from-[#333333] to-[#111111] hover:from-[#444444] hover:to-[#222222] border border-[#111111]">
-                <svg className="w-[18px] h-[18px] invert opacity-90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                Contribute Now
-              </a>
-            </div>
-          </div>
+          <div className="prose prose-lg prose-stone max-w-none text-[#4A4948]" style={{ fontFamily: 'Switzer, sans-serif' }} dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </div>
       </div>
     );
@@ -141,7 +220,7 @@ export default function Blog() {
             <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
-            <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+            <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
             <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
               <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
               <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
@@ -162,12 +241,9 @@ export default function Blog() {
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h1 className="text-[42px] font-semibold text-[#111111] tracking-tight mb-4">Latest Updates</h1>
-            <p className="text-[17px] text-[#666666]">News, insights, and stories from the LLM Arena team.</p>
+            <p className="text-[17px] text-[#666666]">News, insights, and stories from the LLM Benchmark team.</p>
           </div>
-          <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-white text-[14px] font-medium transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1),inset_0_1px_0px_rgba(255,255,255,0.15)] bg-gradient-to-b from-[#333333] to-[#111111] hover:from-[#444444] hover:to-[#222222] border border-[#111111]">
-            <svg className="w-[16px] h-[16px] invert opacity-90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            Contribute Now
-          </a>
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -198,25 +274,14 @@ export default function Blog() {
         </div>
       </div>
 
-      <div className="border-t border-[#EAEAEA] bg-white py-20 px-6">
-        <div className="max-w-[800px] mx-auto text-center">
-          <h2 className="text-[32px] font-serif text-[#111111] mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>Help Shape the Future of LLM Evaluation</h2>
-          <p className="text-[17px] text-[#666666] mb-10 max-w-[600px] mx-auto">
-            LLM Arena is an open-source initiative. We rely on community contributions to add new models, environments, and benchmarking tasks.
-          </p>
-          <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[8px] text-white text-[15px] font-medium transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1),inset_0_1px_0px_rgba(255,255,255,0.15)] bg-gradient-to-b from-[#333333] to-[#111111] hover:from-[#444444] hover:to-[#222222] border border-[#111111]">
-            <svg className="w-[18px] h-[18px] invert opacity-90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            Contribute Now
-          </a>
-        </div>
-      </div>
+
 
       <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA]">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
             <div className="col-span-1 lg:col-span-2 pr-8">
               <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
-                <img src="/icon.png" alt="LLM Arena Icon" className="h-[48px] w-[48px] object-contain shrink-0 grayscale" />
+                <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[48px] w-[48px] object-contain shrink-0 grayscale" />
                 <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
                   <span className="text-[20px] leading-none whitespace-nowrap">llm</span>
                   <span className="text-[20px] leading-none whitespace-nowrap -mt-[2px]">benchmark</span>

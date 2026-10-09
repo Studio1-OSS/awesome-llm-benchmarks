@@ -433,7 +433,7 @@ function App() {
         <div className={`h-20 flex items-center ${isSidebarCollapsed ? 'justify-center px-0' : 'justify-between px-4'} shrink-0 bg-transparent`}>
           {!isSidebarCollapsed ? (
             <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
-              <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+              <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
               <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
                 <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
                 <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
@@ -452,7 +452,7 @@ function App() {
               onMouseLeave={() => setTooltipState(null)}
               className="relative flex items-center justify-center w-12 h-12 rounded-xl hover:bg-[#EAE8E3] transition-colors cursor-pointer shrink-0 group"
             >
-              <img src="/icon.png" alt="LLM Arena Logo" className="w-[30px] h-[30px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
+              <img src="/icon.png" alt="LLM Benchmark Logo" className="w-[30px] h-[30px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
               <PanelLeftOpen className="w-6 h-6 text-[#6E6D6A] absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
             </button>
           )}
@@ -665,7 +665,7 @@ function App() {
               onClick={() => setIsSidebarOpen(true)}
               className="md:hidden relative flex items-center justify-center w-10 h-10 rounded-xl hover:bg-[#EAE8E3] transition-colors group cursor-pointer mr-1"
             >
-              <img src="/icon.png" alt="LLM Arena Logo" className="w-[26px] h-[26px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
+              <img src="/icon.png" alt="LLM Benchmark Logo" className="w-[26px] h-[26px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
               <PanelLeftOpen className="w-5 h-5 text-[#6E6D6A] absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
             </button>
             <div 

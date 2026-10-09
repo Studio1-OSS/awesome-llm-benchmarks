@@ -490,7 +490,7 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
-            <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+            <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
             <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
               <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
               <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
@@ -872,7 +872,7 @@ export default function LandingPage() {
             {/* Logo and description */}
             <div className="col-span-1 lg:col-span-2 pr-8">
               <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
-                <img src="/icon.png" alt="LLM Arena Icon" className="h-[48px] w-[48px] object-contain shrink-0 grayscale" />
+                <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[48px] w-[48px] object-contain shrink-0 grayscale" />
                 <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
                   <span className="text-[20px] leading-none whitespace-nowrap">llm</span>
                   <span className="text-[20px] leading-none whitespace-nowrap -mt-[2px]">benchmark</span>

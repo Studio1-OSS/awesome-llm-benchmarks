@@ -13,8 +13,8 @@ const PAGE_CONTENT: Record<string, { title: string, content: string }> = {
     content: 'Our evaluation methodology is based on procedurally generated, deterministic game loops that test reasoning, planning, and code generation capabilities in real-time. By moving away from static multiple-choice datasets, we eliminate test-set contamination and ensure models are evaluated on true generalization.'
   },
   '/about': {
-    title: 'About LLM Arena',
-    content: 'LLM Arena was created to solve the fundamental problem in AI evaluation: static benchmarks are solved too quickly, and humans cannot scale to evaluate thousands of models daily. We provide a dynamic, game-based evaluation platform that scales infinitely and evaluates models on true agency.'
+    title: 'About LLM Benchmark',
+    content: 'LLM Benchmark was created to solve the fundamental problem in AI evaluation: static benchmarks are solved too quickly, and humans cannot scale to evaluate thousands of models daily. We provide a dynamic, game-based evaluation platform that scales infinitely and evaluates models on true agency.'
   },
   '/contributors': {
     title: 'Contributors',
@@ -26,7 +26,7 @@ const PAGE_CONTENT: Record<string, { title: string, content: string }> = {
   },
   '/updates': {
     title: 'Updates & Changelog',
-    content: 'Stay up to date with the latest changes to the LLM Arena platform. We regularly update our evaluation environments, adjust scoring weights, and introduce new frontier models to the leaderboard.'
+    content: 'Stay up to date with the latest changes to the LLM Benchmark platform. We regularly update our evaluation environments, adjust scoring weights, and introduce new frontier models to the leaderboard.'
   },
   '/faq': {
     title: 'Frequently Asked Questions',
@@ -38,7 +38,7 @@ const PAGE_CONTENT: Record<string, { title: string, content: string }> = {
   },
   '/terms': {
     title: 'Terms of Service',
-    content: 'By using the LLM Arena platform, you agree to our community guidelines. Do not attempt to reverse-engineer the procedural generation seeds, and please respect the API rate limits when programmatically querying the leaderboard data.'
+    content: 'By using the LLM Benchmark platform, you agree to our community guidelines. Do not attempt to reverse-engineer the procedural generation seeds, and please respect the API rate limits when programmatically querying the leaderboard data.'
   }
 };
 
@@ -58,6 +58,10 @@ export default function ContentPage() {
       .catch(err => console.error('Failed to fetch github stars', err));
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA] relative">
       <div className="absolute top-0 right-0 w-[80vw] h-[800px] bg-gradient-to-b from-[#EAE8E3]/60 to-transparent blur-[120px] -z-10 rounded-full opacity-60 translate-x-[20%] -translate-y-[20%] pointer-events-none"></div>
@@ -66,7 +70,7 @@ export default function ContentPage() {
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
-            <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+            <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
             <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
               <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
               <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
@@ -83,11 +87,12 @@ export default function ContentPage() {
         </div>
       </header>
 
-      <div className="max-w-[800px] mx-auto px-6 pt-24 pb-32 min-h-[60vh]">
-        <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-8 tracking-tight font-serif" style={{ fontFamily: '"Playfair Display", serif' }}>
+      <div className="max-w-[800px] mx-auto px-6 pt-16 pb-24 min-h-[60vh]">
+        
+        <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-serif" style={{ fontFamily: '"Playfair Display", serif' }}>
           {pageData.title}
         </h1>
-        <div className="prose prose-lg prose-stone max-w-none text-[#4A4948]">
+        <div className="prose prose-lg prose-stone max-w-none text-[#4A4948]" style={{ fontFamily: 'Switzer, sans-serif' }}>
           <p className="lead">{pageData.content}</p>
         </div>
       </div>
@@ -97,7 +102,7 @@ export default function ContentPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
             <div className="col-span-1 lg:col-span-2 pr-8">
               <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
-                <img src="/icon.png" alt="LLM Arena Icon" className="h-[48px] w-[48px] object-contain shrink-0 grayscale" />
+                <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[48px] w-[48px] object-contain shrink-0 grayscale" />
                 <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
                   <span className="text-[20px] leading-none whitespace-nowrap">llm</span>
                   <span className="text-[20px] leading-none whitespace-nowrap -mt-[2px]">benchmark</span>

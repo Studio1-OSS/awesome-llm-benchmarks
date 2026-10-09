@@ -28,8 +28,8 @@ export default function NotFound() {
       {/* Header */}
       <header className="absolute top-0 w-full z-50 bg-transparent h-20 flex items-center px-8">
         <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
-          <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
-          <span className="font-semibold text-[15px] text-[#111111] tracking-tight leading-none whitespace-nowrap">LLM Arena</span>
+          <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+          <span className="font-semibold text-[15px] text-[#111111] tracking-tight leading-none whitespace-nowrap">LLM Benchmark</span>
         </Link>
       </header>
 
