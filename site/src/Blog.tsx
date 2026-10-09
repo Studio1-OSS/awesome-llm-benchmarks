@@ -495,7 +495,7 @@ export default function Blog() {
           </div>
         </header>
         
-        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 pt-12 pb-24 flex flex-col lg:flex-row gap-12 lg:gap-12 relative items-start">
+        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 pt-12 pb-24 flex flex-col lg:flex-row lg:justify-center gap-12 lg:gap-12 relative items-start">
           
           {/* Left TOC Sidebar */}
           <aside className="hidden lg:flex flex-col w-[240px] shrink-0 sticky top-[100px] max-h-[calc(100vh-140px)]">
