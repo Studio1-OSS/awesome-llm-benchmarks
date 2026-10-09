@@ -322,7 +322,7 @@ export default function Blog() {
             <div className="w-full bg-white/30 backdrop-blur-[24px] p-3 sm:p-4 rounded-lg lg:rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/50 relative z-10 overflow-hidden">
               <div className="w-full rounded-[12px] overflow-hidden border border-white/60 shadow-[0_8px_32px_rgb(0,0,0,0.08)] bg-[#FCFAF8] flex flex-col relative">
                 {/* The blog image - TAB REMOVED AS REQUESTED */}
-                <img src={post.image} alt="" className="w-full h-full object-cover aspect-[2/1] md:aspect-[21/9]" />
+                <img src={post.image} alt="" className="w-full h-auto object-cover" />
               </div>
             </div>
           </div>
