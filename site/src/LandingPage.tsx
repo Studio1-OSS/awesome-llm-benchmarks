@@ -747,7 +747,7 @@ export default function LandingPage() {
                           {card.models.map((model, mi) => {
                             const heightPct = Math.max((model.val / maxVal) * 100, 4);
                             return (
-                              <div key={mi} className="relative flex flex-col items-center justify-end h-full z-10 w-[8%] max-w-[32px] group/bar cursor-pointer">
+                              <div key={mi} className="relative flex flex-col items-center justify-end h-full z-10 hover:z-[100] w-[8%] max-w-[32px] group/bar cursor-pointer">
                                 {/* Bar */}
                                 <div
                                   className="w-full rounded-t-[4px] relative flex flex-col items-center transition-opacity duration-200 group-hover/bar:opacity-80"
