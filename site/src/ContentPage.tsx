@@ -216,7 +216,7 @@ export default function ContentPage() {
       </div>
 
       <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA]">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
             <div className="col-span-1 lg:col-span-2 pr-8">
               <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">

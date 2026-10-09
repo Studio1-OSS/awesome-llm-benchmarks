@@ -141,7 +141,7 @@ export default function LlmRace() {
       </header>
 
       {/* Top Banner Section */}
-      <div className="max-w-[1400px] mx-auto px-8 pt-16 pb-8">
+      <div className="max-w-[1400px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-8 pt-16 pb-8">
         <div className="flex flex-col md:flex-row gap-12 justify-between items-start">
           <div className="flex-1 max-w-[600px]">
             <h1 className="text-[44px] leading-[1.1] font-heading font-medium tracking-tight text-[#1C1C1C] mb-6">
@@ -172,7 +172,7 @@ export default function LlmRace() {
       </div>
 
       {/* Highlights Grid */}
-      <div className="max-w-[1400px] mx-auto px-8 mb-12">
+      <div className="max-w-[1400px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-8 mb-12">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           
           {/* Intelligence Card */}
@@ -258,7 +258,7 @@ export default function LlmRace() {
       </div>
 
       {/* Main Table with Vertical Scroll */}
-      <div className="max-w-[1400px] mx-auto px-8 mb-24">
+      <div className="max-w-[1400px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-8 mb-24">
         <style>{`
           .table-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -352,7 +352,7 @@ export default function LlmRace() {
 
       {/* Footer */}
       <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA] mt-12">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
             <div className="col-span-1 lg:col-span-2 pr-8">
               <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">

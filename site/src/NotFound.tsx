@@ -17,24 +17,43 @@ const ALL_LOGOS = [
   '/logos/perplexity.svg',
   '/logos/huggingface.svg',
   '/logos/github.svg',
-  '/logos/cohere.png',
-  '/logos/alibaba.png',
-  '/logos/nvidia.png',
-  '/logos/baidu.png',
-  '/logos/tencent.png',
-  '/logos/zhipu.png',
   '/logos/qwen.svg',
   '/logos/deepseek.svg',
-  '/logos/gemma.png',
   '/logos/claude.svg',
   '/logos/ollama.svg',
   '/logos/primalabs.svg',
+  '/logos/nvidia.png',
+  '/logos/tencent.png',
+  '/logos/zhipu.png',
+  '/logos/gemma.png',
   '/logos/ibm.png',
   '/logos/sktelecom.png',
   '/logos/upstage.png',
   '/logos/reka.png',
-  '/logos/ai21.png'
+  '/logos/grok.png',
+  '/logos/kimi.png',
+  '/logos/liquid.png',
+  '/logos/minimax.png',
+  '/logos/sarvam.png',
+  '/logos/xiaomi.png'
 ];
+
+const NUMBER_GRIDS = {
+  four: [
+    [0, 0, 1, 0],
+    [0, 1, 1, 0],
+    [1, 0, 1, 0],
+    [1, 1, 1, 1],
+    [0, 0, 1, 0],
+  ],
+  zero: [
+    [0, 1, 1, 0],
+    [1, 0, 0, 1],
+    [1, 0, 0, 1],
+    [1, 0, 0, 1],
+    [0, 1, 1, 0],
+  ]
+};
 
 export default function NotFound() {
   const [githubStars, setGithubStars] = useState<number | null>(null);
@@ -49,6 +68,30 @@ export default function NotFound() {
       })
       .catch(err => console.error('Failed to fetch github stars', err));
   }, []);
+
+  let logoIndex = 0;
+  const renderGrid = (gridPattern: number[][]) => {
+    return (
+      <div className="flex flex-col gap-0.5 sm:gap-1">
+        {gridPattern.map((row, rIdx) => (
+          <div key={rIdx} className="flex gap-0.5 sm:gap-1">
+            {row.map((cell, cIdx) => {
+              if (cell === 1) {
+                const logo = ALL_LOGOS[logoIndex % ALL_LOGOS.length];
+                logoIndex++;
+                return (
+                  <div key={cIdx} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 flex items-center justify-center bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-[#EAEAEA] z-10 relative overflow-hidden rounded-[2px] sm:rounded-[4px] md:rounded-[6px]">
+                    <img src={logo} alt="logo" className="w-full h-full object-contain p-1 sm:p-1.5 md:p-2 2xl:p-2.5" />
+                  </div>
+                );
+              }
+              return <div key={cIdx} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16"></div>;
+            })}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA] flex flex-col relative">
@@ -78,30 +121,25 @@ export default function NotFound() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col justify-center items-center py-20 px-6 w-full max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto">
+      <main className="flex-1 flex flex-col justify-center items-center py-20 md:py-32 px-6 max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto w-full">
         
-        {/* TOP TEXT */}
-        <div className="w-full text-center mb-16">
-          <h1 className="text-[42px] sm:text-[54px] md:text-[64px] text-[#2E2E2D] leading-[1.1] tracking-tight font-heading font-medium">
+        {/* Text at the top */}
+        <div className="w-full text-center mb-16 xl:mb-20">
+          <h1 className="text-[42px] sm:text-[54px] md:text-[64px] 2xl:text-[80px] text-[#2E2E2D] leading-[1.1] tracking-tight font-heading font-medium">
             Oops! This page doesn't exist.
           </h1>
         </div>
 
-        {/* 404 LOGO GRID - Premium Logo Wall */}
-        <div className="w-full max-w-[800px] mx-auto grid grid-cols-4 sm:grid-cols-7 gap-2 sm:gap-4 mb-16">
-          {ALL_LOGOS.map((logo, idx) => {
-            const filterClass = logo.includes('openai') || logo.includes('xai') || logo.includes('github') ? 'filter invert brightness-0 opacity-80' : '';
-            return (
-              <div key={idx} className="aspect-square flex items-center justify-center bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-[#EAEAEA] rounded-lg relative overflow-hidden">
-                <img src={logo} alt="logo" className={`w-full h-full object-contain p-3 sm:p-4 ${filterClass}`} />
-              </div>
-            );
-          })}
+        {/* 404 LOGO GRID */}
+        <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8 lg:gap-10 2xl:gap-14 mb-20 xl:mb-28 transition-transform duration-1000 ease-out">
+          {renderGrid(NUMBER_GRIDS.four)}
+          {renderGrid(NUMBER_GRIDS.zero)}
+          {renderGrid(NUMBER_GRIDS.four)}
         </div>
 
-        {/* BOTTOM BUTTON */}
-        <div className="w-full text-center mt-4">
-          <Link to="/" className="group inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#111111] text-white text-[16px] font-medium rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] hover:bg-black hover:scale-[1.02] transition-all duration-200">
+        {/* Back to home button at the bottom */}
+        <div className="w-full text-center">
+          <Link to="/" className="group inline-flex items-center gap-2.5 px-6 py-3.5 2xl:px-8 2xl:py-4 bg-[#111111] text-white text-[16px] 2xl:text-[18px] font-medium rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] hover:bg-black transition-all duration-200">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             Back to home
           </Link>
@@ -109,7 +147,7 @@ export default function NotFound() {
       </main>
 
       <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA] mt-auto">
-        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
             <div className="col-span-1 lg:col-span-2 pr-8">
               <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
