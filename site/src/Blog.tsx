@@ -327,7 +327,7 @@ export default function Blog() {
             </div>
           </div>
 
-          <div className="prose prose-lg prose-stone max-w-none text-[#4A4948]" style={{ fontFamily: 'Switzer, sans-serif' }} dangerouslySetInnerHTML={{ __html: post.content }}></div>
+          <div className="prose prose-lg max-w-none prose-p:text-[#6E6D6A] prose-headings:text-[#1A1A1A] prose-headings:font-semibold prose-strong:text-[#1A1A1A] prose-ul:text-[#6E6D6A] prose-li:text-[#6E6D6A] prose-a:text-[#1A1A1A] selectable-text font-sans" dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </div>
         
         {/* Footer for single blog post view */}
