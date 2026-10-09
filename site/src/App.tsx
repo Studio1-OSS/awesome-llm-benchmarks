@@ -693,8 +693,8 @@ function App() {
                           }}
                           className={`w-full flex items-center gap-3 text-left px-2.5 py-2 rounded-[10px] transition-colors ${selectedGame === game.id ? 'bg-[#F4F2EF]' : 'hover:bg-[#FAF9F6]'}`}
                         >
-                          <div className="w-8 h-8 rounded-[8px] bg-white border border-[#E5E3DF] shadow-[0_1px_4px_rgba(0,0,0,0.04)] flex items-center justify-center shrink-0">
-                            <img src={game.logo} alt="" className="w-5 h-5 object-contain" />
+                          <div className="w-8 h-8 rounded-[8px] bg-white border border-[#E5E3DF] shadow-[0_1px_4px_rgba(0,0,0,0.04)] flex items-center justify-center shrink-0 overflow-hidden">
+                            <img src={game.logo} alt="" className="w-full h-full object-cover" />
                           </div>
                           <div className="flex flex-col min-w-0 flex-1 gap-1">
                             <div className="flex items-center justify-between gap-2">
@@ -897,7 +897,7 @@ function App() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E3DF] bg-white/80 backdrop-blur-md shrink-0">
               <div className="flex items-center gap-3">
                 {selectedGame && GAMES.find(g => g.id === selectedGame) && (
-                  <img src={GAMES.find(g => g.id === selectedGame)!.logo} alt="" className="w-7 h-7 object-contain rounded-lg border border-[#E5E3DF] shadow-sm p-0.5" />
+                  <img src={GAMES.find(g => g.id === selectedGame)!.logo} alt="" className="w-7 h-7 object-cover rounded-lg border border-[#E5E3DF] shadow-sm" />
                 )}
                 <div>
                   <p className="font-semibold text-[15px] text-[#2E2E2D] leading-tight">{GAMES.find(g => g.id === selectedGame)?.name ?? 'Benchmark'}</p>
