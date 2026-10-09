@@ -324,10 +324,9 @@ function App() {
 
             let cost = parseFloat(rawCost);
             if (isNaN(cost)) cost = 0;
+            if (isNaN(tokens)) tokens = 0;
             
-            if (!isNaN(tokens)) {
-              data.push({ id: modelId, name, tokens, cost, iframeSrc: '' });
-            }
+            data.push({ id: modelId, name, tokens, cost, iframeSrc: '' });
           }
         }
         
