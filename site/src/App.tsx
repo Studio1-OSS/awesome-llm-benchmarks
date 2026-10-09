@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect, useMemo } from 'react'
 import { PanelLeftClose, PanelLeftOpen, X, ChevronDown, Check, Search, BookOpen } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
@@ -8,16 +9,70 @@ import { ComposedChart, Scatter, Line, XAxis, YAxis, CartesianGrid, Tooltip as R
 
 const getProviderLogo = (name: string) => {
   const lowerName = name.toLowerCase();
-  if (lowerName.includes('fable') || lowerName.includes('sonnet') || lowerName.includes('opus') || lowerName.includes('anthropic') || lowerName.includes('claude')) return '/logos/claude.png';
-  if (lowerName.includes('gpt') || lowerName.includes('openai') || lowerName.includes('codex')) return '/logos/openai.svg';
-  if (lowerName.includes('gemini') || lowerName.includes('google')) return '/logos/google.svg';
-  if (lowerName.includes('llama') || lowerName.includes('meta') || lowerName.includes('muse')) return '/logos/meta.svg';
-  if (lowerName.includes('grok') || lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('x ai')) return '/logos/xai.svg';
+  if (lowerName.includes('anthropic')) return '/logos/claude.png';
+  if (lowerName.includes('openai')) return '/logos/openai.svg';
+  if (lowerName.includes('google')) return '/logos/google.svg';
+  if (lowerName.includes('meta')) return '/logos/meta.svg';
+  if (lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('spacexai')) return '/logos/xai.svg';
   if (lowerName.includes('deepseek')) return '/logos/deepseek.svg';
-  if (lowerName.includes('kimi') || lowerName.includes('moonshot')) return '/logos/kimi.png';
-  if (lowerName.includes('glm') || lowerName.includes('zai') || lowerName.includes('z ai')) return '/logos/glm.png';
-  if (lowerName.includes('qwen') || lowerName.includes('alibaba')) return '/logos/qwen.svg';
-  return '/logos/openai.svg'; // Fallback
+  if (lowerName.includes('moonshot')) return '/logos/kimi.png';
+  if (lowerName.includes('zhipu')) return '/logos/zhipu.png';
+  if (lowerName.includes('zai') || lowerName.includes('z ai') || lowerName.includes('glm')) return '/logos/glm.png';
+  if (lowerName.includes('alibaba') || lowerName.includes('qwen')) return '/logos/qwen.svg';
+  if (lowerName.includes('mistral')) return '/logos/mistral.svg';
+  if (lowerName.includes('microsoft')) return '/logos/microsoft.svg';
+  if (lowerName.includes('amazon') || lowerName.includes('aws')) return '/logos/aws.svg';
+  if (lowerName.includes('perplexity')) return '/logos/perplexity.svg';
+  if (lowerName.includes('inclusionai')) return '/logos/inclusionai_small.webp';
+  if (lowerName.includes('primalabs') || lowerName.includes('prima')) return '/logos/primalabs.svg';
+  if (lowerName.includes('ollama')) return '/logos/ollama.svg';
+  if (lowerName.includes('hugging')) return '/logos/huggingface.svg';
+  if (lowerName.includes('ibm') || lowerName.includes('granite')) return '/logos/ibm.png';
+  if (lowerName.includes('cohere')) return '/logos/cohere.png';
+  if (lowerName.includes('celeris')) return '/logos/celeris.png';
+  if (lowerName.includes('mercury')) return '/logos/mercury.png';
+  if (lowerName.includes('liquid')) return '/logos/liquid.png';
+  if (lowerName.includes('stepfun')) return '/logos/stepfun.png';
+  if (lowerName.includes('minimax')) return '/logos/minimax.png';
+  if (lowerName.includes('servicenow')) return '/logos/servicenow.png';
+  if (lowerName.includes('reka')) return '/logos/reka.png';
+  if (lowerName.includes('naver')) return '/logos/naver.png';
+  if (lowerName.includes('upstage')) return '/logos/upstage.png';
+  if (lowerName.includes('tencent')) return '/logos/tencent.png';
+  if (lowerName.includes('baidu')) return '/logos/baidu.png';
+  if (lowerName.includes('xiaomi')) return '/logos/xiaomi.png';
+  if (lowerName.includes('ai21') || lowerName.includes('jt') || lowerName.includes('flash 236b') || lowerName.includes('jamba')) return '/logos/ai21.png';
+  if (lowerName.includes('sk telecom') || lowerName.includes('kt')) return '/logos/sktelecom.png';
+  if (lowerName.includes('sarvam')) return '/logos/sarvam.png';
+
+  if (lowerName.includes('ai9stars')) return '/logos/ai9stars.png';
+  if (lowerName.includes('allen')) return '/logos/allenai.png';
+  if (lowerName.includes('apodex')) return '/logos/apodex.png';
+  if (lowerName.includes('arcee')) return '/logos/arcee.png';
+  if (lowerName.includes('bytedance') || lowerName.includes('seed') || lowerName.includes('doubao') || lowerName.includes('dubao')) return '/logos/doubao.png';
+  if (lowerName.includes('china mobile')) return '/logos/chinamobile.png';
+  if (lowerName.includes('deep cogito')) return '/logos/deepcogito.png';
+  if (lowerName.includes('inception')) return '/logos/inception.png';
+  if (lowerName.includes('institute of foundation')) return '/logos/ifm.png';
+  if (lowerName.includes('kwaikat') || lowerName.includes('kuaishou')) return '/logos/kuaishou.png';
+  if (lowerName.includes('lg ai')) return '/logos/lgai.png';
+  if (lowerName.includes('longcat')) return '/logos/longcat.png';
+  if (lowerName.includes('motif')) return '/logos/motif.png';
+  if (lowerName.includes('multiverse')) return '/logos/multiverse.png';
+  if (lowerName.includes('nvidia')) return '/logos/nvidia.png';
+  if (lowerName.includes('nanbeige')) return '/logos/nanbeige.png';
+  if (lowerName.includes('nex')) return '/logos/nexagi.png';
+  if (lowerName.includes('nous')) return '/logos/nous.png';
+  if (lowerName.includes('openbmb')) return '/logos/openbmb.png';
+  if (lowerName.includes('prime')) return '/logos/primeintellect.png';
+  if (lowerName.includes('swiss ai')) return '/logos/swissai.png';
+  if (lowerName.includes('tii uae') || lowerName.includes('tii')) return '/logos/tii.png';
+  if (lowerName.includes('thinking machines')) return '/logos/thinkingmachines.png';
+  if (lowerName.includes('trillion')) return '/logos/trillion.png';
+  if (lowerName.includes('spartus') || lowerName.includes('sparta')) return '/logos/spartus.png';
+
+  // If no exact provider logo matches, return null so we don't render a false logo.
+  return '';
 }
 
 const getProviderName = (name: string) => {
@@ -251,6 +306,11 @@ const markdownComponents: any = {
 };
 
 
+
+const GithubIcon = ({ size = 20, className = "" }: { size?: number, className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+);
+
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
@@ -258,6 +318,19 @@ function App() {
   
   const [selectedGame, setSelectedGame] = useState('')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  
+  const [githubStars, setGithubStars] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/Studio1-OSS/awesome-llm-benchmarks')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          setGithubStars(data.stargazers_count);
+        }
+      })
+      .catch(err => console.error('Failed to fetch github stars', err));
+  }, []);
   
   // Search Modal State
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
@@ -324,10 +397,9 @@ function App() {
 
             let cost = parseFloat(rawCost);
             if (isNaN(cost)) cost = 0;
+            if (isNaN(tokens)) tokens = 0;
             
-            if (!isNaN(tokens)) {
-              data.push({ id: modelId, name, tokens, cost, iframeSrc: '' });
-            }
+            data.push({ id: modelId, name, tokens, cost, iframeSrc: '' });
           }
         }
         
@@ -403,8 +475,27 @@ function App() {
       return selectedAgents.map((id: any) => models.find((m: any) => m.id === id)).filter(Boolean);
     }, [models, selectedAgents])
 
+  
+  const sidebarCss = `
+    .sidebar-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .sidebar-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #E5E3DF;
+      border-radius: 10px;
+    }
+    .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: #D1CFCA;
+    }
+  `;
+
   return (
-    <div className="flex h-screen bg-[#F1EFEA] text-[#2E2E2D] font-sans overflow-hidden">
+    <>
+      <style>{sidebarCss}</style>
+      <div className="flex h-screen bg-[#F1EFEA] text-[#2E2E2D] font-sans overflow-hidden">
       
       {isSidebarOpen && (
         <div 
@@ -419,13 +510,13 @@ function App() {
         {/* Sidebar Header with Brand */}
         <div className={`h-20 flex items-center ${isSidebarCollapsed ? 'justify-center px-0' : 'justify-between px-4'} shrink-0 bg-transparent`}>
           {!isSidebarCollapsed ? (
-            <a href="#landing" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
-              <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+            <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+              <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
               <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
                 <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
                 <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
               </div>
-            </a>
+            </Link>
           ) : (
             <button 
               onClick={() => {
@@ -439,7 +530,7 @@ function App() {
               onMouseLeave={() => setTooltipState(null)}
               className="relative flex items-center justify-center w-12 h-12 rounded-xl hover:bg-[#EAE8E3] transition-colors cursor-pointer shrink-0 group"
             >
-              <img src="/icon.png" alt="LLM Arena Logo" className="w-[30px] h-[30px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
+              <img src="/icon.png" alt="LLM Benchmark Logo" className="w-[30px] h-[30px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
               <PanelLeftOpen className="w-6 h-6 text-[#6E6D6A] absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
             </button>
           )}
@@ -468,7 +559,7 @@ function App() {
           )}
         </div>
 
-        <div className={`flex-1 overflow-y-auto pt-8 pb-4 ${isSidebarCollapsed ? 'px-2' : 'px-3'}`}>
+        <div className={`flex-1 overflow-y-auto sidebar-scrollbar pt-8 pb-4 ${isSidebarCollapsed ? 'px-2' : 'px-3'}`}>
           <div className="flex flex-col space-y-1">
             {!isSidebarCollapsed && (
               <div className="px-2 flex items-center justify-between text-[11px] font-medium text-[#6E6D6A] uppercase tracking-wider select-none mb-2 cursor-default">
@@ -537,7 +628,7 @@ function App() {
                 className="mx-4 mb-4 mt-2 bg-[#FCFBFA] border border-[#F0EFEB] p-2.5 rounded-[12px] shadow-sm flex items-center justify-between cursor-pointer hover:bg-white transition-all group"
               >
                 <div className="flex items-center gap-2.5">
-                  <img src="/logos/github.svg" alt="GitHub" className="w-4.5 h-4.5 object-contain opacity-70 group-hover:opacity-100 transition-opacity drop-shadow-sm ml-1" />
+                  <GithubIcon className="w-4.5 h-4.5 object-contain opacity-70 group-hover:opacity-100 transition-opacity drop-shadow-sm ml-1" />
                   <span className="text-[12.5px] font-bold text-[#4A3F35] group-hover:text-[#2A231C] transition-colors">Contribute</span>
                 </div>
                 <ChevronDown className="w-3.5 h-3.5 text-[#A3988E] rotate-180 group-hover:text-[#4A3F35] transition-colors mr-1" strokeWidth={2.5} />
@@ -582,13 +673,13 @@ function App() {
                 </p>
                 
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" 
                   target="_blank" 
                   rel="noreferrer"
                   className="inline-flex items-center text-[12px] font-bold text-[#4A3F35] hover:text-[#7A6B5D] transition-colors group cursor-pointer"
                 >
-                  <img src="/logos/github.svg" alt="GitHub" className="w-3.5 h-3.5 mr-1.5 opacity-80 group-hover:opacity-100 transition-opacity" />
-                  Contribute 
+                  <GithubIcon className="w-3.5 h-3.5 mr-1.5 opacity-80 group-hover:opacity-100 transition-opacity" />
+                  Contribute
                   <span className="ml-1 transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
               </div>
@@ -616,8 +707,13 @@ function App() {
           {isSidebarCollapsed && (
             <div className="mt-auto flex flex-col items-center gap-4 pb-6">
               <div className="relative group">
-                <a href="https://github.com" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-xl hover:bg-[#EAE8E3] flex items-center justify-center transition-colors cursor-pointer">
-                  <img src="/logos/github.svg" alt="GitHub" className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+                <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-xl hover:bg-[#EAE8E3] flex items-center justify-center transition-colors cursor-pointer relative">
+                  <GithubIcon className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+                  {githubStars !== null && (
+                    <span className="absolute -top-1 -right-1 bg-[#2E2E2D] text-white text-[8px] font-bold px-1 rounded-sm shadow-sm z-10">
+                      {githubStars.toLocaleString()}
+                    </span>
+                  )}
                 </a>
                 <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2.5 py-1.5 bg-[#2E2E2D] text-white text-[12px] font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">
                   Contribute to this project
@@ -647,7 +743,7 @@ function App() {
               onClick={() => setIsSidebarOpen(true)}
               className="md:hidden relative flex items-center justify-center w-10 h-10 rounded-xl hover:bg-[#EAE8E3] transition-colors group cursor-pointer mr-1"
             >
-              <img src="/icon.png" alt="LLM Arena Logo" className="w-[26px] h-[26px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
+              <img src="/icon.png" alt="LLM Benchmark Logo" className="w-[26px] h-[26px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
               <PanelLeftOpen className="w-5 h-5 text-[#6E6D6A] absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
             </button>
             <div 
@@ -694,8 +790,8 @@ function App() {
                           }}
                           className={`w-full flex items-center gap-3 text-left px-2.5 py-2 rounded-[10px] transition-colors ${selectedGame === game.id ? 'bg-[#F4F2EF]' : 'hover:bg-[#FAF9F6]'}`}
                         >
-                          <div className="w-8 h-8 rounded-[8px] bg-white border border-[#E5E3DF] shadow-[0_1px_4px_rgba(0,0,0,0.04)] flex items-center justify-center shrink-0">
-                            <img src={game.logo} alt="" className="w-5 h-5 object-contain" />
+                          <div className="w-8 h-8 rounded-[8px] bg-white border border-[#E5E3DF] shadow-[0_1px_4px_rgba(0,0,0,0.04)] flex items-center justify-center shrink-0 overflow-hidden">
+                            <img src={game.logo} alt="" className="w-full h-full object-cover" />
                           </div>
                           <div className="flex flex-col min-w-0 flex-1 gap-1">
                             <div className="flex items-center justify-between gap-2">
@@ -748,12 +844,11 @@ function App() {
             
             <div className="w-[1px] h-4 bg-[#E5E3DF] mx-1 hidden sm:block"></div>
             
-            <a 
-              href="#"
+            <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer"
               className="hidden sm:flex items-center gap-1.5 text-[13.5px] font-semibold text-[#6E6D6A] hover:text-[#2E2E2D] transition-colors"
             >
-              <img src="/logos/github.svg" alt="GitHub" className="w-[18px] h-[18px] object-contain opacity-70" />
-              <span>7.1k</span>
+              <GithubIcon size={18} />
+              <span>{githubStars !== null ? githubStars.toLocaleString() : '7.1k'}</span>
             </a>
           </div>
         </header>
@@ -763,7 +858,7 @@ function App() {
             models.length === 0 && selectedGame ? (
               <div className="flex-1 flex flex-col items-center justify-center bg-white/40 backdrop-blur-sm border border-dashed border-[#E5E3DF] rounded-2xl min-h-[420px]">
                 <div className="w-14 h-14 rounded-2xl bg-[#F1EFEA] flex items-center justify-center mb-5 border border-[#E5E3DF] shadow-sm">
-                  <img src="/logos/github.svg" alt="GitHub" className="w-6 h-6 opacity-60" />
+                  <GithubIcon className="w-6 h-6 opacity-60" />
                 </div>
                 <h2 className="text-[16px] font-semibold text-[#2E2E2D] tracking-tight">No runs recorded yet</h2>
                 <p className="text-[#9E9D9A] mt-2.5 text-[13px] text-center max-w-[280px] leading-relaxed font-medium">
@@ -775,7 +870,7 @@ function App() {
                   rel="noreferrer"
                   className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-[#2E2E2D] text-white rounded-xl text-[13px] font-semibold hover:bg-black transition-colors shadow-sm"
                 >
-                  <img src="/logos/github.svg" alt="GitHub" className="w-4 h-4 brightness-0 invert" />
+                  <GithubIcon className="w-4 h-4" />
                   Contribute Run
                 </a>
               </div>
@@ -898,7 +993,7 @@ function App() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E3DF] bg-white/80 backdrop-blur-md shrink-0">
               <div className="flex items-center gap-3">
                 {selectedGame && GAMES.find(g => g.id === selectedGame) && (
-                  <img src={GAMES.find(g => g.id === selectedGame)!.logo} alt="" className="w-7 h-7 object-contain rounded-lg border border-[#E5E3DF] shadow-sm p-0.5" />
+                  <img src={GAMES.find(g => g.id === selectedGame)!.logo} alt="" className="w-7 h-7 object-cover rounded-lg border border-[#E5E3DF] shadow-sm" />
                 )}
                 <div>
                   <p className="font-semibold text-[15px] text-[#2E2E2D] leading-tight">{GAMES.find(g => g.id === selectedGame)?.name ?? 'Benchmark'}</p>
@@ -906,7 +1001,11 @@ function App() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="flex items-center shadow-[0_2px_4px_rgba(0,0,0,0.02)] rounded-xl relative">
+                <div 
+                  className="flex items-center shadow-[0_2px_4px_rgba(0,0,0,0.02)] rounded-xl relative"
+                  onMouseEnter={() => setIsCopyDropdownOpen(true)}
+                  onMouseLeave={() => setIsCopyDropdownOpen(false)}
+                >
                   <button 
                     onClick={(e) => {
                       navigator.clipboard.writeText(markdownContent || '');
@@ -1281,6 +1380,7 @@ function App() {
       })()}
 
     </div>
+    </>
   );
 }
 

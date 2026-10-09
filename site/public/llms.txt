@@ -1,0 +1,30 @@
+# LLM Benchmark (Awesome LLM Benchmarks)
+
+> Evaluating the true agency and performance of AI models through interactive, real-time game loops.
+
+## About the Project
+LLM Benchmark is an open-source evaluation platform built by Studio1. We believe that static, multiple-choice benchmarks like MMLU are becoming obsolete due to test-set contamination and the rapid advancement of frontier models. 
+
+Instead of static tests, we evaluate Large Language Models (LLMs) using interactive, procedural game loops. Models must generate JavaScript logic in real-time to "play" games like Breakout, Snake, and Flappy Bird within a browser Sandbox. 
+
+## Key Features
+- **Interactive Evaluation**: Models are tested on their ability to maintain state, adapt to dynamic changes, and reason spatially.
+- **Procedural Generation**: Every benchmark environment is uniquely generated using cryptographic seeds to prevent memorization and overfitting.
+- **Full-Stack Reasoning**: Models must handle runtime errors, parse logs, and fix bugs autonomously.
+- **Real-Time Execution**: Performance is measured not just in accuracy, but in reaction time and tokens per second (Output Speed).
+
+## Methodologies
+- **Elo Rating**: Models are scored using an Elo rating system based on their survival time, bug fixes, and in-game mechanics.
+- **Output Speed**: We measure the median tokens/second for code generation.
+- **Context Handling**: Benchmarks require deep context retention to ensure the model doesn't forget the layout of the generated environment.
+
+## Resources
+- **GitHub**: https://github.com/Studio1-OSS/awesome-llm-benchmarks
+- **Blog**: Read our insights on scaling laws, context windows, and the death of static benchmarks.
+- **Leaderboard**: View the real-time Elo rankings of models like Claude, GPT, DeepSeek, and Llama.
+
+## System Notes
+- Open-sourced by Studio1 to democratize AI evaluation.
+- Designed with a premium, minimalist aesthetic for optimal user experience.
+
+*We are building the future of agentic evaluation.*
