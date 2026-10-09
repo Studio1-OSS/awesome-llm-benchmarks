@@ -311,9 +311,13 @@ export default function Blog() {
           </div>
           
           <div
-            className="w-full relative py-8 sm:py-10 lg:py-12 px-4 sm:px-8 lg:px-12 flex items-center justify-center bg-cover bg-center border border-[#EAEAEA] rounded-[16px] shadow-[0_8px_40px_rgba(0,0,0,0.06)] overflow-hidden mb-12"
-            style={{ backgroundImage: 'url("https://framerusercontent.com/images/9hdDJMEED7CAsQAkY47FuHca90.png")' }}
+            className="w-full relative py-8 sm:py-10 lg:py-12 px-4 sm:px-8 lg:px-12 flex items-center justify-center border border-[#EAEAEA] rounded-[16px] shadow-[0_8px_40px_rgba(0,0,0,0.06)] overflow-hidden mb-12"
           >
+            {/* Ambient Glow Background */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center scale-110 blur-[60px] opacity-40 mix-blend-multiply"
+              style={{ backgroundImage: `url(${post.image})` }}
+            />
             {/* Glassy border container */}
             <div className="w-full bg-white/30 backdrop-blur-[24px] p-3 sm:p-4 rounded-lg lg:rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/50 relative z-10 overflow-hidden">
               <div className="w-full rounded-[12px] overflow-hidden border border-white/60 shadow-[0_8px_32px_rgb(0,0,0,0.08)] bg-[#FCFAF8] flex flex-col relative">
