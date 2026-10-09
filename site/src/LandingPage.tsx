@@ -517,7 +517,7 @@ export default function LandingPage() {
 
       <main className="pt-10 pb-16">
         {/* Hero + dashboard preview */}
-        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="flex flex-col lg:flex-row items-start lg:items-stretch gap-12 lg:gap-8 pt-8 lg:pt-12 pb-12 lg:pb-16">
             {/* Left side: text */}
             <Reveal delay={0} className="w-full lg:w-[48%] xl:w-[46%] text-left flex flex-col z-10 shrink-0 lg:py-4 xl:py-6">
@@ -685,11 +685,11 @@ export default function LandingPage() {
         </div>
 
         {/* Trusted By Static Grid */}
-        <div className="w-full relative mt-8 mb-32 px-4 sm:px-6 lg:px-8">
+        <div className="w-full relative mt-8 mb-32 px-6 md:px-12 lg:px-20 xl:px-32">
           <Reveal delay={0} className="w-full text-center mb-8">
             <p className="text-[14px] text-[#888888] font-medium tracking-tight">Evaluating the most capable models from world-class AI labs</p>
           </Reveal>
-          <div className="max-w-[1200px] mx-auto grid grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
+          <div className="max-w-[1200px] 2xl:max-w-[1500px] min-[1920px]:max-w-[1700px] min-[2560px]:max-w-[2200px] mx-auto grid grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
             {Array.from({ length: 8 }).map((_, i) => {
               const currentLogo = TRUSTED_LOGOS[(logoIndex + i * 2) % TRUSTED_LOGOS.length];
               return (
@@ -714,7 +714,7 @@ export default function LandingPage() {
         </div>
 
         {/* Metric cards section */}
-        <div id="llm-race" className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div id="llm-race" className="w-full max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32 mb-16">
           <Reveal delay={0} className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 lg:gap-16 mb-16">
             <h2 className="text-[40px] sm:text-[48px] md:text-[56px] font-medium tracking-tight text-[#111111] leading-[1.05] shrink-0 whitespace-nowrap">
               Find the best model for you.
@@ -810,7 +810,7 @@ export default function LandingPage() {
       {/* Testimonials */}
       <section className="bg-[#FCFAF8] pt-12 pb-4">
         {/* Testimonials */}
-        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-8 relative">
+        <div className="w-full max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32 mb-8 relative">
           <Reveal delay={0} className="flex flex-col items-start gap-4 mb-12">
             <h2 className="text-[40px] sm:text-[48px] md:text-[56px] font-medium tracking-tight text-[#111111] leading-[1.05] max-w-[600px]">
               Notes from the frontier.
@@ -849,7 +849,7 @@ export default function LandingPage() {
       </section>
       {/* FAQ Section */}
       <section className="bg-[#FCFAF8] pt-12 pb-24">
-        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
           <Reveal delay={0} className="mb-14 text-left">
             <h2 className="text-[40px] md:text-[52px] font-sans font-medium leading-[1.05] text-[#111111] tracking-tight">
               You have questions.<br />We have answers.
@@ -875,7 +875,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA]">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
             {/* Logo and description */}
             <div className="col-span-1 lg:col-span-2 pr-8">
