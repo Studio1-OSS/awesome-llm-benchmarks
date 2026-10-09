@@ -11,7 +11,7 @@ const GithubIcon = ({ size = 24, className = '' }: { size?: number, className?: 
 
 const getProviderLogo = (name: string) => {
   const lowerName = name.toLowerCase();
-  if (lowerName.includes('anthropic')) return '/logos/anthropic.svg';
+  if (lowerName.includes('anthropic')) return '/logos/claude.png';
   if (lowerName.includes('openai')) return '/logos/openai.svg';
   if (lowerName.includes('google')) return '/logos/google.svg';
   if (lowerName.includes('meta')) return '/logos/meta.svg';
@@ -29,6 +29,23 @@ const getProviderLogo = (name: string) => {
   if (lowerName.includes('ollama')) return '/logos/ollama.svg';
   if (lowerName.includes('hugging')) return '/logos/huggingface.svg';
   if (lowerName.includes('ibm')) return '/logos/ibm.svg';
+  if (lowerName.includes('cohere')) return '/logos/cohere.png';
+  if (lowerName.includes('celeris')) return '/logos/celeris.png';
+  if (lowerName.includes('mercury')) return '/logos/mercury.png';
+  if (lowerName.includes('liquid')) return '/logos/liquid.png';
+  if (lowerName.includes('stepfun')) return '/logos/stepfun.png';
+  if (lowerName.includes('minimax')) return '/logos/minimax.png';
+  if (lowerName.includes('servicenow')) return '/logos/servicenow.png';
+  if (lowerName.includes('reka')) return '/logos/reka.png';
+  if (lowerName.includes('naver')) return '/logos/naver.png';
+  if (lowerName.includes('upstage')) return '/logos/upstage.png';
+  if (lowerName.includes('tencent')) return '/logos/tencent.png';
+  if (lowerName.includes('baidu')) return '/logos/baidu.png';
+  if (lowerName.includes('xiaomi')) return '/logos/xiaomi.png';
+  if (lowerName.includes('ai21')) return '/logos/ai21.png';
+  if (lowerName.includes('sk telecom')) return '/logos/sktelecom.png';
+  if (lowerName.includes('sarvam')) return '/logos/sarvam.png';
+
   // If no exact provider logo matches, return null so we don't render a false logo.
   return null;
 }
@@ -155,8 +172,8 @@ export default function LlmRace() {
               Celeris-1 and Mercury 2.5 are the fastest models, followed by Mercury 2 and Gemini 3.5 Flash-Lite.
             </p>
             <div className="flex items-center gap-2 mt-6">
-              <div className="w-5 h-5 rounded-full bg-black flex items-center justify-center text-white text-[10px] font-bold">C</div>
-              <div className="w-5 h-5 rounded-full bg-black flex items-center justify-center text-white text-[10px] font-bold">M</div>
+              <img src="/logos/celeris.png" className="w-5 h-5 object-contain" alt="Celeris" />
+              <img src="/logos/mercury.png" className="w-5 h-5 object-contain" alt="Mercury" />
               <img src="/logos/google.svg" className="w-5 h-5 object-contain" alt="Google" />
             </div>
           </div>
