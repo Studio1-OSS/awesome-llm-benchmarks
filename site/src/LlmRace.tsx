@@ -303,7 +303,16 @@ export default function LlmRace() {
                         <span className="font-semibold text-[#1C1C1C] truncate" title={m.name}>{m.name}</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-6 text-[#6B6B6B] truncate" title={m.provider}>{m.provider}</td>
+                    <td className="py-3.5 px-6 truncate" title={m.provider}>
+                      <div className="flex items-center gap-2">
+                        {m.logo ? (
+                          <img src={m.logo} alt="" className="w-4 h-4 object-contain opacity-60 shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        ) : (
+                          <div className="w-4 h-4 shrink-0" />
+                        )}
+                        <span className="text-[#6B6B6B]">{m.provider}</span>
+                      </div>
+                    </td>
                     <td className="py-3.5 px-6 text-[#6B6B6B] text-right font-medium">{m.context}</td>
                     <td className="py-3.5 px-6 text-right">
                       {m.intelligence && m.intelligence !== '--' ? (
