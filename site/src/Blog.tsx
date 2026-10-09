@@ -25,21 +25,24 @@ const POSTS = [
       <h3>2. The Interactive Evaluation Pipeline</h3>
       <p>Instead of feeding a model a static prompt, we place it inside a deterministic game engine. The model must "play" games like Snake, Breakout, and Flappy Bird by generating the raw logic required to survive in real-time. This requires a level of spatial reasoning and reaction logic that text-in, text-out benchmarks completely miss.</p>
       
-      <div class="my-8 p-6 bg-white border border-[#EAEAEA] rounded-xl shadow-sm">
+      <div class="my-8 p-6 bg-white border border-[#EAEAEA] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         <div class="flex flex-col md:flex-row items-stretch justify-between text-center gap-4">
-          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg flex flex-col justify-center">
-            <span class="font-bold text-[#111111] whitespace-nowrap">1. Model Inference</span>
-            <p class="text-sm text-[#666666] mt-2">Generate Javascript logic based on current canvas state.</p>
+          <div class="flex-1 bg-[#F8F7F4] p-5 rounded-lg border border-[#EAEAEA] flex flex-col justify-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <span class="font-bold text-[#111111] whitespace-nowrap relative z-10 text-[15px]">1. Model Inference</span>
+            <p class="text-[13px] text-[#666666] mt-2 relative z-10">Generate logic based on canvas state.</p>
           </div>
-          <div class="text-[#8C8276] flex items-center justify-center">➔</div>
-          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg flex flex-col justify-center">
-            <span class="font-bold text-[#111111] whitespace-nowrap">2. Engine Execution</span>
-            <p class="text-sm text-[#666666] mt-2">The browser evaluates the code within a WebWorker sandbox.</p>
+          <div class="text-[#8C8276] flex items-center justify-center font-light text-2xl">→</div>
+          <div class="flex-1 bg-[#F8F7F4] p-5 rounded-lg border border-[#EAEAEA] flex flex-col justify-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <span class="font-bold text-[#111111] whitespace-nowrap relative z-10 text-[15px]">2. Engine Execution</span>
+            <p class="text-[13px] text-[#666666] mt-2 relative z-10">Browser evaluates inside WebWorker sandbox.</p>
           </div>
-          <div class="text-[#8C8276] flex items-center justify-center">➔</div>
-          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg flex flex-col justify-center">
-            <span class="font-bold text-[#111111] whitespace-nowrap">3. Score Computation</span>
-            <p class="text-sm text-[#666666] mt-2">Elo rating is adjusted based on survival time and mechanics.</p>
+          <div class="text-[#8C8276] flex items-center justify-center font-light text-2xl">→</div>
+          <div class="flex-1 bg-[#F8F7F4] p-5 rounded-lg border border-[#EAEAEA] flex flex-col justify-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <span class="font-bold text-[#111111] whitespace-nowrap relative z-10 text-[15px]">3. Score Computation</span>
+            <p class="text-[13px] text-[#666666] mt-2 relative z-10">Elo rating adjusted based on survival time.</p>
           </div>
         </div>
       </div>
@@ -49,7 +52,105 @@ const POSTS = [
       
       <h3>4. Observing the Shift in Leaderboards</h3>
       <p>When we apply this interactive methodology, the leaderboard shifts dramatically. Models that were fine-tuned specifically to score high on MMLU (what we call "benchmark hacking") fall apart completely when placed inside our game loops. They fail to understand state. They fail to maintain context over hundreds of frames. They hallucinate variables that don't exist in the provided API.</p>
-      <p>On the flip side, models designed with strong foundational reasoning capabilities—like Claude 3.5 Opus and DeepSeek V4—excel. They recognize patterns, optimize their own code mid-game, and adapt to the changing procedural environment.</p>
+      
+      <div class="my-10 p-8 bg-white border border-[#EAEAEA] rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+        <h4 class="text-[16px] font-semibold text-[#111111] mb-2 font-heading">Performance Degradation in Interactive Environments</h4>
+        <p class="text-[14px] text-[#666666] mb-8">Models optimized purely for static benchmarks see severe Elo drops when placed in dynamic, real-time physics engines.</p>
+        
+        <div class="relative w-full h-[240px]">
+          <svg class="w-full h-full" viewBox="0 0 600 240" preserveAspectRatio="none">
+            <!-- Grid -->
+            <line x1="0" y1="200" x2="600" y2="200" stroke="#F0F0F0" stroke-width="1" />
+            <line x1="0" y1="150" x2="600" y2="150" stroke="#F0F0F0" stroke-width="1" />
+            <line x1="0" y1="100" x2="600" y2="100" stroke="#F0F0F0" stroke-width="1" />
+            <line x1="0" y1="50" x2="600" y2="50" stroke="#F0F0F0" stroke-width="1" />
+            
+            <text x="0" y="45" fill="#999" font-size="11" font-family="sans-serif">1500 Elo</text>
+            <text x="0" y="195" fill="#999" font-size="11" font-family="sans-serif">800 Elo</text>
+            
+            <!-- Static Models Line (Red) -->
+            <defs>
+              <linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#EF4444" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M 60,60 C 200,60 300,180 550,190" fill="none" stroke="#EF4444" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 4" />
+            <path d="M 60,60 C 200,60 300,180 550,190 L 550,200 L 60,200 Z" fill="url(#redGrad)" />
+            
+            <!-- Foundation Models Line (Blue) -->
+            <defs>
+              <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M 60,70 C 200,65 300,55 550,45" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" />
+            <path d="M 60,70 C 200,65 300,55 550,45 L 550,200 L 60,200 Z" fill="url(#blueGrad)" />
+            
+            <!-- Points -->
+            <circle cx="60" cy="70" r="5" fill="#3B82F6" class="animate-pulse" />
+            <circle cx="550" cy="45" r="5" fill="#3B82F6" class="animate-pulse" />
+            <circle cx="60" cy="60" r="5" fill="#EF4444" />
+            <circle cx="550" cy="190" r="5" fill="#EF4444" />
+          </svg>
+        </div>
+        
+        <div class="flex justify-between items-center mt-6 pt-6 border-t border-[#EAEAEA]">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-[#EF4444]"></div>
+            <span class="text-[13px] text-[#666] font-medium">Fine-tuned for Static MMLU</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-[#3B82F6]"></div>
+            <span class="text-[13px] text-[#666] font-medium">Strong Foundational Reasoning</span>
+          </div>
+        </div>
+      </div>
+
+      <p>On the flip side, models designed with strong foundational reasoning capabilities excel. They recognize patterns, optimize their own code mid-game, and adapt to the changing procedural environment. Let's look at the current front-runners in interactive physics environments:</p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+        <div class="flex items-start gap-4 p-5 bg-white border border-[#EAEAEA] rounded-xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all cursor-default">
+          <div class="w-12 h-12 rounded-lg bg-[#F8F7F4] flex items-center justify-center shrink-0 border border-[#EAEAEA]">
+            <img src="/logos/anthropic.svg" alt="Claude" class="w-6 h-6 object-contain" />
+          </div>
+          <div>
+            <h5 class="text-[15px] font-bold text-[#111] mb-1 mt-0">Claude 3.5 Sonnet</h5>
+            <p class="text-[13px] text-[#666] m-0 leading-snug">Demonstrates unparalleled spatial reasoning and self-healing code loops.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-4 p-5 bg-white border border-[#EAEAEA] rounded-xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all cursor-default">
+          <div class="w-12 h-12 rounded-lg bg-[#F8F7F4] flex items-center justify-center shrink-0 border border-[#EAEAEA]">
+            <img src="/logos/openai.svg" alt="OpenAI" class="w-6 h-6 object-contain invert" />
+          </div>
+          <div>
+            <h5 class="text-[15px] font-bold text-[#111] mb-1 mt-0">GPT-4o</h5>
+            <p class="text-[13px] text-[#666] m-0 leading-snug">Highly adaptable to synthetic syntax shifts and custom APIs.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-5 bg-white border border-[#EAEAEA] rounded-xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all cursor-default">
+          <div class="w-12 h-12 rounded-lg bg-[#F8F7F4] flex items-center justify-center shrink-0 border border-[#EAEAEA]">
+            <img src="/logos/deepseek.svg" alt="DeepSeek" class="w-6 h-6 object-contain" />
+          </div>
+          <div>
+            <h5 class="text-[15px] font-bold text-[#111] mb-1 mt-0">DeepSeek V2 Coder</h5>
+            <p class="text-[13px] text-[#666] m-0 leading-snug">Exceptional open-weight performance in managing complex game states.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-4 p-5 bg-white border border-[#EAEAEA] rounded-xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all cursor-default">
+          <div class="w-12 h-12 rounded-lg bg-[#F8F7F4] flex items-center justify-center shrink-0 border border-[#EAEAEA]">
+            <img src="/logos/meta.svg" alt="Meta" class="w-8 h-8 object-contain" />
+          </div>
+          <div>
+            <h5 class="text-[15px] font-bold text-[#111] mb-1 mt-0">Llama 3 70B</h5>
+            <p class="text-[13px] text-[#666] m-0 leading-snug">Rapid inference and zero-shot reasoning capabilities during real-time tasks.</p>
+          </div>
+        </div>
+      </div>
 
       <h3>5. The Results</h3>
       <p>Our engineering team completely eliminated manual verification by automating this pipeline. Now, new models are submitted to the leaderboard and evaluated autonomously. We are already seeing incredible divergence between models that score high on static benchmarks but fail completely when asked to maintain state across a 60 FPS game loop. This is the future of evaluation: true agency, tested in the wild.</p>
@@ -320,7 +421,7 @@ export default function Blog() {
           {/* Left TOC Sidebar */}
           <aside className="hidden lg:block w-[240px] shrink-0 sticky top-[100px]">
             <h3 className="text-[12px] font-semibold text-[#8C8276] uppercase tracking-wider mb-5">On this page</h3>
-            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA]">
+            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA] mb-12">
               {headings.map(h => (
                 <a 
                   key={h.id} 
@@ -335,6 +436,16 @@ export default function Blog() {
                 </a>
               ))}
             </nav>
+
+            {/* CTAs */}
+            <div className="flex flex-col gap-3">
+              <Link to="/dashboard" className="w-full text-center py-2.5 px-4 bg-[#111111] text-white text-[13.5px] font-medium rounded-lg hover:bg-[#222222] transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+                Compare Now
+              </Link>
+              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-full text-center py-2.5 px-4 bg-white border border-[#EAEAEA] text-[#111111] text-[13.5px] font-medium rounded-lg hover:bg-[#F9F9F9] transition-colors shadow-sm">
+                Contribute Now
+              </a>
+            </div>
           </aside>
 
           {/* Main Article Content */}
