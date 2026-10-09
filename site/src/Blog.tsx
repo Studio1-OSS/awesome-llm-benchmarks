@@ -123,7 +123,7 @@ const POSTS = [
         
         <div class="flex items-start gap-4 p-5 bg-white border border-[#EAEAEA] rounded-xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all cursor-default">
           <div class="w-12 h-12 rounded-lg bg-[#F8F7F4] flex items-center justify-center shrink-0 border border-[#EAEAEA]">
-            <img src="/logos/openai.svg" alt="OpenAI" class="w-6 h-6 object-contain invert" />
+            <img src="/logos/openai.svg" alt="OpenAI" class="w-6 h-6 object-contain" />
           </div>
           <div>
             <h5 class="text-[15px] font-bold text-[#111] mb-1 mt-0">GPT-4o</h5>
@@ -442,7 +442,8 @@ export default function Blog() {
               <Link to="/dashboard" className="w-full text-center py-2.5 px-4 bg-[#111111] text-white text-[13.5px] font-medium rounded-lg hover:bg-[#222222] transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
                 Compare Now
               </Link>
-              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-full text-center py-2.5 px-4 bg-white border border-[#EAEAEA] text-[#111111] text-[13.5px] font-medium rounded-lg hover:bg-[#F9F9F9] transition-colors shadow-sm">
+              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#F4F4F6] border border-[#EAEAEA] text-[#111111] text-[13.5px] font-medium rounded-lg hover:bg-[#EAEAEA] transition-colors shadow-sm">
+                <GithubIcon size={16} />
                 Contribute Now
               </a>
             </div>

@@ -17,23 +17,25 @@ const ALL_LOGOS = [
   '/logos/perplexity.svg',
   '/logos/huggingface.svg',
   '/logos/github.svg',
-  '/logos/cohere.png',
-  '/logos/alibaba.png',
-  '/logos/nvidia.png',
-  '/logos/baidu.png',
-  '/logos/tencent.png',
-  '/logos/zhipu.png',
   '/logos/qwen.svg',
   '/logos/deepseek.svg',
-  '/logos/gemma.png',
   '/logos/claude.svg',
   '/logos/ollama.svg',
   '/logos/primalabs.svg',
+  '/logos/nvidia.png',
+  '/logos/tencent.png',
+  '/logos/zhipu.png',
+  '/logos/gemma.png',
   '/logos/ibm.png',
   '/logos/sktelecom.png',
   '/logos/upstage.png',
   '/logos/reka.png',
-  '/logos/ai21.png'
+  '/logos/grok.png',
+  '/logos/kimi.png',
+  '/logos/liquid.png',
+  '/logos/minimax.png',
+  '/logos/sarvam.png',
+  '/logos/xiaomi.png'
 ];
 
 const NUMBER_GRIDS = {
@@ -77,11 +79,9 @@ export default function NotFound() {
               if (cell === 1) {
                 const logo = ALL_LOGOS[logoIndex % ALL_LOGOS.length];
                 logoIndex++;
-                const isWhiteLogo = logo.includes('openai') || logo.includes('xai') || logo.includes('github') || logo.includes('aws') || logo.includes('perplexity') || logo.includes('ibm');
-                const filterClass = isWhiteLogo ? 'invert' : '';
                 return (
                   <div key={cIdx} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 2xl:w-20 2xl:h-20 flex items-center justify-center bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-[#EAEAEA] z-10 relative overflow-hidden rounded-[2px] sm:rounded-[4px] md:rounded-[6px]">
-                    <img src={logo} alt="logo" className={`w-full h-full object-contain p-1.5 sm:p-2 2xl:p-3 ${filterClass}`} />
+                    <img src={logo} alt="logo" className="w-full h-full object-contain p-1.5 sm:p-2 2xl:p-3" />
                   </div>
                 );
               }
