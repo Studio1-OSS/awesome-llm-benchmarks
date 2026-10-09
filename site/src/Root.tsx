@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import App from './App'
+import LlmRace from './LlmRace'
 import LandingPage from './LandingPage'
 import Blog from './Blog'
 import NotFound from './NotFound'
@@ -10,6 +11,7 @@ export default function Root() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/dashboard" element={<App />} />
+      <Route path="/llm-race" element={<LlmRace />} />
       <Route path="/blog/*" element={<Blog />} />
       <Route path="/methodologies" element={<ContentPage />} />
       <Route path="/about" element={<ContentPage />} />
