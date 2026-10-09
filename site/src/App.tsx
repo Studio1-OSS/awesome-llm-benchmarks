@@ -259,6 +259,19 @@ function App() {
   const [selectedGame, setSelectedGame] = useState('')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   
+  const [githubStars, setGithubStars] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/Studio1-OSS/awesome-llm-benchmarks')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          setGithubStars(data.stargazers_count);
+        }
+      })
+      .catch(err => console.error('Failed to fetch github stars', err));
+  }, []);
+  
   // Search Modal State
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -581,13 +594,13 @@ function App() {
                 </p>
                 
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" 
                   target="_blank" 
                   rel="noreferrer"
                   className="inline-flex items-center text-[12px] font-bold text-[#4A3F35] hover:text-[#7A6B5D] transition-colors group cursor-pointer"
                 >
                   <img src="/logos/github.svg" alt="GitHub" className="w-3.5 h-3.5 mr-1.5 opacity-80 group-hover:opacity-100 transition-opacity" />
-                  Contribute 
+                  Contribute {githubStars !== null && <span className="ml-1 font-normal opacity-80">({githubStars.toLocaleString()} ★)</span>}
                   <span className="ml-1 transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
               </div>
@@ -615,8 +628,13 @@ function App() {
           {isSidebarCollapsed && (
             <div className="mt-auto flex flex-col items-center gap-4 pb-6">
               <div className="relative group">
-                <a href="https://github.com" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-xl hover:bg-[#EAE8E3] flex items-center justify-center transition-colors cursor-pointer">
+                <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-xl hover:bg-[#EAE8E3] flex items-center justify-center transition-colors cursor-pointer relative">
                   <img src="/logos/github.svg" alt="GitHub" className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+                  {githubStars !== null && (
+                    <span className="absolute -top-1 -right-1 bg-[#2E2E2D] text-white text-[8px] font-bold px-1 rounded-sm shadow-sm z-10">
+                      {githubStars > 999 ? (githubStars/1000).toFixed(1) + 'k' : githubStars}
+                    </span>
+                  )}
                 </a>
                 <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2.5 py-1.5 bg-[#2E2E2D] text-white text-[12px] font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">
                   Contribute to this project
