@@ -905,7 +905,11 @@ function App() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="flex items-center shadow-[0_2px_4px_rgba(0,0,0,0.02)] rounded-xl relative">
+                <div 
+                  className="flex items-center shadow-[0_2px_4px_rgba(0,0,0,0.02)] rounded-xl relative"
+                  onMouseEnter={() => setIsCopyDropdownOpen(true)}
+                  onMouseLeave={() => setIsCopyDropdownOpen(false)}
+                >
                   <button 
                     onClick={(e) => {
                       navigator.clipboard.writeText(markdownContent || '');
