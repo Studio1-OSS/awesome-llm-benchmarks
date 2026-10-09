@@ -8,7 +8,7 @@ const POSTS = [
     subtitle: 'How a 12-person support team cut 30 weekly hours of repetitive tickets.',
     date: 'Jun 16, 2026',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1490750967868-88cb44cb2753?auto=format&fit=crop&q=80&w=800',
+    image: 'https://framerusercontent.com/images/89wYJHZRlIHHAeJ2fb38UtX5wI.png?scale-down-to=1024&width=1344&height=896',
     content: 'Long form content goes here...'
   },
   {
@@ -17,7 +17,7 @@ const POSTS = [
     subtitle: 'Navigating the handoff between automated agents and your customer success team.',
     date: 'Jun 2, 2026',
     readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&q=80&w=800',
+    image: 'https://framerusercontent.com/images/74Pklphfry6xPsPBdf6NPOlkfro.png?scale-down-to=1024&width=1344&height=896',
     content: 'Long form content goes here...'
   },
   {
@@ -26,7 +26,7 @@ const POSTS = [
     subtitle: 'Best practices for human-in-the-loop AI deployments.',
     date: 'Jun 10, 2026',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=800',
+    image: 'https://framerusercontent.com/images/TeeEjm2aY6UxjlgIZ9MC2hTefg.png?scale-down-to=1024&width=1344&height=896',
     content: 'Long form content goes here...'
   }
 ];
@@ -245,6 +245,7 @@ export default function Blog() {
                   <li><Link to="/" className="hover:text-[#111111] transition-colors">About</Link></li>
                   <li><Link to="/" className="hover:text-[#111111] transition-colors">Contributors</Link></li>
                   <li><a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="hover:text-[#111111] transition-colors">GitHub</a></li>
+                  <li><Link to="/blog" className="hover:text-[#111111] transition-colors">Blog</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
