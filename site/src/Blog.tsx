@@ -26,19 +26,19 @@ const POSTS = [
       <p>Instead of feeding a model a static prompt, we place it inside a deterministic game engine. The model must "play" games like Snake, Breakout, and Flappy Bird by generating the raw logic required to survive in real-time. This requires a level of spatial reasoning and reaction logic that text-in, text-out benchmarks completely miss.</p>
       
       <div class="my-8 p-6 bg-white border border-[#EAEAEA] rounded-xl shadow-sm">
-        <div class="flex flex-col md:flex-row items-center justify-between text-center gap-4">
-          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg">
-            <span class="font-bold text-[#111111]">1. Model Inference</span>
+        <div class="flex flex-col md:flex-row items-stretch justify-between text-center gap-4">
+          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg flex flex-col justify-center">
+            <span class="font-bold text-[#111111] whitespace-nowrap">1. Model Inference</span>
             <p class="text-sm text-[#666666] mt-2">Generate Javascript logic based on current canvas state.</p>
           </div>
-          <div class="text-[#8C8276]">➔</div>
-          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg">
-            <span class="font-bold text-[#111111]">2. Engine Execution</span>
+          <div class="text-[#8C8276] flex items-center justify-center">➔</div>
+          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg flex flex-col justify-center">
+            <span class="font-bold text-[#111111] whitespace-nowrap">2. Engine Execution</span>
             <p class="text-sm text-[#666666] mt-2">The browser evaluates the code within a WebWorker sandbox.</p>
           </div>
-          <div class="text-[#8C8276]">➔</div>
-          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg">
-            <span class="font-bold text-[#111111]">3. Score Computation</span>
+          <div class="text-[#8C8276] flex items-center justify-center">➔</div>
+          <div class="flex-1 bg-[#F4F2EF] p-4 rounded-lg flex flex-col justify-center">
+            <span class="font-bold text-[#111111] whitespace-nowrap">3. Score Computation</span>
             <p class="text-sm text-[#666666] mt-2">Elo rating is adjusted based on survival time and mechanics.</p>
           </div>
         </div>
