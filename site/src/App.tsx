@@ -9,16 +9,26 @@ import { ComposedChart, Scatter, Line, XAxis, YAxis, CartesianGrid, Tooltip as R
 
 const getProviderLogo = (name: string) => {
   const lowerName = name.toLowerCase();
-  if (lowerName.includes('fable') || lowerName.includes('sonnet') || lowerName.includes('opus') || lowerName.includes('anthropic') || lowerName.includes('claude')) return '/logos/claude.png';
-  if (lowerName.includes('gpt') || lowerName.includes('openai') || lowerName.includes('codex')) return '/logos/openai.svg';
-  if (lowerName.includes('gemini') || lowerName.includes('google')) return '/logos/google.svg';
-  if (lowerName.includes('llama') || lowerName.includes('meta') || lowerName.includes('muse')) return '/logos/meta.svg';
-  if (lowerName.includes('grok') || lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('x ai')) return '/logos/xai.svg';
+  if (lowerName.includes('anthropic')) return '/logos/anthropic.svg';
+  if (lowerName.includes('openai')) return '/logos/openai.svg';
+  if (lowerName.includes('google')) return '/logos/google.svg';
+  if (lowerName.includes('meta')) return '/logos/meta.svg';
+  if (lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('spacexai')) return '/logos/xai.svg';
   if (lowerName.includes('deepseek')) return '/logos/deepseek.svg';
-  if (lowerName.includes('kimi') || lowerName.includes('moonshot')) return '/logos/kimi.png';
-  if (lowerName.includes('glm') || lowerName.includes('zai') || lowerName.includes('z ai')) return '/logos/glm.png';
-  if (lowerName.includes('qwen') || lowerName.includes('alibaba')) return '/logos/qwen.svg';
-  return '/logos/openai.svg'; // Fallback
+  if (lowerName.includes('moonshot')) return '/logos/kimi.png'; // Kimi logo often used for Moonshot
+  if (lowerName.includes('zai') || lowerName.includes('z ai') || lowerName.includes('zhipu')) return '/logos/glm.png';
+  if (lowerName.includes('alibaba') || lowerName.includes('qwen')) return '/logos/qwen.svg';
+  if (lowerName.includes('mistral')) return '/logos/mistral.svg';
+  if (lowerName.includes('microsoft')) return '/logos/microsoft.svg';
+  if (lowerName.includes('amazon') || lowerName.includes('aws')) return '/logos/aws.svg';
+  if (lowerName.includes('perplexity')) return '/logos/perplexity.svg';
+  if (lowerName.includes('inclusionai')) return '/logos/inclusionai_small.webp';
+  if (lowerName.includes('primalabs') || lowerName.includes('prima')) return '/logos/primalabs.svg';
+  if (lowerName.includes('ollama')) return '/logos/ollama.svg';
+  if (lowerName.includes('hugging')) return '/logos/huggingface.svg';
+  if (lowerName.includes('ibm')) return '/logos/ibm.svg';
+  // If no exact provider logo matches, return null so we don't render a false logo.
+  return '';
 }
 
 const getProviderName = (name: string) => {
@@ -416,8 +426,27 @@ function App() {
       return selectedAgents.map((id: any) => models.find((m: any) => m.id === id)).filter(Boolean);
     }, [models, selectedAgents])
 
+  
+  const sidebarCss = `
+    .sidebar-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .sidebar-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #E5E3DF;
+      border-radius: 10px;
+    }
+    .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: #D1CFCA;
+    }
+  `;
+
   return (
-    <div className="flex h-screen bg-[#F1EFEA] text-[#2E2E2D] font-sans overflow-hidden">
+    <>
+      <style>{sidebarCss}</style>
+      <div className="flex h-screen bg-[#F1EFEA] text-[#2E2E2D] font-sans overflow-hidden">
       
       {isSidebarOpen && (
         <div 
@@ -481,7 +510,7 @@ function App() {
           )}
         </div>
 
-        <div className={`flex-1 overflow-y-auto pt-8 pb-4 ${isSidebarCollapsed ? 'px-2' : 'px-3'}`}>
+        <div className={`flex-1 overflow-y-auto sidebar-scrollbar pt-8 pb-4 ${isSidebarCollapsed ? 'px-2' : 'px-3'}`}>
           <div className="flex flex-col space-y-1">
             {!isSidebarCollapsed && (
               <div className="px-2 flex items-center justify-between text-[11px] font-medium text-[#6E6D6A] uppercase tracking-wider select-none mb-2 cursor-default">
@@ -1302,6 +1331,7 @@ function App() {
       })()}
 
     </div>
+    </>
   );
 }
 

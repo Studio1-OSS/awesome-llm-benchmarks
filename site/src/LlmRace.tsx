@@ -11,21 +11,26 @@ const GithubIcon = ({ size = 24, className = '' }: { size?: number, className?: 
 
 const getProviderLogo = (name: string) => {
   const lowerName = name.toLowerCase();
-  if (lowerName.includes('fable') || lowerName.includes('sonnet') || lowerName.includes('opus') || lowerName.includes('anthropic') || lowerName.includes('claude') || lowerName.includes('haiku')) return '/logos/claude.png';
-  if (lowerName.includes('gpt') || lowerName.includes('openai') || lowerName.includes('codex') || lowerName.includes('o3')) return '/logos/openai.svg';
-  if (lowerName.includes('gemini') || lowerName.includes('google') || lowerName.includes('gemma')) return '/logos/google.svg';
-  if (lowerName.includes('llama') || lowerName.includes('meta') || lowerName.includes('muse')) return '/logos/meta.svg';
-  if (lowerName.includes('grok') || lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('spacexai')) return '/logos/xai.svg';
+  if (lowerName.includes('anthropic')) return '/logos/anthropic.svg';
+  if (lowerName.includes('openai')) return '/logos/openai.svg';
+  if (lowerName.includes('google')) return '/logos/google.svg';
+  if (lowerName.includes('meta')) return '/logos/meta.svg';
+  if (lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('spacexai')) return '/logos/xai.svg';
   if (lowerName.includes('deepseek')) return '/logos/deepseek.svg';
-  if (lowerName.includes('kimi') || lowerName.includes('moonshot')) return '/logos/kimi.png';
-  if (lowerName.includes('glm') || lowerName.includes('zai') || lowerName.includes('z ai')) return '/logos/glm.png';
-  if (lowerName.includes('qwen') || lowerName.includes('alibaba')) return '/logos/qwen.svg';
-  if (lowerName.includes('mistral') || lowerName.includes('magistral') || lowerName.includes('ministral')) return '/logos/mistral.svg';
+  if (lowerName.includes('moonshot')) return '/logos/kimi.png'; // Kimi logo often used for Moonshot
+  if (lowerName.includes('zai') || lowerName.includes('z ai') || lowerName.includes('zhipu')) return '/logos/glm.png';
+  if (lowerName.includes('alibaba') || lowerName.includes('qwen')) return '/logos/qwen.svg';
+  if (lowerName.includes('mistral')) return '/logos/mistral.svg';
   if (lowerName.includes('microsoft')) return '/logos/microsoft.svg';
   if (lowerName.includes('amazon') || lowerName.includes('aws')) return '/logos/aws.svg';
   if (lowerName.includes('perplexity')) return '/logos/perplexity.svg';
   if (lowerName.includes('inclusionai')) return '/logos/inclusionai_small.webp';
-  return null; // Return null if no exact logo match
+  if (lowerName.includes('primalabs') || lowerName.includes('prima')) return '/logos/primalabs.svg';
+  if (lowerName.includes('ollama')) return '/logos/ollama.svg';
+  if (lowerName.includes('hugging')) return '/logos/huggingface.svg';
+  if (lowerName.includes('ibm')) return '/logos/ibm.svg';
+  // If no exact provider logo matches, return null so we don't render a false logo.
+  return null;
 }
 
 const getProviderColor = (name: string) => {
@@ -82,7 +87,8 @@ export default function LlmRace() {
         <div className="flex items-center gap-4">
           <Link onClick={() => window.scrollTo(0, 0)} to="/llm-race" className="text-[13px] font-medium text-white bg-black/80 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-md hover:bg-black transition-all shadow-[0_4px_12px_rgba(0,0,0,0.1)]">LLM Race</Link>
           <Link onClick={() => window.scrollTo(0, 0)} to="/dashboard" className="text-[13px] font-medium text-[#111111] bg-[#EEEEEE]/80 backdrop-blur-xl border border-black/10 px-4 py-1.5 rounded-md hover:bg-[#E5E5E5]/90 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)]">Dashboard</Link>
-          <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity ml-1">
+          <div className="w-[1px] h-5 bg-[#EAEAEA] mx-1"></div>
+          <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity">
             <GithubIcon size={22} />
             {githubStars !== null && <span className="ml-1.5 text-[12.5px] font-medium text-[#111111]">{githubStars.toLocaleString()}</span>}
           </a>
@@ -94,7 +100,7 @@ export default function LlmRace() {
         <div className="flex flex-col md:flex-row gap-12 justify-between items-start">
           <div className="flex-1 max-w-[600px]">
             <h1 className="text-[44px] leading-[1.1] font-heading font-medium tracking-tight text-[#1C1C1C] mb-6">
-              LLM Leaderboard - Comparison of AI models from OpenAI, Anthropic, Google, SpaceXAI & others
+              The Global LLM Race — Evaluating the Frontier of AI Performance
             </h1>
             
             <div className="flex items-center gap-3">
@@ -102,16 +108,16 @@ export default function LlmRace() {
                 Dashboard
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <Link to="/contributors" onClick={() => window.scrollTo(0, 0)} className="px-5 py-2.5 rounded-full text-[#111111] text-[15px] font-medium transition-all flex items-center gap-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10">
-                Contribute
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
+              <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="px-5 py-2.5 rounded-full text-[#111111] text-[15px] font-medium transition-all flex items-center gap-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10">
+                Contribute on GitHub
+                <GithubIcon size={16} />
+              </a>
             </div>
           </div>
           
           <div className="w-full md:w-[480px] shrink-0 text-[#4B4B4B] text-[15px] leading-relaxed">
             <p className="mb-4">
-              Comparison and ranking the performance of over 250 AI models (LLMs) across key metrics including intelligence, price, performance and speed (output speed - tokens per second & latency - TTFT), context window & others.
+              A comprehensive, data-driven analysis ranking over 250 leading language models. We evaluate the world's top AI systems across critical dimensions including holistic intelligence, operational cost, processing speed, and context scale.
             </p>
             <p>
               For more details including relating to our methodology, see our <Link to="/faq" onClick={() => window.scrollTo(0, 0)} className="underline decoration-[#A1A1AA] hover:text-[#1C1C1C] transition-colors underline-offset-4">FAQs</Link>.
@@ -228,7 +234,7 @@ export default function LlmRace() {
           <div className="overflow-auto flex-1 relative table-scrollbar">
             <table className="w-full text-left border-collapse text-[13px] table-fixed min-w-[900px]">
               <thead className="sticky top-0 z-10 bg-[#F9F8F6] border-b border-[#E5E3DF] shadow-sm">
-                <tr>
+                <tr className="divide-x divide-[#E5E3DF]">
                   <th className="py-4 px-6 font-semibold text-[#1C1C1C] w-[25%]">Model</th>
                   <th className="py-4 px-6 font-semibold text-[#1C1C1C] w-[15%]">Provider</th>
                   <th className="py-4 px-6 font-semibold text-[#1C1C1C] w-[12%] text-right">Context Window</th>
@@ -240,18 +246,14 @@ export default function LlmRace() {
               </thead>
               <tbody className="divide-y divide-[#E5E3DF]">
                 {models.map((m, idx) => (
-                  <tr key={idx} className="hover:bg-[#FAF9F6] transition-colors group">
+                  <tr key={idx} className="hover:bg-[#FAF9F6] transition-colors group divide-x divide-[#E5E3DF]">
                     <td className="py-3.5 px-6">
                       <div className="flex items-center gap-3">
                         <div className="w-1.5 h-6 rounded-full shrink-0" style={{background: m.color}} />
                         {m.logo ? (
                           <img src={m.logo} alt={m.provider} className="w-5 h-5 object-contain shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                         ) : (
-                          <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-gray-400">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-                            </svg>
-                          </div>
+                          <div className="w-5 h-5 shrink-0" />
                         )}
                         <span className="font-semibold text-[#1C1C1C] truncate" title={m.name}>{m.name}</span>
                       </div>
