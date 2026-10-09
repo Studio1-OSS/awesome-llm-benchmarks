@@ -1,11 +1,6 @@
 <div align="center">
   <img src="./site/public/llm-benchmark.svg" alt="LLM Benchmark Logo" width="240" />
-
-  <br />
-  <br />
-
-  **The Definitive Open-Source AI Model Evaluation Platform**
-
+  <h1>Awesome LLM Benchmarks</h1>
   <p>
     <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks/actions"><img src="https://img.shields.io/github/actions/workflow/status/Studio1-OSS/awesome-llm-benchmarks/ci.yml?style=flat-square" alt="Build Status"></a>
     <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Studio1-OSS/awesome-llm-benchmarks?style=flat-square" alt="License"></a>
