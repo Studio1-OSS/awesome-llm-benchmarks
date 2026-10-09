@@ -64,7 +64,7 @@ export default function NotFound() {
           404
         </h1>
         
-        <h2 className="text-[32px] font-serif text-[#2E2E2D] mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>
+        <h2 className="text-[32px] font-heading text-[#2E2E2D] mb-4">
           Page Hallucinated
         </h2>
         

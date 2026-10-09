@@ -89,7 +89,7 @@ export default function ContentPage() {
 
       <div className="max-w-[800px] mx-auto px-6 pt-16 pb-24 min-h-[60vh]">
         
-        <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-serif" style={{ fontFamily: '"Playfair Display", serif' }}>
+        <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-heading">
           {pageData.title}
         </h1>
         <div className="prose prose-lg prose-stone max-w-none text-[#4A4948]" style={{ fontFamily: 'Switzer, sans-serif' }}>

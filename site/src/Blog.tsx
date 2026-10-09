@@ -193,7 +193,7 @@ export default function Blog() {
         <div className="max-w-[800px] mx-auto px-6 pt-16 pb-24">
           
           
-          <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-serif" style={{ fontFamily: '"Playfair Display", serif' }}>
+          <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-heading">
             {post.title}
           </h1>
           <p className="text-[18px] text-[#6E6D6A] mb-8 leading-relaxed">
@@ -251,10 +251,10 @@ export default function Blog() {
             <Link 
               key={post.id}
               to={`/blog/${post.id}`}
-              className="group flex flex-col bg-[#F4F2EF] rounded-2xl p-4 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:-translate-y-1"
+              className="group flex flex-col bg-[#F4F2EF] rounded-2xl p-4 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] "
             >
               <div className="w-full aspect-[4/3] rounded-xl overflow-hidden mb-5">
-                <img src={post.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={post.image} alt="" className="w-full h-full object-cover  " />
               </div>
               <div className="px-1 flex-1 flex flex-col">
                 <div className="flex items-center gap-4 text-[#8C8276] text-[12px] mb-3 font-medium">
@@ -266,7 +266,7 @@ export default function Blog() {
                 </h3>
                 <div className="mt-auto pt-4 flex items-center text-[13px] font-medium text-[#6E6D6A] group-hover:text-[#2E2E2D] transition-colors">
                   Read more
-                  <svg className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+                  <svg className="w-3.5 h-3.5 ml-1 transition-transform " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </div>
               </div>
             </Link>
