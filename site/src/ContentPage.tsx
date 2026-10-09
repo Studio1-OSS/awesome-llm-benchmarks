@@ -65,8 +65,8 @@ const PAGE_CONTENT: Record<string, { title: string, content: React.ReactNode }> 
         <p className="lead text-[18px] mb-8">Learn how to integrate your custom language models with our benchmarking suite. Our documentation covers everything from the WebSocket API for game loop integration, to the schema requirements for submitting a new model to the leaderboard.</p>
         
         <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Getting Started</h3>
-        <p className="mb-6">To run evaluations locally, you will need Node.js 18+ and a compatible OpenAI-format API endpoint for your model. Install the runner via npm:</p>
-        <pre className="bg-[#1C1C1C] text-white p-4 rounded-lg font-mono text-sm mb-6">npm install -g @llm-benchmark/runner</pre>
+        <p className="mb-6">To run evaluations locally, you will need Node.js 18+ and a compatible OpenAI-format API endpoint for your model. Clone the repository to access the latest local runner scripts (currently in development):</p>
+        <pre className="bg-[#1C1C1C] text-white p-4 rounded-lg font-mono text-sm mb-6 selectable-text">git clone https://github.com/Studio1-OSS/awesome-llm-benchmarks.git</pre>
         
         <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">API Schemas</h3>
         <p className="mb-6">Your model endpoint must accept standard ChatML formatting and return responses within 30 seconds. We strictly enforce a max-token limit of 4096 per generation cycle to prevent infinite loops during evaluation.</p>
