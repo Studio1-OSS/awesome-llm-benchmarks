@@ -1148,7 +1148,7 @@ function App() {
             onClick={() => setIsCompareModalOpen(false)}
           >
             <div
-              className="bg-[#FAF9F6] w-full max-w-[1400px] max-h-[90vh] rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.18)] border border-[#E5E3DF] flex flex-col overflow-hidden"
+              className="bg-[#FAF9F6] w-full max-w-[1400px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] max-h-[90vh] rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.18)] border border-[#E5E3DF] flex flex-col overflow-hidden"
               onClick={e => e.stopPropagation()}
             >
               {/* Header */}
