@@ -870,7 +870,7 @@ function App() {
                   rel="noreferrer"
                   className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-[#2E2E2D] text-white rounded-xl text-[13px] font-semibold hover:bg-black transition-colors shadow-sm"
                 >
-                  <GithubIcon className="w-4 h-4 brightness-0 invert" />
+                  <GithubIcon className="w-4 h-4" />
                   Contribute Run
                 </a>
               </div>

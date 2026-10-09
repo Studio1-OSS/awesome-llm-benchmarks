@@ -834,7 +834,7 @@ export default function LandingPage() {
 
           <Reveal delay={200} className="flex justify-center mt-[-60px] relative z-10">
             <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-8 py-3.5 rounded-[8px] text-white text-[15px] font-medium transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1),inset_0_1px_0px_rgba(255,255,255,0.15)] bg-gradient-to-b from-[#333333] to-[#111111] hover:from-[#444444] hover:to-[#222222] border border-[#111111]">
-              <GithubIcon className="w-[18px] h-[18px] invert opacity-90" />
+              <GithubIcon className="w-[18px] h-[18px] opacity-90" />
               Contribute
             </a>
           </Reveal>
