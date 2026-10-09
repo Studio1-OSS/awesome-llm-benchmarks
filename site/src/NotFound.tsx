@@ -75,21 +75,21 @@ export default function NotFound() {
   let logoIndex = 0;
   const renderGrid = (gridPattern: number[][]) => {
     return (
-      <div className="flex flex-col gap-1.5 sm:gap-2 md:gap-3">
+      <div className="flex flex-col gap-0.5 sm:gap-1">
         {gridPattern.map((row, rIdx) => (
-          <div key={rIdx} className="flex gap-1.5 sm:gap-2 md:gap-3">
+          <div key={rIdx} className="flex gap-0.5 sm:gap-1">
             {row.map((cell, cIdx) => {
               if (cell === 1) {
                 const logo = ALL_LOGOS[logoIndex % ALL_LOGOS.length];
                 logoIndex++;
                 const filterClass = logo.includes('openai') || logo.includes('xai') || logo.includes('grok') ? 'filter invert brightness-0' : '';
                 return (
-                  <div key={cIdx} className="w-10 h-10 sm:w-14 sm:h-14 md:w-[72px] md:h-[72px] flex items-center justify-center p-2 md:p-3 bg-white rounded-lg md:rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.04)] border border-[#EAEAEA] hover:scale-110 transition-transform duration-300">
-                    <img src={logo} alt="logo" className={`w-full h-full object-contain ${filterClass}`} />
+                  <div key={cIdx} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-[#EAEAEA] hover:scale-110 transition-transform duration-300 z-10 hover:z-20 relative overflow-hidden">
+                    <img src={logo} alt="logo" className={`w-full h-full object-cover ${filterClass}`} />
                   </div>
                 );
               }
-              return <div key={cIdx} className="w-10 h-10 sm:w-14 sm:h-14 md:w-[72px] md:h-[72px]"></div>;
+              return <div key={cIdx} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"></div>;
             })}
           </div>
         ))}

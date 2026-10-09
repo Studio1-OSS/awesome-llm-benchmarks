@@ -1,36 +1,47 @@
 <div align="center">
-  <img src="./site/public/icon.png" alt="LLM Arena Logo" width="120" />
-  <h1>Awesome LLM Benchmarks</h1>
-  <p><strong>The Definitive Open-Source AI Model Evaluation Platform</strong></p>
+  <img src="./site/public/llm-benchmark.svg" alt="LLM Benchmark Logo" width="240" />
+
+  <br />
+  <br />
+
+  **The Definitive Open-Source AI Model Evaluation Platform**
+
+  <p>
+    <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks/actions"><img src="https://img.shields.io/github/actions/workflow/status/Studio1-OSS/awesome-llm-benchmarks/ci.yml?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Studio1-OSS/awesome-llm-benchmarks?style=flat-square" alt="License"></a>
+    <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks/stargazers"><img src="https://img.shields.io/github/stars/Studio1-OSS/awesome-llm-benchmarks?style=flat-square" alt="Stars"></a>
+  </p>
 </div>
 
-<br />
+---
 
-Welcome to the **Awesome LLM Benchmarks** repository! This project serves as an open-source, interactive leaderboard and testing environment designed to push the world's most capable AI models to their absolute limits.
+Welcome to the **Awesome LLM Benchmarks** repository—a rigorous, open-source leaderboard and interactive evaluation environment engineered to push frontier AI models to their absolute limits.
 
-Rather than relying on static multiple-choice questions, this arena stress-tests models against complex interactive game loops, bespoke UI scenarios, and dynamic coding tasks.
+As Large Language Models rapidly achieve super-human performance on traditional static exams (like MMLU and HumanEval), the AI industry requires a new standard of measurement. We are moving beyond static multiple-choice questions. This arena evaluates true model agency, stress-testing capabilities against complex, procedurally generated game loops, multi-step bespoke UI workflows, and dynamic coding challenges.
 
-## 🚀 Features
+## ✨ Core Features
 
-- **Interactive Benchmarks:** Models are evaluated on their ability to generate, debug, and interact with complex game loops (e.g., 3D Snake, Flappy Bird, 2D Breakout) and rich UIs.
-- **Dynamic Leaderboard:** A fully responsive, modern web dashboard showcasing the top-performing models and their benchmark results across different capabilities.
-- **Provider Aggregation:** Compare frontier models from leading AI labs including OpenAI, Anthropic, Google, Meta, Mistral, xAI, and more.
-- **Open-Source Architectures:** Fully transparent evaluation environments that any researcher can run and verify.
+*   **Interactive Agentic Benchmarks:** Models are subjected to deterministic, real-time evaluation environments. From rendering 3D graphics in HTML5 Canvas to executing logic in Flappy Bird and 2D Breakout, models are forced to demonstrate true generalized reasoning.
+*   **Dynamic Leaderboard Dashboard:** A meticulously designed, fully responsive React/Vite web application that visualizes performance metrics, Elo rankings, and cost-to-latency ratios across all tested models.
+*   **Comprehensive Model Aggregation:** Unbiased side-by-side comparisons of the industry's most advanced frontier models from OpenAI, Anthropic, Google, Meta, Mistral, xAI, and open-weight community submissions.
+*   **Transparent & Open Architecture:** 100% open-source evaluation logic. No hidden test sets. Every environment is completely transparent, allowing researchers to run, verify, and reproduce the results locally.
 
-## 📂 Repository Structure
+## 🏗️ Repository Architecture
 
-This repository is organized as a monorepo to ensure clean separation of concerns and easy extensibility:
+This repository is structured as a modern monorepo, prioritizing clean separation of concerns:
 
-- **`/site`**: The React + Vite + Tailwind frontend that powers the beautiful interactive dashboard and landing page.
-- **`/examples`**: The evaluation environments, containing interactive games, procedural tests, and bespoke UIs that the models are stress-tested against.
-- **`/benchmarks`**: (Coming soon) The core evaluation logic, runners, and data aggregation scripts.
+*   **`/site`**: The frontend web application built with React, Vite, and Tailwind CSS. It powers our modern interactive dashboard, comprehensive data visualizers, and the landing page.
+*   **`/site/public/awesome-llm-benchmarks`**: The source of truth for our evaluation results. Contains detailed markdown reports and raw JSON data from individual game loops and simulated evaluations.
+*   **`/benchmarks`** *(Coming soon)*: The core automated runner infrastructure, evaluation scripts, and Elo aggregation math models.
 
-## 🤝 Contributing
+## 🤝 Community & Contributing
 
-We strongly believe that open evaluation is critical for the future of AI. We welcome contributions from the community!
+We believe that the future of artificial intelligence requires an open, community-driven evaluation standard. We welcome contributions from researchers, engineers, and hobbyists alike!
 
-Whether you want to add a new model's benchmark results, create a wildly complex new testing environment in the `/examples` folder, or improve the dashboard UI, please see our [CONTRIBUTING.md](./CONTRIBUTING.md) guide for details on how to submit a Pull Request.
+Whether you are submitting performance results for a newly released model, engineering a wildly complex interactive test environment, or contributing UX refinements to our leaderboard dashboard, your work is valued here. 
+
+Please review our [Contribution Guidelines](./CONTRIBUTING.md) to understand our pull request workflow and schema requirements.
 
 ## 📜 License
 
-This project is fully open-source and released under the [MIT License](LICENSE). 
+This project is open-source software licensed under the [MIT License](LICENSE).
