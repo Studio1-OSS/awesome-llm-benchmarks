@@ -843,7 +843,7 @@ function App() {
               className="hidden sm:flex items-center gap-1.5 text-[13.5px] font-semibold text-[#6E6D6A] hover:text-[#2E2E2D] transition-colors"
             >
               <img src="/logos/github.svg" alt="GitHub" className="w-[18px] h-[18px] object-contain opacity-70" />
-              <span>7.1k</span>
+              <span>{githubStars !== null ? githubStars.toLocaleString() : '7.1k'}</span>
             </Link>
           </div>
         </header>
