@@ -219,7 +219,38 @@ const GithubIcon = ({ size = 20, className = "" }: { size?: number, className?: 
 export default function Blog() {
   const [postId, setPostId] = useState<string | null>(null);
   const [githubStars, setGithubStars] = useState<number | null>(null);
+  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
+  const [activeId, setActiveId] = useState<string>('');
   const location = useLocation();
+
+  useEffect(() => {
+    if (postId) {
+      const timer = setTimeout(() => {
+        const articleContent = document.getElementById('article-content');
+        if (articleContent) {
+          const h3Elements = Array.from(articleContent.querySelectorAll('h3'));
+          const newHeadings = h3Elements.map((h3, index) => {
+            const id = h3.id || `heading-${index}`;
+            h3.id = id;
+            return { id, text: h3.innerText || h3.textContent || '' };
+          });
+          setHeadings(newHeadings);
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                setActiveId(entry.target.id);
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          h3Elements.forEach(h3 => observer.observe(h3));
+          return () => observer.disconnect();
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [postId]);
 
   useEffect(() => {
     fetch('https://api.github.com/repos/Studio1-OSS/awesome-llm-benchmarks')
@@ -284,7 +315,30 @@ export default function Blog() {
           </div>
         </header>
         
-        <div className="max-w-[800px] mx-auto px-6 pt-12 pb-24">
+        <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 pt-12 pb-24 flex flex-col lg:flex-row gap-12 lg:gap-24 relative items-start">
+          
+          {/* Left TOC Sidebar */}
+          <aside className="hidden lg:block w-[240px] shrink-0 sticky top-[100px]">
+            <h3 className="text-[12px] font-semibold text-[#8C8276] uppercase tracking-wider mb-5">On this page</h3>
+            <nav className="flex flex-col gap-3.5 border-l border-[#EAEAEA]">
+              {headings.map(h => (
+                <a 
+                  key={h.id} 
+                  href={`#${h.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className={`text-[14px] leading-snug transition-colors duration-200 border-l-2 -ml-[1px] pl-4 py-0.5 ${activeId === h.id ? 'border-[#111111] text-[#111111] font-medium' : 'border-transparent text-[#8C8276] hover:text-[#111111]'}`}
+                >
+                  {h.text}
+                </a>
+              ))}
+            </nav>
+          </aside>
+
+          {/* Main Article Content */}
+          <article className="flex-1 min-w-0 max-w-[800px]">
           
           <div className="flex items-center justify-between mb-10 border-b border-[#EAEAEA] pb-6">
             <Link to="/blog" className="flex items-center gap-2 text-[14px] font-medium text-[#666666] hover:text-[#111111] transition-colors">
@@ -323,12 +377,13 @@ export default function Blog() {
             </div>
           </div>
 
-          <div className="prose prose-lg max-w-none prose-p:text-[#6E6D6A] prose-headings:text-[#1A1A1A] prose-headings:font-semibold prose-strong:text-[#1A1A1A] prose-ul:text-[#6E6D6A] prose-li:text-[#6E6D6A] prose-a:text-[#1A1A1A] selectable-text font-sans" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+          <div id="article-content" className="prose prose-lg max-w-none prose-p:text-[#6E6D6A] prose-headings:text-[#1A1A1A] prose-headings:font-semibold prose-strong:text-[#1A1A1A] prose-ul:text-[#6E6D6A] prose-li:text-[#6E6D6A] prose-a:text-[#1A1A1A] selectable-text font-sans" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+          </article>
         </div>
         
         {/* Footer for single blog post view */}
         <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA]">
-          <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
               <div className="col-span-1 lg:col-span-2 pr-8">
                 <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
@@ -415,7 +470,7 @@ export default function Blog() {
       </header>
 
       {/* Main Content */}
-      <div className="max-w-[1240px] mx-auto px-6 py-20 pb-32">
+      <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 py-20 pb-32">
         <div className="flex flex-col md:flex-row gap-12 lg:gap-24">
           <Reveal delay={0}>
             <h1 className="text-[56px] text-[#2E2E2D] leading-[1.05] tracking-tight font-heading mb-6 shrink-0 md:max-w-[300px]">
@@ -457,7 +512,7 @@ export default function Blog() {
       
       {/* Footer for blog list view */}
       <footer className="bg-[#FAFAF8] pt-16 pb-12 border-t border-[#EAEAEA]">
-          <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
               <div className="col-span-1 lg:col-span-2 pr-8">
                 <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
