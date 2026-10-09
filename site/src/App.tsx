@@ -601,7 +601,7 @@ function App() {
                   className="inline-flex items-center text-[12px] font-bold text-[#4A3F35] hover:text-[#7A6B5D] transition-colors group cursor-pointer"
                 >
                   <img src="/logos/github.svg" alt="GitHub" className="w-3.5 h-3.5 mr-1.5 opacity-80 group-hover:opacity-100 transition-opacity" />
-                  Contribute {githubStars !== null && <span className="ml-1 font-normal opacity-80">({githubStars.toLocaleString()} ★)</span>}
+                  Contribute
                   <span className="ml-1 transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
               </div>

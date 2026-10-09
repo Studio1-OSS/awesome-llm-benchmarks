@@ -3,6 +3,7 @@ import App from './App'
 import LandingPage from './LandingPage'
 import Blog from './Blog'
 import NotFound from './NotFound'
+import ContentPage from './ContentPage'
 
 export default function Root() {
   return (
@@ -10,6 +11,14 @@ export default function Root() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/dashboard" element={<App />} />
       <Route path="/blog/*" element={<Blog />} />
+      <Route path="/methodologies" element={<ContentPage />} />
+      <Route path="/about" element={<ContentPage />} />
+      <Route path="/contributors" element={<ContentPage />} />
+      <Route path="/documentation" element={<ContentPage />} />
+      <Route path="/updates" element={<ContentPage />} />
+      <Route path="/faq" element={<ContentPage />} />
+      <Route path="/privacy" element={<ContentPage />} />
+      <Route path="/terms" element={<ContentPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
