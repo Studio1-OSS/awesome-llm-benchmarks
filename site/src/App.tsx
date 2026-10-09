@@ -633,7 +633,7 @@ function App() {
                   <img src="/logos/github.svg" alt="GitHub" className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
                   {githubStars !== null && (
                     <span className="absolute -top-1 -right-1 bg-[#2E2E2D] text-white text-[8px] font-bold px-1 rounded-sm shadow-sm z-10">
-                      {githubStars > 999 ? (githubStars/1000).toFixed(1) + 'k' : githubStars}
+                      {githubStars.toLocaleString()}
                     </span>
                   )}
                 </a>

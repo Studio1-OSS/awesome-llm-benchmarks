@@ -503,6 +503,7 @@ export default function LandingPage() {
           <Link to="/dashboard" className="text-[13px] font-medium text-[#111111] bg-[#EEEEEE]/80 backdrop-blur-xl border border-black/10 px-4 py-1.5 rounded-md hover:bg-[#E5E5E5]/90 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)]">Dashboard</Link>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity ml-1">
             <GithubIcon size={22} />
+            {githubStars !== null && <span className="ml-1.5 text-[12.5px] font-medium text-[#111111]">{githubStars.toLocaleString()}</span>}
           </a>
         </div>
       </header>
@@ -556,7 +557,7 @@ export default function LandingPage() {
                   </div>
                 </Link>
                 <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="px-5 py-2.5 rounded-full text-[#111111] text-[15px] font-medium transition-all flex items-center gap-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10">
-                  Contribute on GitHub {githubStars !== null && <span className="opacity-70 font-normal">({githubStars > 999 ? (githubStars/1000).toFixed(1) + 'k' : githubStars} ★)</span>}
+                  Contribute on GitHub
                   <GithubIcon size={16} />
                 </a>
               </div>
@@ -834,7 +835,7 @@ export default function LandingPage() {
           <Reveal delay={200} className="flex justify-center mt-[-60px] relative z-10">
             <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-8 py-3.5 rounded-[8px] text-white text-[15px] font-medium transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1),inset_0_1px_0px_rgba(255,255,255,0.15)] bg-gradient-to-b from-[#333333] to-[#111111] hover:from-[#444444] hover:to-[#222222] border border-[#111111]">
               <img src="/logos/github.svg" alt="" className="w-[18px] h-[18px] invert opacity-90" />
-              Contribute {githubStars !== null && <span className="opacity-80 font-normal">({githubStars.toLocaleString()} ★)</span>}
+              Contribute
             </a>
           </Reveal>
         </div>

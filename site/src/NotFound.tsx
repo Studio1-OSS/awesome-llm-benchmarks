@@ -1,6 +1,25 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+const AI_LOGOS = [
+  '/logos/claude.png',
+  '/logos/google.svg',
+  '/logos/meta.png',
+  '/logos/mistral.png',
+  '/logos/openai.svg',
+  '/logos/qwen.svg'
+];
 
 export default function NotFound() {
+  const [logoIndex, setLogoIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLogoIndex((prev) => (prev + 1) % AI_LOGOS.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center justify-center font-sans selection:bg-[#EAEAEA] relative overflow-hidden">
       {/* Background Decorators */}
@@ -16,13 +35,32 @@ export default function NotFound() {
 
       {/* Main Content */}
       <div className="flex flex-col items-center text-center px-6 max-w-2xl z-10">
-        <div className="w-20 h-20 mb-8 rounded-2xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-[#E5E3DF] flex items-center justify-center">
-          <svg className="w-8 h-8 text-[#9E9D9A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+        <div className="w-24 h-24 mb-10 rounded-3xl bg-white shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-[#E5E3DF] flex items-center justify-center relative overflow-hidden">
+          {AI_LOGOS.map((logo, idx) => {
+            const distance = (idx - logoIndex + AI_LOGOS.length) % AI_LOGOS.length;
+            const isCurrent = distance === 0;
+            const isPrev = distance === AI_LOGOS.length - 1;
+            const isNext = distance === 1;
+
+            let translateClass = 'translate-y-full opacity-0';
+            if (isCurrent) translateClass = 'translate-y-0 opacity-100';
+            else if (isPrev) translateClass = '-translate-y-full opacity-0';
+
+            const transitionClass = isCurrent || isPrev || isNext ? 'transition-all duration-500 ease-in-out' : 'transition-none';
+            const filterClass = logo.includes('openai') || logo.includes('xai') || logo.includes('grok') ? 'filter invert brightness-0' : '';
+
+            return (
+              <img
+                key={logo}
+                src={logo}
+                alt="AI"
+                className={`absolute w-12 h-12 object-contain ${transitionClass} ${filterClass} ${translateClass}`}
+              />
+            );
+          })}
         </div>
         
-        <h1 className="text-[120px] font-bold text-[#111111] leading-none tracking-tighter mb-4 opacity-10">
+        <h1 className="text-[120px] font-bold text-[#111111] leading-none tracking-tighter mb-4 opacity-5">
           404
         </h1>
         
