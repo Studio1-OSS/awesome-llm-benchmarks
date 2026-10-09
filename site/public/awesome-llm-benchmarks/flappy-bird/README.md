@@ -44,6 +44,10 @@ Muse Spark 1.3 was run on the Contributor tier, which lowers the recorded price;
 
 Muse Spark 1.3 is the overall winner. It delivered the most cohesive UI, the richest level of implementation detail, and a working game for $0.0163. Its difficulty should be tuned down for better accessibility, but that is a smaller issue than the functional and presentation gaps in the other runs.
 
-DeepSeek V4 Flash is the strongest budget alternative at $0.026754: it is playable and visually appealing, particularly its 3D-style effect, but it lacks an intro screen and keeps the game loop simple. Kimi K3 also produced a usable result, but at $0.226800 it costs substantially more while offering less detail than Muse Spark 1.3. Codex 5.6 Terra produced a presentable interface but failed the core reliability requirement because its game logic does not work.
+**DeepSeek V4 Flash** is the strongest budget alternative at $0.026754: it is playable and visually appealing, particularly its 3D-style effect, but it lacks an intro screen and keeps the game loop simple.
+
+**Kimi K3** also produced a usable result, but at $0.226800 it costs substantially more while offering less detail than Muse Spark 1.3.
+
+**Codex 5.6 Terra** produced a presentable interface but failed the core reliability requirement because its game logic does not work.
 
 Cost comparisons should account for pricing tier: Muse Spark 1.3 was run on the Contributor tier, which lowers its recorded cost; standard-tier pricing can be higher. On the recorded runs, Muse Spark 1.3 offers the best balance of UI quality, implementation depth, functionality, and cost.
