@@ -401,20 +401,7 @@ export default function Blog() {
   const [githubStars, setGithubStars] = useState<number | null>(null);
   const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
   const [activeId, setActiveId] = useState<string>('');
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (windowHeight > 0) {
-        setScrollProgress(totalScroll / windowHeight);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     if (postId) {
@@ -508,11 +495,6 @@ export default function Blog() {
           </div>
         </header>
         
-        {/* Longitudinal Scroll Progress Scale */}
-        <div className="sticky top-16 left-0 w-full h-[3px] bg-transparent z-40">
-          <div className="h-full bg-gradient-to-r from-[#111111] to-[#444444] transition-all duration-150 ease-out" style={{ width: `${scrollProgress * 100}%` }}></div>
-        </div>
-
         <div className="max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 pt-12 pb-24 flex flex-col lg:flex-row gap-12 lg:gap-12 relative items-start">
           
           {/* Left TOC Sidebar */}
@@ -547,7 +529,7 @@ export default function Blog() {
           </aside>
 
           {/* Main Article Content */}
-          <article className="flex-1 min-w-0 max-w-[800px]">
+          <article className="flex-1 min-w-0 max-w-[800px] lg:border-l lg:border-[#EAEAEA] lg:pl-12">
           
           <div className="flex items-center justify-between mb-10 border-b border-[#EAEAEA] pb-6">
             <Link to="/blog" className="flex items-center gap-2 text-[14px] font-medium text-[#666666] hover:text-[#111111] transition-colors">
