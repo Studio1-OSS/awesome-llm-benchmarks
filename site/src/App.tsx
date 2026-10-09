@@ -15,8 +15,9 @@ const getProviderLogo = (name: string) => {
   if (lowerName.includes('meta')) return '/logos/meta.svg';
   if (lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('spacexai')) return '/logos/xai.svg';
   if (lowerName.includes('deepseek')) return '/logos/deepseek.svg';
-  if (lowerName.includes('moonshot')) return '/logos/kimi.png'; // Kimi logo often used for Moonshot
-  if (lowerName.includes('zai') || lowerName.includes('z ai') || lowerName.includes('zhipu')) return '/logos/glm.png';
+  if (lowerName.includes('moonshot')) return '/logos/kimi.png';
+  if (lowerName.includes('zhipu')) return '/logos/zhipu.png';
+  if (lowerName.includes('zai') || lowerName.includes('z ai') || lowerName.includes('glm')) return '/logos/glm.png';
   if (lowerName.includes('alibaba') || lowerName.includes('qwen')) return '/logos/qwen.svg';
   if (lowerName.includes('mistral')) return '/logos/mistral.svg';
   if (lowerName.includes('microsoft')) return '/logos/microsoft.svg';
@@ -26,7 +27,7 @@ const getProviderLogo = (name: string) => {
   if (lowerName.includes('primalabs') || lowerName.includes('prima')) return '/logos/primalabs.svg';
   if (lowerName.includes('ollama')) return '/logos/ollama.svg';
   if (lowerName.includes('hugging')) return '/logos/huggingface.svg';
-  if (lowerName.includes('ibm')) return '/logos/ibm.svg';
+  if (lowerName.includes('ibm') || lowerName.includes('granite')) return '/logos/ibm.png';
   if (lowerName.includes('cohere')) return '/logos/cohere.png';
   if (lowerName.includes('celeris')) return '/logos/celeris.png';
   if (lowerName.includes('mercury')) return '/logos/mercury.png';
@@ -40,20 +41,19 @@ const getProviderLogo = (name: string) => {
   if (lowerName.includes('tencent')) return '/logos/tencent.png';
   if (lowerName.includes('baidu')) return '/logos/baidu.png';
   if (lowerName.includes('xiaomi')) return '/logos/xiaomi.png';
-  if (lowerName.includes('ai21')) return '/logos/ai21.png';
-  if (lowerName.includes('sk telecom')) return '/logos/sktelecom.png';
+  if (lowerName.includes('ai21') || lowerName.includes('jt') || lowerName.includes('flash 236b') || lowerName.includes('jamba')) return '/logos/ai21.png';
+  if (lowerName.includes('sk telecom') || lowerName.includes('kt')) return '/logos/sktelecom.png';
   if (lowerName.includes('sarvam')) return '/logos/sarvam.png';
 
   if (lowerName.includes('ai9stars')) return '/logos/ai9stars.png';
   if (lowerName.includes('allen')) return '/logos/allenai.png';
   if (lowerName.includes('apodex')) return '/logos/apodex.png';
   if (lowerName.includes('arcee')) return '/logos/arcee.png';
-  if (lowerName.includes('bytedance') || lowerName.includes('seed')) return '/logos/bytedance.png';
+  if (lowerName.includes('bytedance') || lowerName.includes('seed') || lowerName.includes('doubao') || lowerName.includes('dubao')) return '/logos/doubao.png';
   if (lowerName.includes('china mobile')) return '/logos/chinamobile.png';
   if (lowerName.includes('deep cogito')) return '/logos/deepcogito.png';
   if (lowerName.includes('inception')) return '/logos/inception.png';
   if (lowerName.includes('institute of foundation')) return '/logos/ifm.png';
-  if (lowerName.includes('korea telecom') || lowerName.includes('kt')) return '/logos/kt.png';
   if (lowerName.includes('kwaikat') || lowerName.includes('kuaishou')) return '/logos/kuaishou.png';
   if (lowerName.includes('lg ai')) return '/logos/lgai.png';
   if (lowerName.includes('longcat')) return '/logos/longcat.png';
@@ -69,6 +69,7 @@ const getProviderLogo = (name: string) => {
   if (lowerName.includes('tii uae') || lowerName.includes('tii')) return '/logos/tii.png';
   if (lowerName.includes('thinking machines')) return '/logos/thinkingmachines.png';
   if (lowerName.includes('trillion')) return '/logos/trillion.png';
+  if (lowerName.includes('spartus') || lowerName.includes('sparta')) return '/logos/spartus.png';
 
   // If no exact provider logo matches, return null so we don't render a false logo.
   return '';
