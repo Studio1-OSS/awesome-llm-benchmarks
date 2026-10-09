@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 export default function NotFound() {
   return (
@@ -7,10 +8,10 @@ export default function NotFound() {
       
       {/* Header */}
       <header className="absolute top-0 w-full z-50 bg-transparent h-20 flex items-center px-8">
-        <a href="#" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+        <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
           <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
           <span className="font-semibold text-[15px] text-[#111111] tracking-tight leading-none whitespace-nowrap">LLM Arena</span>
-        </a>
+        </Link>
       </header>
 
       {/* Main Content */}
@@ -34,15 +35,15 @@ export default function NotFound() {
           Let's get you back to grounded reality.
         </p>
         
-        <a 
-          href="#"
+        <Link 
+          to="/"
           className="flex items-center gap-2 px-8 py-3.5 rounded-[8px] text-white text-[15px] font-medium transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1),inset_0_1px_0px_rgba(255,255,255,0.15)] bg-gradient-to-b from-[#333333] to-[#111111] hover:from-[#444444] hover:to-[#222222] border border-[#111111]"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           Back to Home
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';const AI_LOGOS = [
   '/logos/openai.svg',
   '/logos/claude.png',
@@ -488,18 +489,18 @@ export default function LandingPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
-          <a href="#" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+          <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
             <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
             <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
               <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
               <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
             </div>
-          </a>
+          </Link>
         </div>
         <div className="flex items-center gap-4">
-          <a href="#blog" className="text-[13px] font-medium text-[#4A4948] hover:text-black transition-colors hidden sm:block">Blog</a>
-          <a href="#llm-race" className="text-[13px] font-medium text-white bg-black/80 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-md hover:bg-black transition-all shadow-[0_4px_12px_rgba(0,0,0,0.1)]">LLM Race</a>
-          <a href="#dashboard" className="text-[13px] font-medium text-[#111111] bg-[#EEEEEE]/80 backdrop-blur-xl border border-black/10 px-4 py-1.5 rounded-md hover:bg-[#E5E5E5]/90 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)]">Dashboard</a>
+          <Link to="/blog" className="text-[13px] font-medium text-[#4A4948] hover:text-black transition-colors hidden sm:block">Blog</Link>
+          <Link to="/dashboard" className="text-[13px] font-medium text-white bg-black/80 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-md hover:bg-black transition-all shadow-[0_4px_12px_rgba(0,0,0,0.1)]">LLM Race</Link>
+          <Link to="/dashboard" className="text-[13px] font-medium text-[#111111] bg-[#EEEEEE]/80 backdrop-blur-xl border border-black/10 px-4 py-1.5 rounded-md hover:bg-[#E5E5E5]/90 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)]">Dashboard</Link>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity ml-1">
             <GithubIcon size={22} />
           </a>
@@ -527,7 +528,7 @@ export default function LandingPage() {
               </p>
 
               <div className="flex items-center justify-start gap-3 mb-14">
-                <a href="#dashboard" className="px-5 py-2.5 rounded-full text-white text-[15px] font-medium transition-all flex items-center gap-2 shadow-[0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#333333]/90 to-[#111111]/90 backdrop-blur-xl hover:from-[#444444]/90 hover:to-[#222222]/90 border border-black/50">
+                <Link to="/dashboard" className="px-5 py-2.5 rounded-full text-white text-[15px] font-medium transition-all flex items-center gap-2 shadow-[0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#333333]/90 to-[#111111]/90 backdrop-blur-xl hover:from-[#444444]/90 hover:to-[#222222]/90 border border-black/50">
                   Start Comparing
                   <div className="w-4 h-4 relative overflow-hidden flex items-center justify-center -mr-0.5">
                     {AI_LOGOS.map((logo, idx) => {
@@ -553,7 +554,7 @@ export default function LandingPage() {
                       );
                     })}
                   </div>
-                </a>
+                </Link>
                 <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="px-5 py-2.5 rounded-full text-[#111111] text-[15px] font-medium transition-all flex items-center gap-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10">
                   Contribute on GitHub {githubStars !== null && <span className="opacity-70 font-normal">({githubStars > 999 ? (githubStars/1000).toFixed(1) + 'k' : githubStars} ★)</span>}
                   <GithubIcon size={16} />
@@ -897,32 +898,32 @@ export default function LandingPage() {
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Product</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Benchmarks</a></li>
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Methodologies</a></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Benchmarks</Link></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Methodologies</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Company</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">About</a></li>
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Contributors</a></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">About</Link></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Contributors</Link></li>
                   <li><a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#111111] transition-colors">GitHub</a></li>
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Blog</a></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Blog</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Resources</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Documentation</a></li>
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Updates</a></li>
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">FAQ</a></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Documentation</Link></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Updates</Link></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">FAQ</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Legal</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-[#111111] transition-colors">Terms of Service</a></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Privacy Policy</Link></li>
+                  <li><Link to="/" className="hover:text-[#111111] transition-colors">Terms of Service</Link></li>
                 </ul>
               </div>
             </div>

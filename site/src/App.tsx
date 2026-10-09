@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect, useMemo } from 'react'
 import { PanelLeftClose, PanelLeftOpen, X, ChevronDown, Check, Search, BookOpen } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
@@ -431,13 +432,13 @@ function App() {
         {/* Sidebar Header with Brand */}
         <div className={`h-20 flex items-center ${isSidebarCollapsed ? 'justify-center px-0' : 'justify-between px-4'} shrink-0 bg-transparent`}>
           {!isSidebarCollapsed ? (
-            <a href="#landing" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+            <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
               <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
               <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
                 <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
                 <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
               </div>
-            </a>
+            </Link>
           ) : (
             <button 
               onClick={() => {
@@ -765,13 +766,12 @@ function App() {
             
             <div className="w-[1px] h-4 bg-[#E5E3DF] mx-1 hidden sm:block"></div>
             
-            <a 
-              href="#"
+            <Link to="/"
               className="hidden sm:flex items-center gap-1.5 text-[13.5px] font-semibold text-[#6E6D6A] hover:text-[#2E2E2D] transition-colors"
             >
               <img src="/logos/github.svg" alt="GitHub" className="w-[18px] h-[18px] object-contain opacity-70" />
               <span>7.1k</span>
-            </a>
+            </Link>
           </div>
         </header>
         

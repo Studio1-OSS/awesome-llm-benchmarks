@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const POSTS = [
   {
@@ -32,15 +33,28 @@ const POSTS = [
 
 export default function Blog() {
   const [postId, setPostId] = useState<string | null>(null);
+  const [githubStars, setGithubStars] = useState<number | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.startsWith('#blog/')) {
-      setPostId(hash.replace('#blog/', ''));
+    fetch('https://api.github.com/repos/Studio1-OSS/awesome-llm-benchmarks')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          setGithubStars(data.stargazers_count);
+        }
+      })
+      .catch(err => console.error('Failed to fetch github stars', err));
+  }, []);
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path.startsWith('/blog/') && path.length > 6) {
+      setPostId(path.replace('/blog/', ''));
     } else {
       setPostId(null);
     }
-  }, []);
+  }, [location.pathname]);
 
   const CalendarIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -55,19 +69,19 @@ export default function Blog() {
     return (
       <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA]">
         <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
-          <a href="#" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+          <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
             <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
             <span className="font-semibold text-[15px] text-[#111111] tracking-tight leading-none whitespace-nowrap">LLM Arena</span>
-          </a>
+          </Link>
         </header>
         <div className="max-w-[800px] mx-auto px-6 pt-16 pb-24">
-          <button 
-            onClick={() => window.location.hash = '#blog'}
-            className="flex items-center gap-1.5 text-[12px] font-medium text-[#6E6D6A] bg-[#F1EFEA] hover:bg-[#E5E3DF] px-3 py-1.5 rounded-md transition-colors mb-8"
+          <Link 
+            to="/blog"
+            className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#6E6D6A] bg-[#F1EFEA] hover:bg-[#E5E3DF] px-3 py-1.5 rounded-md transition-colors mb-8"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             Back to Blog
-          </button>
+          </Link>
           
           <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-serif" style={{ fontFamily: '"Playfair Display", serif' }}>
             {post.title}
@@ -112,10 +126,10 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA]">
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
-        <a href="#" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+        <Link to="/" className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
           <img src="/icon.png" alt="LLM Arena Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
           <span className="font-semibold text-[15px] text-[#111111] tracking-tight leading-none whitespace-nowrap">LLM Arena</span>
-        </a>
+        </Link>
       </header>
 
         <div className="max-w-[1200px] mx-auto px-6 py-20">
