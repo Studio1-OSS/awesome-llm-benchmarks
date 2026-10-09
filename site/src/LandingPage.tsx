@@ -497,6 +497,7 @@ export default function LandingPage() {
           </a>
         </div>
         <div className="flex items-center gap-4">
+          <a href="#blog" className="text-[13px] font-medium text-[#4A4948] hover:text-black transition-colors hidden sm:block">Blog</a>
           <a href="#llm-race" className="text-[13px] font-medium text-white bg-black/80 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-md hover:bg-black transition-all shadow-[0_4px_12px_rgba(0,0,0,0.1)]">LLM Race</a>
           <a href="#dashboard" className="text-[13px] font-medium text-[#111111] bg-[#EEEEEE]/80 backdrop-blur-xl border border-black/10 px-4 py-1.5 rounded-md hover:bg-[#E5E5E5]/90 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)]">Dashboard</a>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity ml-1">
