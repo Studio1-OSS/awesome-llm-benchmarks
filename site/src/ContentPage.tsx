@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const GithubIcon = ({ size = 24, className = '' }: { size?: number, className?: string }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="currentColor">
@@ -7,45 +7,167 @@ const GithubIcon = ({ size = 24, className = '' }: { size?: number, className?: 
   </svg>
 );
 
-const PAGE_CONTENT: Record<string, { title: string, content: string }> = {
+const PAGE_CONTENT: Record<string, { title: string, content: React.ReactNode }> = {
   '/methodologies': {
     title: 'Methodologies',
-    content: 'Our evaluation methodology is based on procedurally generated, deterministic game loops that test reasoning, planning, and code generation capabilities in real-time. By moving away from static multiple-choice datasets, we eliminate test-set contamination and ensure models are evaluated on true generalization.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">Our evaluation methodology is based on procedurally generated, deterministic game loops that test reasoning, planning, and code generation capabilities in real-time. By moving away from static multiple-choice datasets, we eliminate test-set contamination and ensure models are evaluated on true generalization.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Procedural Generation</h3>
+        <p className="mb-6">Unlike traditional benchmarks like MMLU or HumanEval, our environments are procedurally generated at runtime. Each evaluation instance starts with a unique configuration seed. This prevents models from memorizing the test set during their pre-training phase, forcing them to genuinely interpret the game state and synthesize the correct operational logic.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Determinism and Verification</h3>
+        <p className="mb-6">The core principle of our methodology is strict determinism. Every action a model takes within the environment yields a mathematically verifiable outcome. If a model generates code for a 2D physics interaction, the physics engine evaluates the exact collision bounds and response vectors. We assign scores based on the objective success of the execution loop.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Elo Rating System</h3>
+        <p className="mb-6">Models are ranked using a modified Elo rating system. They compete against both a static baseline (established heuristically) and dynamically against other models in head-to-head performance scenarios. The K-factor adapts based on the model's volatility and sample size to quickly converge on its true capability.</p>
+      </>
+    )
   },
   '/about': {
     title: 'About LLM Benchmark',
-    content: 'LLM Benchmark was created to solve the fundamental problem in AI evaluation: static benchmarks are solved too quickly, and humans cannot scale to evaluate thousands of models daily. We provide a dynamic, game-based evaluation platform that scales infinitely and evaluates models on true agency.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">LLM Benchmark was created to solve the fundamental problem in AI evaluation: static benchmarks are solved too quickly, and humans cannot scale to evaluate thousands of models daily. We provide a dynamic, game-based evaluation platform that scales infinitely and evaluates models on true agency.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Our Mission</h3>
+        <p className="mb-6">As Large Language Models reach super-human performance on static examinations, the AI industry is flying blind. We are building the next generation of evaluation infrastructure. Our mission is to provide an open, transparent, and un-gameable standard for measuring artificial intelligence.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Why Game Environments?</h3>
+        <p className="mb-6">Games are microcosms of reality. They require spatial reasoning, temporal planning, logic generation, and rapid feedback iteration. By asking models to play, build, or manipulate these game environments, we effectively measure their capability to operate in real-world, agentic scenarios.</p>
+      </>
+    )
   },
   '/contributors': {
     title: 'Contributors',
-    content: 'This project is powered by the open-source community. We want to thank all the researchers, engineers, and hobbyists who have submitted models, created new game environments, and helped refine our scoring algorithms. You can join us on GitHub to make your mark.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">This project is powered by the open-source community. We want to thank all the researchers, engineers, and hobbyists who have submitted models, created new game environments, and helped refine our scoring algorithms.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Core Maintainers</h3>
+        <p className="mb-6">Our core team comprises researchers from leading AI labs and experienced game engine developers. Together, we maintain the primary validation suite, the open-source runner infrastructure, and the daily leaderboard pipeline.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">How to Contribute</h3>
+        <p className="mb-6">We welcome contributions from anyone! You can help by:</p>
+        <ul className="list-disc pl-6 space-y-2 mb-8">
+          <li>Designing new deterministic mini-games in HTML5 Canvas and JavaScript.</li>
+          <li>Submitting new model endpoint integrations (e.g., vLLM, HuggingFace TGI).</li>
+          <li>Improving the frontend UI and data visualization.</li>
+          <li>Refining the Elo ranking mathematical models.</li>
+        </ul>
+        <p>Visit our <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" className="text-blue-600 hover:underline">GitHub repository</a> to get started.</p>
+      </>
+    )
   },
   '/documentation': {
     title: 'Documentation',
-    content: 'Learn how to integrate your custom language models with our benchmarking suite. Our documentation covers everything from the WebSocket API for game loop integration, to the schema requirements for submitting a new model to the leaderboard.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">Learn how to integrate your custom language models with our benchmarking suite. Our documentation covers everything from the WebSocket API for game loop integration, to the schema requirements for submitting a new model to the leaderboard.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Getting Started</h3>
+        <p className="mb-6">To run evaluations locally, you will need Node.js 18+ and a compatible OpenAI-format API endpoint for your model. Install the runner via npm:</p>
+        <pre className="bg-[#1C1C1C] text-white p-4 rounded-lg font-mono text-sm mb-6">npm install -g @llm-benchmark/runner</pre>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">API Schemas</h3>
+        <p className="mb-6">Your model endpoint must accept standard ChatML formatting and return responses within 30 seconds. We strictly enforce a max-token limit of 4096 per generation cycle to prevent infinite loops during evaluation.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Submitting to the Leaderboard</h3>
+        <p className="mb-6">Once you have successfully run the benchmark locally and achieved a stable Elo rating, you can submit your model weights or API endpoint to our automated pipeline via a Pull Request on GitHub.</p>
+      </>
+    )
   },
   '/updates': {
     title: 'Updates & Changelog',
-    content: 'Stay up to date with the latest changes to the LLM Benchmark platform. We regularly update our evaluation environments, adjust scoring weights, and introduce new frontier models to the leaderboard.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">Stay up to date with the latest changes to the LLM Benchmark platform. We regularly update our evaluation environments, adjust scoring weights, and introduce new frontier models to the leaderboard.</p>
+        
+        <div className="border-l-4 border-[#1C1C1C] pl-6 py-2 mb-8">
+          <h4 className="font-semibold text-lg">v2.1.0 - October 2026</h4>
+          <p className="text-gray-600 mt-2">Introduced the new "3D Scene Design" evaluation environment. Added native support for reasoning models (e.g., OpenAI o3, DeepSeek V4) with extended timeout configurations.</p>
+        </div>
+        
+        <div className="border-l-4 border-gray-300 pl-6 py-2 mb-8">
+          <h4 className="font-semibold text-lg text-gray-700">v2.0.0 - August 2026</h4>
+          <p className="text-gray-600 mt-2">Major overhaul of the Elo rating algorithm to account for varying task difficulties. Launched the dedicated UI for tracking Cost per Task and Latency metrics.</p>
+        </div>
+        
+        <div className="border-l-4 border-gray-300 pl-6 py-2 mb-8">
+          <h4 className="font-semibold text-lg text-gray-700">v1.5.0 - May 2026</h4>
+          <p className="text-gray-600 mt-2">Integrated the 2D Breakout and Endless Runner environments. Improved test determinism across different hardware architectures.</p>
+        </div>
+      </>
+    )
   },
   '/faq': {
     title: 'Frequently Asked Questions',
-    content: 'Have questions about how we calculate Elo ratings, why your model failed a specific game loop, or how to interpret the cost-per-task metrics? Find all your answers here.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">Find answers to the most common questions regarding our platform, ranking systems, and model submissions.</p>
+        
+        <h4 className="font-semibold text-lg mb-2">How is the Intelligence Index calculated?</h4>
+        <p className="mb-6">The index is a composite score derived from a model's Elo rating across all game environments, normalized against a baseline model (usually GPT-4) which is set at an arbitrary 50.0 mark.</p>
+
+        <h4 className="font-semibold text-lg mb-2">Why did my model fail the Flappy Bird test?</h4>
+        <p className="mb-6">Models often fail dynamic physics tests if they cannot accurately maintain spatial state context across multiple turns. We recommend examining the exact generation trace provided in your local runner logs.</p>
+
+        <h4 className="font-semibold text-lg mb-2">Are the benchmark games open source?</h4>
+        <p className="mb-6">Yes! The source code for all evaluation environments is fully open-source under the MIT license, available in our GitHub repository.</p>
+
+        <h4 className="font-semibold text-lg mb-2">How frequently is the leaderboard updated?</h4>
+        <p className="mb-6">The main leaderboard undergoes a comprehensive re-evaluation every 48 hours to incorporate new community submissions and API changes from major providers.</p>
+      </>
+    )
   },
   '/privacy': {
     title: 'Privacy Policy',
-    content: 'We take your privacy seriously. We do not store or use the prompts generated during evaluation for training purposes. All telemetry data is anonymized and used strictly to improve the stability of the benchmarking platform.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">This Privacy Policy governs the manner in which LLM Benchmark collects, uses, maintains, and discloses information collected from users.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Information Collection</h3>
+        <p className="mb-6">We collect standard analytical telemetry (such as IP addresses, browser types, and access times) to improve the stability and performance of our web platform. We do not require account creation to view the leaderboard data.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Model Telemetry</h3>
+        <p className="mb-6">When you run the benchmark locally using our CLI tool, no prompts, generated code, or model architectures are uploaded to our servers unless you explicitly submit a pull request to the public repository.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Cookies</h3>
+        <p className="mb-6">Our site uses "cookies" strictly for functional purposes, such as maintaining light/dark mode preferences and session routing. We do not use third-party advertising trackers.</p>
+
+        <p className="mt-8 text-sm text-gray-500">Last updated: October 2026</p>
+      </>
+    )
   },
   '/terms': {
     title: 'Terms of Service',
-    content: 'By using the LLM Benchmark platform, you agree to our community guidelines. Do not attempt to reverse-engineer the procedural generation seeds, and please respect the API rate limits when programmatically querying the leaderboard data.'
+    content: (
+      <>
+        <p className="lead text-[18px] mb-8">By accessing and using the LLM Benchmark website and evaluation tools, you accept and agree to be bound by the terms and provisions of this agreement.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Use License</h3>
+        <p className="mb-6">The content on this website, including the leaderboard data and UI assets, is provided for informational purposes. The underlying evaluation framework and game source codes are licensed under the MIT License.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">API and Scraping</h3>
+        <p className="mb-6">While we encourage researchers to use our data, please respect our infrastructure. Automated scraping of the leaderboard should be limited to once per hour. High-frequency automated access may result in IP blocking to preserve availability for standard users.</p>
+        
+        <h3 className="text-[24px] font-semibold text-[#1C1C1C] mt-10 mb-4">Disclaimer of Warranties</h3>
+        <p className="mb-6">The benchmark scores and metrics provided on this site are indicative measures of AI performance based on our specific synthetic tests. We make no guarantees regarding a model's performance in real-world, non-synthetic production environments.</p>
+        
+        <p className="mt-8 text-sm text-gray-500">Last updated: October 2026</p>
+      </>
+    )
   }
 };
 
 export default function ContentPage() {
   const [githubStars, setGithubStars] = useState<number | null>(null);
   const location = useLocation();
-  const pageData = PAGE_CONTENT[location.pathname] || { title: 'Page Not Found', content: 'The content you are looking for does not exist.' };
+  const pageData = PAGE_CONTENT[location.pathname] || { 
+    title: 'Page Not Found', 
+    content: <p>The content you are looking for does not exist.</p> 
+  };
 
   useEffect(() => {
     fetch('https://api.github.com/repos/Studio1-OSS/awesome-llm-benchmarks')
@@ -57,10 +179,6 @@ export default function ContentPage() {
       })
       .catch(err => console.error('Failed to fetch github stars', err));
   }, []);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans overflow-x-hidden selection:bg-[#EAEAEA] relative">
@@ -87,13 +205,12 @@ export default function ContentPage() {
         </div>
       </header>
 
-      <div className="max-w-[800px] mx-auto px-6 pt-16 pb-24 min-h-[60vh]">
-        
-        <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-5 tracking-tight font-heading">
+      <div className="max-w-[800px] mx-auto px-6 pt-20 pb-32 min-h-[60vh]">
+        <h1 className="text-[48px] text-[#2E2E2D] leading-[1.1] mb-12 tracking-tight font-heading font-medium">
           {pageData.title}
         </h1>
         <div className="prose prose-lg prose-stone max-w-none text-[#4A4948]" style={{ fontFamily: 'Switzer, sans-serif' }}>
-          <p className="lead">{pageData.content}</p>
+          {pageData.content}
         </div>
       </div>
 
@@ -121,35 +238,38 @@ export default function ContentPage() {
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Product</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/dashboard" className="hover:text-[#111111] transition-colors">Benchmarks</Link></li>
-                  <li><Link to="/methodologies" className="hover:text-[#111111] transition-colors">Methodologies</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/dashboard" className="hover:text-[#111111] transition-colors">Benchmarks</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/methodologies" className="hover:text-[#111111] transition-colors">Methodologies</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Company</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/about" className="hover:text-[#111111] transition-colors">About</Link></li>
-                  <li><Link to="/contributors" className="hover:text-[#111111] transition-colors">Contributors</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/about" className="hover:text-[#111111] transition-colors">About</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/contributors" className="hover:text-[#111111] transition-colors">Contributors</Link></li>
                   <li><a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="hover:text-[#111111] transition-colors">GitHub</a></li>
-                  <li><Link to="/blog" className="hover:text-[#111111] transition-colors">Blog</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/blog" className="hover:text-[#111111] transition-colors">Blog</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Resources</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/documentation" className="hover:text-[#111111] transition-colors">Documentation</Link></li>
-                  <li><Link to="/updates" className="hover:text-[#111111] transition-colors">Updates</Link></li>
-                  <li><Link to="/faq" className="hover:text-[#111111] transition-colors">FAQ</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/documentation" className="hover:text-[#111111] transition-colors">Documentation</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/updates" className="hover:text-[#111111] transition-colors">Updates</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/faq" className="hover:text-[#111111] transition-colors">FAQ</Link></li>
                 </ul>
               </div>
               <div className="flex flex-col">
                 <h4 className="text-[15px] text-[#111111] mb-6">Legal</h4>
                 <ul className="space-y-3.5 text-[14px] text-[#666666]">
-                  <li><Link to="/privacy" className="hover:text-[#111111] transition-colors">Privacy Policy</Link></li>
-                  <li><Link to="/terms" className="hover:text-[#111111] transition-colors">Terms of Service</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/privacy" className="hover:text-[#111111] transition-colors">Privacy Policy</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/terms" className="hover:text-[#111111] transition-colors">Terms of Service</Link></li>
                 </ul>
               </div>
             </div>
+          </div>
+          <div className="pt-8 border-t border-[#EAEAEA] flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[13px] text-[#999999]">© {new Date().getFullYear()} LLM Benchmark. All rights reserved.</p>
           </div>
         </div>
       </footer>

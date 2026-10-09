@@ -1,7 +1,13 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { LEADERBOARD_DATA } from './leaderboardData';
 import { Link } from 'react-router-dom';
+
+const GithubIcon = ({ size = 24, className = '' }: { size?: number, className?: string }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="currentColor">
+    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+  </svg>
+);
 
 const getProviderLogo = (name: string) => {
   const lowerName = name.toLowerCase();
@@ -14,8 +20,12 @@ const getProviderLogo = (name: string) => {
   if (lowerName.includes('kimi') || lowerName.includes('moonshot')) return '/logos/kimi.png';
   if (lowerName.includes('glm') || lowerName.includes('zai') || lowerName.includes('z ai')) return '/logos/glm.png';
   if (lowerName.includes('qwen') || lowerName.includes('alibaba')) return '/logos/qwen.svg';
-  if (lowerName.includes('mistral') || lowerName.includes('magistral') || lowerName.includes('ministral')) return '/logos/mistral.png';
-  return '/logos/openai.svg'; // Fallback
+  if (lowerName.includes('mistral') || lowerName.includes('magistral') || lowerName.includes('ministral')) return '/logos/mistral.svg';
+  if (lowerName.includes('microsoft')) return '/logos/microsoft.svg';
+  if (lowerName.includes('amazon') || lowerName.includes('aws')) return '/logos/aws.svg';
+  if (lowerName.includes('perplexity')) return '/logos/perplexity.svg';
+  if (lowerName.includes('inclusionai')) return '/logos/inclusionai_small.webp';
+  return null; // Return null if no exact logo match
 }
 
 const getProviderColor = (name: string) => {
@@ -26,10 +36,28 @@ const getProviderColor = (name: string) => {
   if (lower.includes('meta')) return '#0668E1';
   if (lower.includes('xai') || lower.includes('spacexai')) return '#000000';
   if (lower.includes('deepseek')) return '#1D4ED8';
-  return '#9CA3AF'; // fallback gray
+  if (lower.includes('mistral')) return '#F97316';
+  if (lower.includes('cohere')) return '#39594D';
+  
+  // Deterministic random-ish color for other providers based on their name length
+  const colors = ['#6B7280', '#EF4444', '#F59E0B', '#10B981', '#3B82F6', '#6366F1', '#8B5CF6', '#EC4899'];
+  return colors[name.length % colors.length];
 }
 
 export default function LlmRace() {
+  const [githubStars, setGithubStars] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/Studio1-OSS/awesome-llm-benchmarks')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          setGithubStars(data.stargazers_count);
+        }
+      })
+      .catch(err => console.error('Failed to fetch github stars', err));
+  }, []);
+
   const models = useMemo(() => {
     return LEADERBOARD_DATA.map(m => ({
       ...m,
@@ -39,7 +67,28 @@ export default function LlmRace() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F5F4F1] font-sans selection:bg-[#E5E3DF] selection:text-[#2E2E2D] pb-24">
+    <div className="min-h-screen bg-[#F5F4F1] font-sans selection:bg-[#E5E3DF] selection:text-[#2E2E2D] pb-0 relative">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 bg-[#F5F4F1]/90 backdrop-blur-md border-b border-[#EAEAEA] h-16 flex items-center justify-between px-6">
+        <div className="flex items-center gap-8">
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} className="flex items-center min-w-0 gap-2.5 hover:opacity-80 transition-opacity">
+            <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[32px] w-[32px] object-contain shrink-0" />
+            <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
+              <span className="text-[17px] leading-none whitespace-nowrap">llm</span>
+              <span className="text-[17px] leading-none whitespace-nowrap -mt-0.5">benchmark</span>
+            </div>
+          </Link>
+        </div>
+        <div className="flex items-center gap-4">
+          <Link onClick={() => window.scrollTo(0, 0)} to="/llm-race" className="text-[13px] font-medium text-white bg-black/80 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-md hover:bg-black transition-all shadow-[0_4px_12px_rgba(0,0,0,0.1)]">LLM Race</Link>
+          <Link onClick={() => window.scrollTo(0, 0)} to="/dashboard" className="text-[13px] font-medium text-[#111111] bg-[#EEEEEE]/80 backdrop-blur-xl border border-black/10 px-4 py-1.5 rounded-md hover:bg-[#E5E5E5]/90 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)]">Dashboard</Link>
+          <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:opacity-70 transition-opacity ml-1">
+            <GithubIcon size={22} />
+            {githubStars !== null && <span className="ml-1.5 text-[12.5px] font-medium text-[#111111]">{githubStars.toLocaleString()}</span>}
+          </a>
+        </div>
+      </header>
+
       {/* Top Banner Section */}
       <div className="max-w-[1400px] mx-auto px-8 pt-16 pb-8">
         <div className="flex flex-col md:flex-row gap-12 justify-between items-start">
@@ -49,12 +98,12 @@ export default function LlmRace() {
             </h1>
             
             <div className="flex items-center gap-3">
-              <Link to="/dashboard" className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white text-[14px] font-medium rounded transition-colors shadow-sm">
-                LLM API Providers Leaderboard
+              <Link to="/dashboard" onClick={() => window.scrollTo(0, 0)} className="px-5 py-2.5 rounded-full text-white text-[15px] font-medium transition-all flex items-center gap-2 shadow-[0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#333333]/90 to-[#111111]/90 backdrop-blur-xl hover:from-[#444444]/90 hover:to-[#222222]/90 border border-black/50">
+                Dashboard
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <Link to="/playground" className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white hover:bg-[#FAF9F6] text-[#1C1C1C] text-[14px] font-medium border border-[#E5E3DF] rounded transition-colors shadow-sm">
-                Try it out
+              <Link to="/contributors" onClick={() => window.scrollTo(0, 0)} className="px-5 py-2.5 rounded-full text-[#111111] text-[15px] font-medium transition-all flex items-center gap-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10">
+                Contribute
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
@@ -65,7 +114,7 @@ export default function LlmRace() {
               Comparison and ranking the performance of over 250 AI models (LLMs) across key metrics including intelligence, price, performance and speed (output speed - tokens per second & latency - TTFT), context window & others.
             </p>
             <p>
-              For more details including relating to our methodology, see our <Link to="/faq" className="underline decoration-[#A1A1AA] hover:text-[#1C1C1C] transition-colors underline-offset-4">FAQs</Link>.
+              For more details including relating to our methodology, see our <Link to="/faq" onClick={() => window.scrollTo(0, 0)} className="underline decoration-[#A1A1AA] hover:text-[#1C1C1C] transition-colors underline-offset-4">FAQs</Link>.
             </p>
           </div>
         </div>
@@ -133,7 +182,7 @@ export default function LlmRace() {
             <div className="flex items-center gap-2 mt-6">
               <img src="/logos/openai.svg" className="w-5 h-5 object-contain" alt="OpenAI" />
               <span className="text-[10px] font-bold text-blue-600">IBM</span>
-              <img src="/logos/mistral.png" className="w-5 h-5 object-contain" alt="Mistral" />
+              <img src="/logos/mistral.svg" className="w-5 h-5 object-contain" alt="Mistral" />
               <img src="/logos/openai.svg" className="w-5 h-5 object-contain" alt="OpenAI" />
             </div>
           </div>
@@ -157,13 +206,29 @@ export default function LlmRace() {
         </div>
       </div>
 
-      {/* Main Table */}
-      <div className="max-w-[1400px] mx-auto px-8">
-        <div className="bg-white rounded-xl border border-[#E5E3DF] shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
+      {/* Main Table with Vertical Scroll */}
+      <div className="max-w-[1400px] mx-auto px-8 mb-24">
+        <style>{`
+          .table-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+          }
+          .table-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          .table-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #E5E7EB;
+            border-radius: 10px;
+          }
+          .table-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #D1D5DB;
+          }
+        `}</style>
+        <div className="bg-white rounded-xl border border-[#E5E3DF] shadow-sm overflow-hidden flex flex-col max-h-[600px]">
+          <div className="overflow-auto flex-1 relative table-scrollbar">
             <table className="w-full text-left border-collapse text-[13px] table-fixed min-w-[900px]">
-              <thead>
-                <tr className="bg-[#F9F8F6] border-b border-[#E5E3DF]">
+              <thead className="sticky top-0 z-10 bg-[#F9F8F6] border-b border-[#E5E3DF] shadow-sm">
+                <tr>
                   <th className="py-4 px-6 font-semibold text-[#1C1C1C] w-[25%]">Model</th>
                   <th className="py-4 px-6 font-semibold text-[#1C1C1C] w-[15%]">Provider</th>
                   <th className="py-4 px-6 font-semibold text-[#1C1C1C] w-[12%] text-right">Context Window</th>
@@ -175,11 +240,19 @@ export default function LlmRace() {
               </thead>
               <tbody className="divide-y divide-[#E5E3DF]">
                 {models.map((m, idx) => (
-                  <tr key={idx} className="hover:bg-[#FAF9F6] transition-colors">
+                  <tr key={idx} className="hover:bg-[#FAF9F6] transition-colors group">
                     <td className="py-3.5 px-6">
                       <div className="flex items-center gap-3">
                         <div className="w-1.5 h-6 rounded-full shrink-0" style={{background: m.color}} />
-                        <img src={m.logo} alt={m.provider} className="w-4.5 h-4.5 object-contain shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        {m.logo ? (
+                          <img src={m.logo} alt={m.provider} className="w-5 h-5 object-contain shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        ) : (
+                          <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-gray-400">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                            </svg>
+                          </div>
+                        )}
                         <span className="font-semibold text-[#1C1C1C] truncate" title={m.name}>{m.name}</span>
                       </div>
                     </td>
@@ -220,6 +293,67 @@ export default function LlmRace() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-[#F8F7F4] pt-16 pb-12 border-t border-[#EAEAEA] mt-12">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-4 relative pb-16">
+            <div className="col-span-1 lg:col-span-2 pr-8">
+              <div className="flex items-center min-w-0 gap-3 mb-6 opacity-90">
+                <img src="/icon.png" alt="LLM Benchmark Icon" className="h-[48px] w-[48px] object-contain shrink-0 grayscale" />
+                <div className="flex flex-col text-[#1c1c1c] tracking-tighter font-semibold min-w-0 justify-center">
+                  <span className="text-[20px] leading-none whitespace-nowrap">llm</span>
+                  <span className="text-[20px] leading-none whitespace-nowrap -mt-[2px]">benchmark</span>
+                </div>
+              </div>
+              <div className="mb-6">
+                <a href="https://www.studio1hq.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#666666] transition-colors hover:text-[#171717] group/studio">
+                  An open-source project by Studio1
+                  <svg viewBox="0 0 160 160" className="w-[14px] h-[14px] fill-current text-[#FF7E1D]">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M0 35C0 16.6807 14.0744 1.64844 32 0.126953V141H51.0523C52.4308 137.344 54.7446 133.689 57.9938 130.033C61.1446 126.508 64.6892 123.44 68.6277 120.829C72.5662 118.349 76.3569 116.782 80 116.129V86.7544C75.4708 87.9292 71.3846 89.6919 67.7415 92.0415C64 94.5225 60.7508 97.46 57.9938 100.854C56.5345 102.72 55.2545 104.659 54.1539 106.671V0H125C144.33 0 160 15.6699 160 35V125C160 144.33 144.33 160 125 160H124V18H104.948C103.569 21.6816 101.255 25.3628 98.0062 29.0444C94.8554 32.5942 91.3108 35.6841 87.3723 38.314C83.4338 40.812 79.6431 42.3896 76 43.0474V72.6304C80.5292 71.4473 84.6154 69.6724 88.2585 67.3057C92 64.8076 95.2492 61.8491 98.0062 58.4307C99.4655 56.5513 100.745 54.5986 101.846 52.5723V160H35C15.67 160 0 144.33 0 125V35Z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="col-span-1 lg:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-8 pt-2">
+              <div className="flex flex-col">
+                <h4 className="text-[15px] text-[#111111] mb-6">Product</h4>
+                <ul className="space-y-3.5 text-[14px] text-[#666666]">
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/dashboard" className="hover:text-[#111111] transition-colors">Benchmarks</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/methodologies" className="hover:text-[#111111] transition-colors">Methodologies</Link></li>
+                </ul>
+              </div>
+              <div className="flex flex-col">
+                <h4 className="text-[15px] text-[#111111] mb-6">Company</h4>
+                <ul className="space-y-3.5 text-[14px] text-[#666666]">
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/about" className="hover:text-[#111111] transition-colors">About</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/contributors" className="hover:text-[#111111] transition-colors">Contributors</Link></li>
+                  <li><a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer" className="hover:text-[#111111] transition-colors">GitHub</a></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/blog" className="hover:text-[#111111] transition-colors">Blog</Link></li>
+                </ul>
+              </div>
+              <div className="flex flex-col">
+                <h4 className="text-[15px] text-[#111111] mb-6">Resources</h4>
+                <ul className="space-y-3.5 text-[14px] text-[#666666]">
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/documentation" className="hover:text-[#111111] transition-colors">Documentation</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/updates" className="hover:text-[#111111] transition-colors">Updates</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/faq" className="hover:text-[#111111] transition-colors">FAQ</Link></li>
+                </ul>
+              </div>
+              <div className="flex flex-col">
+                <h4 className="text-[15px] text-[#111111] mb-6">Legal</h4>
+                <ul className="space-y-3.5 text-[14px] text-[#666666]">
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/privacy" className="hover:text-[#111111] transition-colors">Privacy Policy</Link></li>
+                  <li><Link onClick={() => window.scrollTo(0, 0)} to="/terms" className="hover:text-[#111111] transition-colors">Terms of Service</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-[#EAEAEA] flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[13px] text-[#999999]">© {new Date().getFullYear()} LLM Benchmark. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
