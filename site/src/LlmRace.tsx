@@ -9,11 +9,11 @@ const GithubIcon = ({ size = 20, className = "" }: { size?: number, className?: 
 
 const getProviderLogo = (name: string) => {
   const lowerName = name.toLowerCase();
-  if (lowerName.includes('anthropic')) return '/logos/claude.png';
-  if (lowerName.includes('openai')) return '/logos/openai.svg';
-  if (lowerName.includes('google')) return '/logos/google.svg';
-  if (lowerName.includes('meta')) return '/logos/meta.svg';
-  if (lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('spacexai')) return '/logos/xai.svg';
+  if (lowerName.includes('anthropic') || lowerName.includes('fable') || lowerName.includes('sonnet') || lowerName.includes('opus') || lowerName.includes('claude')) return '/logos/claude.png';
+  if (lowerName.includes('openai') || lowerName.includes('gpt') || lowerName.includes('codex')) return '/logos/openai.svg';
+  if (lowerName.includes('google') || lowerName.includes('gemini')) return '/logos/google.svg';
+  if (lowerName.includes('meta') || lowerName.includes('llama') || lowerName.includes('muse')) return '/logos/meta.svg';
+  if (lowerName.includes('xai') || lowerName.includes('x-ai') || lowerName.includes('spacexai') || lowerName.includes('grok')) return '/logos/xai.svg';
   if (lowerName.includes('deepseek')) return '/logos/deepseek.svg';
   if (lowerName.includes('moonshot')) return '/logos/kimi.png';
   if (lowerName.includes('zhipu')) return '/logos/zhipu.png';
