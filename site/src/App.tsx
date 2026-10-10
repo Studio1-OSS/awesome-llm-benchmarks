@@ -736,44 +736,44 @@ function App() {
       </aside>
 
       <main className="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-[#FAF9F6] to-[#EAE8E3] h-screen overflow-hidden relative">
-        <header className="h-[60px] border-b border-[#E5E3DF] flex items-center justify-between px-5 lg:px-8 bg-[#FAF9F6]/80 backdrop-blur-md shrink-0 z-10 sticky top-0">
+        <header className="h-[60px] border-b border-[#E5E3DF] flex items-center justify-between px-3 sm:px-5 lg:px-8 bg-[#FAF9F6]/80 backdrop-blur-md shrink-0 z-10 sticky top-0">
           <div className="flex items-center gap-3">
             <button 
               onClick={() => setIsSidebarOpen(true)}
-              className="md:hidden relative flex items-center justify-center w-10 h-10 rounded-xl hover:bg-[#EAE8E3] transition-colors group cursor-pointer mr-1"
+              className="md:hidden relative flex items-center justify-center w-10 h-10 rounded-xl hover:bg-[#EAE8E3] transition-colors group cursor-pointer mr-0 sm:mr-1 shrink-0"
             >
-              <img src="/icon.png" alt="LLM Benchmark Logo" className="w-[26px] h-[26px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
+              <img src="/icon.png" alt="LLM Benchmark Logo" className="w-[24px] h-[24px] sm:w-[26px] sm:h-[26px] object-contain transition-opacity duration-200 group-hover:opacity-0" />
               <PanelLeftOpen className="w-5 h-5 text-[#6E6D6A] absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
             </button>
             <div 
-              className="relative flex items-center ml-2"
+              className="relative flex items-center ml-0 sm:ml-2"
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
               <button 
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-lg transition-colors focus:outline-none ${isDropdownOpen ? 'bg-[#EAE8E3]' : 'hover:bg-[#EAE8E3]'}`}
+                className={`inline-flex items-center gap-1.5 sm:gap-2 px-1.5 sm:px-2.5 py-1 rounded-lg transition-colors focus:outline-none ${isDropdownOpen ? 'bg-[#EAE8E3]' : 'hover:bg-[#EAE8E3]'}`}
               >
                 {(() => {
                   const game = GAMES.find(g => g.id === selectedGame);
                   if (game) {
                     return (
                       <>
-                        <img src={game.logo} alt="" className="w-5 h-5 object-contain rounded-[4px] shadow-sm" />
-                        <span className="text-[16px] font-semibold tracking-tight text-[#2E2E2D]">{game.name}</span>
+                        <img src={game.logo} alt="" className="w-4 h-4 sm:w-5 sm:h-5 object-contain rounded-[4px] shadow-sm shrink-0" />
+                        <span className="text-[14px] sm:text-[16px] font-semibold tracking-tight text-[#2E2E2D] max-w-[100px] sm:max-w-none truncate">{game.name}</span>
                       </>
                     );
                   }
                   return (
                     <>
-                      <div className="w-5 h-5 bg-[#E5E3DF] rounded-[4px] flex items-center justify-center border border-black/5">
-                        <BookOpen className="w-3 h-3 text-[#6E6D6A]" strokeWidth={2.5} />
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 bg-[#E5E3DF] rounded-[4px] flex items-center justify-center border border-black/5 shrink-0">
+                        <BookOpen className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#6E6D6A]" strokeWidth={2.5} />
                       </div>
-                      <span className="text-[16px] font-semibold tracking-tight text-[#6E6D6A]">Select Benchmark</span>
+                      <span className="text-[14px] sm:text-[16px] font-semibold tracking-tight text-[#6E6D6A]">Select</span>
                     </>
                   );
                 })()}
-                <ChevronDown className="w-4 h-4 text-[#9E9D9A]" />
+                <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#9E9D9A]" />
               </button>
               
               {isDropdownOpen && (
@@ -818,15 +818,15 @@ function App() {
             </div>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 sm:gap-3">
             {/* View Details Button */}
             {selectedGame && (
               <button 
                 onClick={() => setIsDetailsModalOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E5E3DF] rounded-lg shadow-sm hover:bg-[#F1EFEA] transition-colors text-[13px] font-semibold text-[#2E2E2D]"
+                className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-1.5 bg-white border border-[#E5E3DF] rounded-lg shadow-sm hover:bg-[#F1EFEA] transition-colors text-[11px] sm:text-[13px] font-semibold text-[#2E2E2D]"
               >
-                <BookOpen className="w-4 h-4 text-[#6E6D6A]" />
-                <span className="hidden sm:inline">Details</span>
+                <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#6E6D6A]" />
+                <span>Details</span>
               </button>
             )}
             
@@ -835,18 +835,18 @@ function App() {
               <button 
                 onClick={() => setIsCompareModalOpen(true)}
                 disabled={comparisonModels.length === 0}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2E2E2D] text-white border border-[#2E2E2D] rounded-lg shadow-sm hover:bg-black transition-colors text-[13px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-[#2E2E2D] text-white border border-[#2E2E2D] rounded-lg shadow-sm hover:bg-black transition-colors text-[11px] sm:text-[13px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="hidden sm:inline">Compare</span>
+                <span>Compare</span>
               </button>
             )}
             
-            <div className="w-[1px] h-4 bg-[#E5E3DF] mx-1 hidden sm:block"></div>
+            <div className="w-[1px] h-4 bg-[#E5E3DF] mx-0.5 sm:mx-1 hidden sm:block"></div>
             
             <a href="https://github.com/Studio1-OSS/awesome-llm-benchmarks" target="_blank" rel="noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-[13.5px] font-semibold text-[#6E6D6A] hover:text-[#2E2E2D] transition-colors"
+              className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-[13.5px] font-semibold text-[#6E6D6A] hover:text-[#2E2E2D] transition-colors"
             >
-              <GithubIcon size={18} />
+              <GithubIcon size={16} className="sm:w-[18px] sm:h-[18px] w-[14px] h-[14px]" />
               <span>{githubStars !== null ? githubStars.toLocaleString() : '7.1k'}</span>
             </a>
           </div>
@@ -1338,8 +1338,8 @@ function App() {
 
 
                 {/* Table */}
-                <div className="rounded-xl border border-[#E5E3DF] overflow-hidden w-full bg-white shadow-sm">
-                  <table className="w-full text-left border-collapse text-[12.5px] table-fixed">
+                <div className="rounded-xl border border-[#E5E3DF] overflow-hidden w-full bg-white shadow-sm overflow-x-auto no-scrollbar">
+                  <table className="w-full text-left border-collapse text-[12.5px] min-w-[700px]">
                     <thead>
                       <tr className="bg-[#F7F6F3] border-b border-[#E5E3DF]">
                         <th className="py-3.5 px-6 font-semibold text-[#2E2E2D] w-[25%]">Model</th>
