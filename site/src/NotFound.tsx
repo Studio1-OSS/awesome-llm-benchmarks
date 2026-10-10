@@ -111,21 +111,63 @@ const SnakeGame = () => {
 
   return (
     <div className="flex flex-col items-center w-full max-w-full overflow-hidden">
-      <div className="mb-6 text-[15px] font-bold text-[#111] bg-white px-5 py-2 rounded-full shadow-sm border border-[#EAEAEA]">Score: {score}</div>
-      <div className="relative bg-[#F8F7F4] border-2 border-[#EAEAEA] shadow-md rounded-xl overflow-hidden touch-none" style={{ width: 20 * 16, height: 20 * 16, maxWidth: '100vw', maxHeight: '100vw' }}>
+      <div className="mb-6 flex items-center justify-between w-[320px] max-w-full bg-white px-5 py-2.5 rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-[#EAEAEA]">
+        <span className="text-[13px] font-bold text-[#888] uppercase tracking-wider">Snake</span>
+        <span className="text-[15px] font-bold text-[#111]">Score: {score}</span>
+      </div>
+      
+      <div 
+        className="relative bg-[#1A1A1A] border-4 border-[#111111] shadow-[0_12px_40px_rgba(0,0,0,0.15)] rounded-2xl overflow-hidden touch-none" 
+        style={{ 
+          width: 20 * 16, 
+          height: 20 * 16, 
+          maxWidth: '100vw', 
+          maxHeight: '100vw',
+          backgroundImage: 'linear-gradient(#262626 1px, transparent 1px), linear-gradient(90deg, #262626 1px, transparent 1px)',
+          backgroundSize: '16px 16px'
+        }}
+      >
         {snake.map((segment, i) => (
-          <div key={i} className="absolute bg-[#111] rounded-sm" style={{ left: segment.x * 16, top: segment.y * 16, width: 16, height: 16, transition: 'all 50ms linear' }} />
+          <div 
+            key={i} 
+            className="absolute flex items-center justify-center" 
+            style={{ 
+              left: segment.x * 16, 
+              top: segment.y * 16, 
+              width: 16, 
+              height: 16, 
+              transition: 'all 60ms linear' 
+            }}
+          >
+            <div className={`w-[14px] h-[14px] ${i === 0 ? 'bg-[#34d399] rounded-[4px] z-10' : 'bg-[#10b981] rounded-sm'} shadow-sm`} />
+          </div>
         ))}
-        <div className="absolute bg-red-500 rounded-full animate-pulse" style={{ left: food.x * 16, top: food.y * 16, width: 16, height: 16 }} />
+        
+        <div 
+          className="absolute flex items-center justify-center" 
+          style={{ left: food.x * 16, top: food.y * 16, width: 16, height: 16 }}
+        >
+          <div className="w-[12px] h-[12px] bg-[#f43f5e] rounded-full shadow-[0_0_12px_rgba(244,63,94,0.7)] animate-pulse" />
+        </div>
+
         {(!isStarted || gameOver) && (
-          <div className="absolute inset-0 bg-white/60 flex flex-col items-center justify-center backdrop-blur-sm z-10 p-4 text-center">
+          <div className="absolute inset-0 bg-[#111111]/70 flex flex-col items-center justify-center backdrop-blur-[2px] z-20 p-4 text-center">
             {gameOver ? (
-              <div className="flex flex-col items-center">
-                <div className="font-bold text-[24px] text-[#111] mb-2 tracking-tight">Game Over!</div>
-                <button onClick={() => { setSnake([{x:10, y:10}]); setDirection({x:1, y:0}); setScore(0); setGameOver(false); setIsStarted(true); }} className="px-5 py-2.5 bg-[#111] text-white text-[14px] font-medium rounded-full shadow-lg hover:bg-black transition-all hover:scale-105 active:scale-95 mt-2">Play Again</button>
+              <div className="flex flex-col items-center animate-in fade-in zoom-in duration-200">
+                <div className="font-bold text-[28px] text-white mb-1 tracking-tight">Game Over</div>
+                <div className="text-[14px] text-[#A1A1AA] mb-6 font-medium">Final Score: {score}</div>
+                <button 
+                  onClick={() => { setSnake([{x:10, y:10}]); setDirection({x:1, y:0}); setScore(0); setGameOver(false); setIsStarted(true); }} 
+                  className="px-6 py-2.5 bg-white text-[#111111] text-[14px] font-bold rounded-full shadow-[0_4px_16px_rgba(255,255,255,0.2)] hover:bg-[#F4F4F5] transition-all hover:scale-105 active:scale-95"
+                >
+                  Play Again
+                </button>
               </div>
             ) : (
-              <div className="text-[14px] font-medium text-[#111] bg-white px-5 py-2.5 rounded-full shadow-lg border border-[#EAEAEA] animate-bounce">Press any arrow key to start</div>
+              <div className="flex flex-col items-center">
+                <div className="text-[16px] font-bold text-white mb-2 animate-bounce">Ready?</div>
+                <div className="text-[13px] font-medium text-[#A1A1AA] bg-[#222222] px-4 py-1.5 rounded-full border border-[#333]">Press any arrow key to start</div>
+              </div>
             )}
           </div>
         )}
