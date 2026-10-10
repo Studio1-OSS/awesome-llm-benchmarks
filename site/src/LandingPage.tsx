@@ -566,6 +566,7 @@ export default function LandingPage() {
                   </div>
                 </Link>
                 <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="group px-4 sm:px-5 py-2.5 rounded-full text-[#111111] text-[14px] sm:text-[15px] font-medium transition-all flex items-center justify-center sm:justify-start gap-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] bg-[#EEEEEE]/80 backdrop-blur-2xl hover:bg-[#E5E5E5]/90 border border-black/10 whitespace-nowrap">
+                  <GithubIcon size={16} className="shrink-0" />
                   Contribute on GitHub
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:opacity-100 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0 ml-0.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                 </a>
