@@ -718,7 +718,7 @@ export default function LandingPage() {
         {/* Metric cards section */}
         <div id="llm-race" className="w-full max-w-[1240px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32 mb-16">
           <Reveal delay={0} className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 lg:gap-16 mb-16">
-            <h2 className="text-[40px] sm:text-[48px] md:text-[56px] font-medium tracking-tight text-[#111111] leading-[1.05] shrink-0 whitespace-nowrap">
+            <h2 className="text-[40px] sm:text-[48px] md:text-[56px] font-medium tracking-tight text-[#111111] leading-[1.05] md:whitespace-nowrap">
               Find the best model for you.
             </h2>
             <p className="text-[15px] text-[#666666] max-w-[500px] leading-relaxed mb-2">

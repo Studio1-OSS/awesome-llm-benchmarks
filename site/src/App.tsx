@@ -823,10 +823,10 @@ function App() {
             {selectedGame && (
               <button 
                 onClick={() => setIsDetailsModalOpen(true)}
-                className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-1.5 bg-white border border-[#E5E3DF] rounded-lg shadow-sm hover:bg-[#F1EFEA] transition-colors text-[11px] sm:text-[13px] font-semibold text-[#2E2E2D]"
+                className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 bg-white border border-[#E5E3DF] rounded-lg shadow-sm hover:bg-[#F1EFEA] transition-colors text-[11.5px] sm:text-[13px] font-semibold text-[#2E2E2D] shrink-0"
               >
                 <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#6E6D6A]" />
-                <span>Details</span>
+                <span className="hidden sm:inline">Details</span>
               </button>
             )}
             
@@ -835,7 +835,7 @@ function App() {
               <button 
                 onClick={() => setIsCompareModalOpen(true)}
                 disabled={comparisonModels.length === 0}
-                className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-[#2E2E2D] text-white border border-[#2E2E2D] rounded-lg shadow-sm hover:bg-black transition-colors text-[11px] sm:text-[13px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#2E2E2D] text-white border border-[#2E2E2D] rounded-lg shadow-sm hover:bg-black transition-colors text-[11.5px] sm:text-[13px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
               >
                 <span>Compare</span>
               </button>
@@ -981,15 +981,15 @@ function App() {
       {/* ── Details Modal ─────────────────────────────────────────── */}
       {_isDetailsModalOpen && (
         <div
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/25 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/25 backdrop-blur-sm p-3 sm:p-4"
           onClick={() => setIsDetailsModalOpen(false)}
         >
           <div
-            className="bg-[#FAF9F6] w-full max-w-4xl max-h-[88vh] rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.18)] border border-[#E5E3DF] flex flex-col overflow-hidden"
+            className="bg-[#FAF9F6] w-full max-w-4xl max-h-[95vh] sm:max-h-[88vh] rounded-xl sm:rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.18)] border border-[#E5E3DF] flex flex-col overflow-hidden"
             onClick={e => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E3DF] bg-white/80 backdrop-blur-md shrink-0">
+            <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 border-b border-[#E5E3DF] bg-white/80 backdrop-blur-md shrink-0">
               <div className="flex items-center gap-3">
                 {selectedGame && GAMES.find(g => g.id === selectedGame) && (
                   <img src={GAMES.find(g => g.id === selectedGame)!.logo} alt="" className="w-7 h-7 object-cover rounded-lg border border-[#E5E3DF] shadow-sm" />
@@ -1008,25 +1008,24 @@ function App() {
                   <button 
                     onClick={(e) => {
                       navigator.clipboard.writeText(markdownContent || '');
-                      const span = e.currentTarget.querySelector('span');
-                      if (span) {
-                        const orig = span.innerText;
-                        span.innerText = 'Copied!';
-                        setTimeout(() => span.innerText = orig, 1500);
-                      }
+                      const btn = e.currentTarget;
+                      const origHtml = btn.innerHTML;
+                      btn.innerHTML = '<span class="px-2 font-bold">Copied!</span>';
+                      setTimeout(() => btn.innerHTML = origHtml, 1500);
                     }}
-                    className="flex items-center gap-1.5 px-3 h-[34px] rounded-l-xl border border-r-0 border-[#E5E3DF] bg-white hover:bg-[#FAF9F6] transition-colors cursor-pointer text-[12.5px] font-medium text-[#6E6D6A]"
+                    className="flex items-center justify-center gap-1.5 px-2.5 sm:px-3 h-[30px] sm:h-[34px] rounded-l-xl border border-r-0 border-[#E5E3DF] bg-white hover:bg-[#FAF9F6] transition-colors cursor-pointer text-[11px] sm:text-[12.5px] font-medium text-[#6E6D6A] min-w-[70px] sm:min-w-[120px]"
                     title="Copy full report as raw Markdown"
                   >
                     <svg className="w-3.5 h-3.5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                       <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
                       <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
                     </svg>
-                    <span>Copy Markdown</span>
+                    <span className="hidden sm:inline">Copy Markdown</span>
+                    <span className="sm:hidden">Copy</span>
                   </button>
                   <button 
                     onClick={() => setIsCopyDropdownOpen(!isCopyDropdownOpen)}
-                    className="group text-sm text-[#9E9D9A] rounded-none rounded-r-xl border flex items-center justify-center h-[34px] border-[#E5E3DF] aspect-square bg-white hover:bg-[#FAF9F6] transition-colors cursor-pointer focus:outline-none"
+                    className="group text-sm text-[#9E9D9A] rounded-none rounded-r-xl border flex items-center justify-center h-[30px] sm:h-[34px] border-[#E5E3DF] aspect-square bg-white hover:bg-[#FAF9F6] transition-colors cursor-pointer focus:outline-none"
                     aria-label="More actions"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false" className={`w-3 h-3 transition-transform text-[#9E9D9A] group-hover:text-[#6E6D6A] shrink-0 ${isCopyDropdownOpen ? 'rotate-[90deg]' : 'rotate-[270deg]'}`}>
@@ -1079,13 +1078,13 @@ function App() {
                   )}
                 </div>
                 <div className="w-px h-4 bg-[#E5E3DF]" />
-                <button onClick={() => setIsDetailsModalOpen(false)} className="p-1.5 rounded-lg hover:bg-[#F1EFEA] transition-colors cursor-pointer">
-                  <X className="w-5 h-5 text-[#6E6D6A]" strokeWidth={1.5} />
+                <button onClick={() => setIsDetailsModalOpen(false)} className="p-1 sm:p-1.5 rounded-lg hover:bg-[#F1EFEA] transition-colors cursor-pointer">
+                  <X className="w-4 h-4 sm:w-5 sm:h-5 text-[#6E6D6A]" strokeWidth={1.5} />
                 </button>
               </div>
             </div>
             {/* Body */}
-            <div className="overflow-y-auto p-7 select-auto">
+            <div className="overflow-y-auto p-4 sm:p-7 select-auto">
 
 
               <ReactMarkdown
@@ -1144,27 +1143,27 @@ function App() {
 
         return (
           <div
-            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/25 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/25 backdrop-blur-sm p-3 sm:p-4"
             onClick={() => setIsCompareModalOpen(false)}
           >
             <div
-              className="bg-[#FAF9F6] w-full max-w-[1400px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] max-h-[90vh] rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.18)] border border-[#E5E3DF] flex flex-col overflow-hidden"
+              className="bg-[#FAF9F6] w-full max-w-[1400px] 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[2400px] max-h-[95vh] sm:max-h-[90vh] rounded-xl sm:rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.18)] border border-[#E5E3DF] flex flex-col overflow-hidden"
               onClick={e => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E3DF] bg-white/80 backdrop-blur-md shrink-0">
+              <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-[#E5E3DF] bg-white/80 backdrop-blur-md shrink-0">
                 <div className="flex items-center gap-3">
                   <div>
-                    <p className="font-semibold text-[15px] text-[#2E2E2D]">Intelligence Index vs. Cost per Task</p>
-                    <p className="text-[11.5px] text-[#9E9D9A] mt-0.5">Weighted average cost (USD) per Artificial Analysis Intelligence Index task</p>
+                    <p className="font-semibold text-[13px] sm:text-[15px] text-[#2E2E2D]">Intelligence Index vs. Cost per Task</p>
+                    <p className="text-[10px] sm:text-[11.5px] text-[#9E9D9A] mt-0.5">Weighted average cost (USD) per Artificial Analysis Intelligence Index task</p>
                   </div>
                 </div>
-                <button onClick={() => setIsCompareModalOpen(false)} className="p-1.5 rounded-lg hover:bg-[#F1EFEA] transition-colors cursor-pointer">
-                  <X className="w-5 h-5 text-[#6E6D6A]" strokeWidth={1.5} />
+                <button onClick={() => setIsCompareModalOpen(false)} className="p-1 sm:p-1.5 rounded-lg hover:bg-[#F1EFEA] transition-colors cursor-pointer shrink-0">
+                  <X className="w-4 h-4 sm:w-5 sm:h-5 text-[#6E6D6A]" strokeWidth={1.5} />
                 </button>
               </div>
 
-              <div className="overflow-y-auto flex flex-col gap-5 p-6">
+              <div className="overflow-y-auto flex flex-col gap-4 sm:gap-5 p-4 sm:p-6">
                 {/* Legend */}
                 <div className="flex flex-wrap gap-x-5 gap-y-2 items-center">
                   <div className="flex items-center gap-1.5 text-[12px] text-[#6E6D6A]">
@@ -1185,12 +1184,12 @@ function App() {
                 </div>
 
                 {/* Charts Container */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                   {/* Scatter Chart — matches reference style */}
-                  <div className="bg-white rounded-xl border border-[#E5E3DF] pt-5 pb-8 pr-6 pl-2 shrink-0 min-h-[400px] flex flex-col" style={{height: 400}}>
-                    <div className="flex-1">
+                  <div className="bg-white rounded-xl border border-[#E5E3DF] pt-4 sm:pt-5 pb-6 sm:pb-8 pr-2 sm:pr-6 pl-0 sm:pl-2 shrink-0 min-h-[300px] sm:min-h-[400px] flex flex-col overflow-hidden" style={{height: 400}}>
+                    <div className="flex-1 w-full min-w-0">
                       <ResponsiveContainer width="100%" height="100%">
-                    <ComposedChart margin={{top: 36, right: 120, left: 70, bottom: 28}}>
+                    <ComposedChart margin={{top: 20, right: 20, left: -20, bottom: 20}}>
                       <defs>
                         <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
                           <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000000" floodOpacity="0.08" />
@@ -1289,10 +1288,10 @@ function App() {
                   </div>
                   
                   {/* Right: Bar Chart — sorted by intelligence */}
-                  <div className="bg-white rounded-xl border border-[#E5E3DF] pt-5 pb-8 pr-6 pl-2 shrink-0 min-h-[400px] flex flex-col" style={{height: 400}}>
-                    <div className="flex-1">
+                  <div className="bg-white rounded-xl border border-[#E5E3DF] pt-4 sm:pt-5 pb-6 sm:pb-8 pr-2 sm:pr-6 pl-0 sm:pl-2 shrink-0 min-h-[300px] sm:min-h-[400px] flex flex-col overflow-hidden" style={{height: 400}}>
+                    <div className="flex-1 w-full min-w-0">
                       <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={[...scatterData].sort((a, b) => b.intelligence - a.intelligence)} margin={{top: 32, right: 10, left: 0, bottom: 80}} barCategoryGap="20%">
+                        <BarChart data={[...scatterData].sort((a, b) => b.intelligence - a.intelligence)} margin={{top: 20, right: 10, left: -20, bottom: 80}} barCategoryGap="20%">
                           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F0EFEB" />
                           <XAxis 
                             dataKey="name" 
