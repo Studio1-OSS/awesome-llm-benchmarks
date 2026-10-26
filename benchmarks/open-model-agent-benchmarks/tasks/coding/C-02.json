@@ -1,0 +1,208 @@
+{
+  "taskId": "C-02",
+  "resultTaskId": "coding-C-02",
+  "categoryId": "coding",
+  "title": "Safe payment webhook processing under retries and reordering",
+  "version": "1.0.0",
+  "language": "python",
+  "difficulty": "hard",
+  "objective": "Make a payment-provider webhook processor safe against duplicate delivery, provider event-ID reuse, out-of-order events, identity mismatches, invalid state transitions, concurrent processing, and partial persistence failures while ensuring capture fulfillment work is emitted exactly once.",
+  "prompt": "# C-02 — Make payment webhook ingestion safe under retries and reordering\n\n## Production incident\n\nA checkout platform receives payment-provider webhooks at least once. During a busy sale, the provider retries deliveries, sends events out of order, and can reuse a delivery ID incorrectly after a provider-side bug. The current processor updates payment state in arrival order and trusts fields in the incoming event. That can regress a captured payment, associate a payment with the wrong tenant/order, or let an inconsistent event be treated as a duplicate. The service also emits a `payment.captured` outbox message used by downstream fulfillment.\n\nThe relevant code is under `src/payments/`. The public interface is `WebhookProcessor`, `PaymentStore`, and `ProviderEvent`.\n\n## Required behavior\n\nImplement a production-safe webhook processor while keeping the public API compatible and using only the Python standard library.\n\n1. **Bind each event to the registered payment.** A payment is registered with provider, provider payment ID, tenant ID, order ID, integer amount in minor units, and currency. Incoming events must match all those identity and financial fields. Reject mismatches without changing the payment, recording a successful receipt, or creating an outbox message. Provider payment IDs and event IDs are scoped by provider.\n2. **Validate input strictly.** Require non-empty identifiers, supported statuses (`authorized`, `captured`, `failed`, `refunded`), a non-negative integer sequence, a positive integer amount in minor units, and a three-letter currency code. Boolean values must not be accepted as integers. Normalize whitespace, status case, and currency case consistently.\n3. **Make delivery IDs idempotent.** Re-delivery of the same provider event ID and same normalized payload must be a no-op. Reuse of that provider/event ID with a different payload must raise `EventIdConflict` rather than silently discarding the new body.\n4. **Handle provider sequence numbers.** The sequence belongs to one provider payment, not to the whole tenant. Older events must be acknowledged as stale without regressing payment state. If an event has the current sequence, accept it as a duplicate only when its business payload is semantically identical; a different state/payload at the same sequence must raise `SequenceConflict`. Sequence gaps are allowed because providers do not guarantee every intermediate event will be delivered.\n5. **Enforce legal state changes.** Initial state is `pending`. Valid changes are `pending → authorized|captured|failed`, `authorized → captured|failed`, and `captured → refunded`. `failed` and `refunded` are terminal. Repeating the current state at a newer sequence is allowed and advances the sequence, but must not repeat business side effects.\n6. **Persist effects atomically.** Updating payment state, recording the event receipt, and enqueuing downstream work must be one transaction. A persistence failure must not leave only some of these changes committed.\n7. **Emit fulfillment work exactly once.** Transitioning a payment to `captured` must create one durable `payment.captured` outbox message for that provider payment. Retries, concurrent deliveries, repeated captured snapshots, and stale events must never create a second capture message. A later valid refund must not erase the historical capture message.\n8. **Keep changes focused.** Preserve the public names and call signatures, do not weaken/delete tests, do not add dependencies, and document any non-obvious invariant. You may refactor the internals as needed.\n\n## Public API sketch\n\n```python\nstore = PaymentStore()  # or pass a database file path\nprocessor = WebhookProcessor(store)\nprocessor.register_payment(\n    provider=\"acme-pay\", provider_payment_id=\"pay-100\",\n    tenant_id=\"tenant-a\", order_id=\"order-100\",\n    amount_minor=2599, currency=\"USD\",\n)\nresult = processor.process(ProviderEvent(\n    provider=\"acme-pay\", event_id=\"evt-1\", tenant_id=\"tenant-a\",\n    provider_payment_id=\"pay-100\", order_id=\"order-100\",\n    sequence=1, status=\"captured\", amount_minor=2599, currency=\"USD\",\n))\n```\n\n`process` returns a `ProcessResult` with `outcome`, `status`, and `sequence`. Normal outcomes are `processed`, `duplicate`, and `stale`; invalid or conflicting input should raise the appropriate domain error. `PaymentStore.get_payment` and `PaymentStore.list_outbox` expose persisted state for callers and tests.\n\n## Done means\n\n- The public test suite passes.\n- The implementation behaves correctly under out-of-order and concurrent delivery.\n- The state machine and identity checks cannot be bypassed by replaying, reordering, or mutating webhook fields.\n- State, receipt, and outbox changes remain atomic.\n- Add useful regression tests for any bug fixed and report the exact commands and results.",
+  "workspace": {
+    "starterProject": "coding-benchmark-starter",
+    "targetFiles": [
+      "src/payments/webhooks.py",
+      "src/payments/store.py",
+      "src/payments/models.py",
+      "src/payments/errors.py",
+      "tests/test_webhooks.py"
+    ],
+    "baselineDefect": "The baseline processes incoming events using arrival order and trusts event payload fields. It can treat a reused event ID with a changed payload as a duplicate, regress payment state on older events, mishandle equal-sequence conflicts and terminal transitions, associate events with the wrong registered payment, duplicate capture outbox effects, and leave partial state/receipt/outbox changes when persistence fails.",
+    "expectedWorkingDirectoryPattern": "coding-agent-workspaces/C-02-<model>-<harness>",
+    "timeLimitSeconds": 900
+  },
+  "expectedOutcome": {
+    "behavior": [
+      {
+        "id": "registered_payment_identity",
+        "description": "Provider, provider payment ID, tenant ID, order ID, amount in minor units, and currency must match the registered payment. Reject mismatches without mutating payment state or creating successful receipts/outbox effects. Provider-scoped identifiers remain isolated."
+      },
+      {
+        "id": "strict_input_validation",
+        "description": "Reject blank identifiers, unsupported statuses, negative/non-integer sequences, non-positive/non-integer minor-unit amounts, and malformed currency codes. Boolean values must not be accepted where integers are required. Normalize whitespace, status case, and currency case consistently."
+      },
+      {
+        "id": "event_idempotency_and_conflict_detection",
+        "description": "An exact replay of the same provider event ID and normalized business payload is a no-op. Reusing that provider/event ID with a changed payload raises EventIdConflict. Event IDs are scoped by provider."
+      },
+      {
+        "id": "sequence_ordering_and_conflicts",
+        "description": "Sequence numbers are tracked per provider payment. Older events return a stale outcome without regressing state. A same-sequence event is a duplicate only when its business payload is semantically equivalent; conflicting same-sequence state/payload raises SequenceConflict. Sequence gaps are accepted."
+      },
+      {
+        "id": "legal_payment_state_machine",
+        "description": "Initial state is pending. Valid transitions are pending to authorized/captured/failed, authorized to captured/failed, and captured to refunded. Failed and refunded are terminal. Repeating a state at a higher sequence may advance the sequence but must not repeat business side effects."
+      },
+      {
+        "id": "atomic_state_receipt_outbox_persistence",
+        "description": "Payment state updates, successful event receipt recording, and outbox writes are committed atomically. A persistence exception rolls back all related changes."
+      },
+      {
+        "id": "capture_outbox_exactly_once",
+        "description": "A transition to captured produces one durable payment.captured outbox message for that provider payment. Retries, concurrent deliveries, repeated captured snapshots, and stale events do not create additional capture messages. A later valid refund preserves the historical capture message."
+      },
+      {
+        "id": "concurrency_safety",
+        "description": "Independent processor/store connections racing to process the same delivery or same-sequence business snapshot must not create duplicate receipts/outbox effects or allow inconsistent state transitions."
+      },
+      {
+        "id": "public_api_and_dependency_constraints",
+        "description": "Keep WebhookProcessor, PaymentStore, ProviderEvent, ProcessResult, documented public method names and call signatures compatible. Use the Python standard library only and do not delete or weaken existing tests."
+      }
+    ],
+    "implementationGuidance": [
+      "Inspect the existing payment models, domain errors, store persistence behavior, and webhook processor before changing implementation details.",
+      "Normalize the business payload before fingerprinting or comparing duplicate events, including status and currency normalization.",
+      "Scope provider payment IDs and event IDs by provider; scope sequence tracking to the corresponding provider payment rather than the tenant globally.",
+      "Distinguish exact retries, changed-payload event-ID conflicts, equal-sequence business conflicts, stale events, and illegal state transitions.",
+      "Use database transaction and concurrency primitives appropriate to the existing PaymentStore implementation. Ensure rollback covers state, receipt, and outbox mutations together.",
+      "Make outbox deduplication durable and tied to the provider payment, not just the current event ID.",
+      "Avoid unrelated refactors; add regression tests without modifying or deleting existing tests."
+    ],
+    "completionReport": "Summarize the root cause and implementation, identify the files changed, and report the exact commands and test output. Distinguish local tests from independent evaluator results; do not claim a test passed unless its output supports that claim."
+  },
+  "evaluationConfig": {
+    "strategy": "Behavioral evaluation using the four canonical public tests and fourteen independent private regression tests in a clean Python 3.12 container. Evaluation must inspect resulting behavior, not rely only on the agent's summary.",
+    "environment": {
+      "dockerImage": "python:3.12-slim",
+      "timeoutSeconds": 180,
+      "memoryMiB": 512,
+      "cpus": 1,
+      "networkEnabled": false
+    },
+    "publicTests": [
+      "test_capture_updates_payment_and_creates_outbox_message",
+      "test_exact_replay_is_a_noop",
+      "test_required_identifiers_cannot_be_blank",
+      "test_unsupported_status_is_rejected"
+    ],
+    "privateRegressionTests": [
+      "test_boolean_values_are_not_valid_integer_amounts_or_sequences",
+      "test_concurrent_duplicate_delivery_creates_one_receipt_and_one_outbox",
+      "test_concurrent_same_sequence_snapshots_across_independent_connections",
+      "test_currency_code_is_normalized_before_comparison_and_fingerprinting",
+      "test_database_failure_during_outbox_insert_rolls_back_state_and_receipt",
+      "test_different_event_ids_for_same_sequence_and_same_state_are_idempotent",
+      "test_event_ids_are_scoped_by_provider",
+      "test_illegal_state_transition_is_rejected_without_mutation",
+      "test_out_of_order_event_cannot_regress_state",
+      "test_refund_after_capture_is_valid_but_recapture_after_refund_is_not",
+      "test_same_event_id_with_changed_payload_is_rejected",
+      "test_same_sequence_with_different_state_is_a_conflict",
+      "test_same_state_at_higher_sequence_does_not_repeat_outbox_effect",
+      "test_tenant_order_amount_and_currency_must_match_registered_payment"
+    ],
+    "checks": [
+      {
+        "id": "capture_and_outbox",
+        "description": "A valid capture updates payment state and creates a payment.captured outbox message."
+      },
+      {
+        "id": "exact_replay_noop",
+        "description": "Replaying the same normalized event is idempotent and does not repeat side effects."
+      },
+      {
+        "id": "strict_validation",
+        "description": "Blank identifiers, unsupported statuses, invalid sequence/amount types, boolean-as-integer cases, and invalid currency inputs are rejected."
+      },
+      {
+        "id": "provider_scoped_event_ids",
+        "description": "The same event ID can be handled independently under distinct providers."
+      },
+      {
+        "id": "changed_event_payload_conflict",
+        "description": "Reusing an event ID with a changed normalized payload raises EventIdConflict."
+      },
+      {
+        "id": "sequence_conflict_and_stale_events",
+        "description": "Older events do not regress state; the same sequence with a different business payload raises SequenceConflict, while semantically identical snapshots are idempotent."
+      },
+      {
+        "id": "state_transition_rules",
+        "description": "Illegal transitions are rejected without mutation; refund after capture is valid, but recapture after refund is rejected."
+      },
+      {
+        "id": "atomic_persistence",
+        "description": "A failure while inserting the outbox message rolls back the payment update and receipt insertion."
+      },
+      {
+        "id": "concurrent_delivery_deduplication",
+        "description": "Concurrent duplicate deliveries across independent connections produce one receipt and one outbox entry."
+      },
+      {
+        "id": "capture_effect_once",
+        "description": "Higher-sequence repeated captured states do not create another capture side effect."
+      },
+      {
+        "id": "registered_identity_match",
+        "description": "Tenant, order, amount, and currency must match the registered payment before any successful mutation."
+      },
+      {
+        "id": "api_and_dependency_constraints",
+        "description": "Public names and signatures remain compatible, and no runtime dependency is added."
+      }
+    ],
+    "testRequirements": {
+      "runExistingTests": true,
+      "requireRegressionCoverageForIdempotencyOrderingAndTransactions": true,
+      "includeIndependentTests": true,
+      "includeConcurrentIndependentConnectionTests": true,
+      "runInCleanWorkspace": true,
+      "testClaimsRequireCommandEvidence": true
+    },
+    "passPolicy": {
+      "mustPassAllRequiredBehavioralChecks": true,
+      "doNotAcceptAgentSelfReportAsSufficientEvidence": true,
+      "recordUnrunOrUnavailableTestsAsUnverified": true,
+      "publicTestPassesDoNotOverridePrivateRegressionFailures": true
+    },
+    "reviewPolicy": {
+      "manualReviewWhen": [
+        "The test command fails because Python, SQLite, or the test environment is unavailable, and no alternative test evidence is recorded.",
+        "The implementation claims atomic state/receipt/outbox behavior but no failure-injection test or transaction evidence is available.",
+        "The implementation changes or deletes existing tests rather than adding regression coverage.",
+        "Public tests pass but independent private regression tests for concurrency, identity checks, event conflicts, or transaction rollback are unavailable.",
+        "The implementation uses arrival order rather than provider sequence numbers, or uses global rather than provider/payment-scoped keys."
+      ],
+      "keepRecordedRunStatusSeparateFromIndependentEvaluation": true
+    }
+  },
+  "executionGuidance": {
+    "samePromptAcrossRuns": true,
+    "cleanWorkspacePerModelAndHarnessAttempt": true,
+    "reuseSameStarterFixtureAndTestEnvironment": true,
+    "runtime": "Python standard library; unittest; SQLite-backed persistence; public tests run in the agent workspace and canonical public/private tests run in Python 3.12-slim with network disabled.",
+    "timeLimitSecondsPerAgentRun": 900,
+    "capture": [
+      "Exact prompt supplied to the harness",
+      "Harness and model identifier",
+      "Run command and working directory",
+      "Session identifier when available",
+      "Wall-clock, user, and system time when available",
+      "Reported cost and token usage when available",
+      "Tool transcript or source log",
+      "Final response",
+      "Test commands and their output",
+      "Warnings and environment limitations",
+      "Independent public and private evaluator result"
+    ]
+  },
+  "dataQualityNotes": [
+    "This file defines the C-02 benchmark task; it is not an individual model/harness run record and contains no per-run score, session ID, runtime, cost, or token totals.",
+    "C-02 is intended to be a hard coding task because it combines idempotency, ordering, a finite state machine, durable outbox semantics, transactional consistency, and concurrency safety.",
+    "The public evaluator has four canonical tests and the private regression suite has fourteen tests; these counts apply to the current fixture described by the supplied run logs.",
+    "Use the same prompt, starter fixture, public tests, independent private tests, and evaluator environment across model/harness comparisons.",
+    "An agent process exit code of zero does not imply a benchmark pass; retain the independent public and private evaluator result separately from local agent-reported tests.",
+    "The fixture's intended database-failure and concurrent-connection checks are part of the task's required behavior, not optional stretch goals."
+  ]
+}

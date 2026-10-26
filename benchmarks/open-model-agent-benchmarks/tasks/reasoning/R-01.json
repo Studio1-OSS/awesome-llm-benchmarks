@@ -1,0 +1,10 @@
+{
+  "taskId": "R-01",
+  "categoryId": "reasoning",
+  "title": "Constraint scheduling",
+  "difficulty": "Medium",
+  "prompt": "Six jobs A, B, C, D, E and F must be processed exactly once.\n\nRules:\n1. A must occur before D.\n2. F must occur before A.\n3. F must occur immediately before C.\n4. B must occur after D.\n5. E must occur after B.\n\nQuestion: What is the only valid order?",
+  "expectedOutcome": "F → C → A → D → B → E",
+  "evaluationCriteria": "Parse the six positions and verify every rule. PASS only if the returned permutation is exactly FCADBE.",
+  "whatItMeasures": "Constraint tracking, ordering, adjacency, and consistency."
+}

@@ -1,0 +1,105 @@
+{
+  "taskId": "T-01",
+  "resultTaskId": "tool-use-T-01",
+  "categoryId": "tool-use",
+  "title": "Travel booking free-change eligibility",
+  "prompt": "For Maya Shah (maya.shah@example.test), find her next upcoming flight. Check whether it is eligible for a free change. If it is eligible, return the available free-change options, including the departure time and fare difference. Do not modify the booking. Use the available travel-booking tools to complete the task.",
+  "whatItMeasures": [
+    "MCP tool selection and sequencing",
+    "Retrieving and combining information from multiple tools",
+    "Applying booking-change eligibility rules",
+    "Accurately reporting flight details and available options",
+    "Respecting the instruction not to modify a booking"
+  ],
+  "mcpRequirements": {
+    "serverId": "t01-travel-booking",
+    "requiredTools": [
+      "t01-travel-booking/search_upcoming_trips",
+      "t01-travel-booking/check_change_eligibility",
+      "t01-travel-booking/list_change_options"
+    ],
+    "expectedToolOrder": [
+      "t01-travel-booking/search_upcoming_trips",
+      "t01-travel-booking/check_change_eligibility",
+      "t01-travel-booking/list_change_options"
+    ],
+    "orderPolicy": "ordered_subsequence",
+    "bookingMutationAllowed": false,
+    "requireToolTraceForVerification": true
+  },
+  "expectedOutcome": {
+    "customer": {
+      "name": "Maya Shah",
+      "email": "maya.shah@example.test",
+      "customerId": "CUS-101"
+    },
+    "flight": {
+      "bookingId": "BK-2041",
+      "route": {
+        "from": "BOM",
+        "to": "BLR"
+      },
+      "departureAt": "2026-10-12T09:20:00+05:30",
+      "status": "confirmed",
+      "changePolicy": "FREE_CHANGE"
+    },
+    "freeChangeEligibility": {
+      "eligible": true,
+      "reason": "The booking is confirmed and has a FREE_CHANGE policy."
+    },
+    "freeChangeOptions": [
+      {
+        "departureAt": "2026-10-13T09:20:00+05:30",
+        "fareDifference": {
+          "amount": 0,
+          "currency": "INR"
+        }
+      },
+      {
+        "departureAt": "2026-10-13T18:45:00+05:30",
+        "fareDifference": {
+          "amount": 0,
+          "currency": "INR"
+        }
+      }
+    ],
+    "bookingModified": false
+  },
+  "evaluationCriteria": "PASS only if the response correctly identifies the customer's next flight, reports its booking details and free-change eligibility, lists all available free-change options with their departure times and fare differences, and does not modify the booking. Required MCP tools must be used in the specified order. A claim in the final response alone is not proof that the booking remained unchanged.",
+  "evaluationConfig": {
+    "responseChecks": {
+      "requireCustomerIdentity": true,
+      "requireBookingId": true,
+      "requireRoute": true,
+      "requireDepartureTime": true,
+      "requireBookingStatus": true,
+      "requireChangePolicy": true,
+      "requireEligibilityDecision": true,
+      "requireAllOptions": true,
+      "requireFareDifferences": true
+    },
+    "toolTraceChecks": {
+      "requireAllTools": true,
+      "requireExpectedOrder": true,
+      "allowAdditionalReadOnlyCalls": true,
+      "rejectBookingMutations": true,
+      "traceFieldCandidates": [
+        "toolNamesUsed",
+        "toolCalls"
+      ]
+    },
+    "stateIntegrityChecks": {
+      "bookingMustRemainUnchanged": true,
+      "preferredEvidence": [
+        "beforeAfterBookingState",
+        "structuredToolTrace"
+      ],
+      "missingEvidenceOutcome": "manual_review"
+    }
+  },
+  "dataQualityNotes": [
+    "Expected booking and change-option values are taken from the recorded benchmark results.",
+    "The recorded flight departure is October 12, 2026, and the listed options are for October 13, 2026. These dates are now in the past. Before rerunning this task, confirm that the MCP fixture uses a reproducible clock and seeded state, or update the fixture and expected outcome together.",
+    "The task file describes the expected MCP server and tool interactions. The actual server implementation and launch configuration remain part of the harness environment."
+  ]
+}

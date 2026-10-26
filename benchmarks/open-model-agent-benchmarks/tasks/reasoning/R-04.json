@@ -1,0 +1,32 @@
+{
+  "taskId": "R-04",
+  "categoryId": "reasoning",
+  "title": "Discrete optimization",
+  "difficulty": "Hard",
+  "prompt": "You have a budget of 10 units. You may select each improvement at most once.\n\nA: cost 4, gain 11\nB: cost 5, gain 14\nC: cost 6, gain 17\nD: cost 3, gain 8\nE: cost 2, gain 5\n\nChoose a valid combination with total cost less than or equal to 10 that maximizes total gain. Return the chosen items, total cost, and total gain.",
+  "expectedOutcome": {
+    "items": ["A", "C"],
+    "totalCost": 10,
+    "totalGain": 28
+  },
+  "evaluationCriteria": "PASS if the chosen set is valid and its gain equals the maximum possible gain of 28. A correct alternative is accepted only if it has the same maximum gain and satisfies the budget.",
+  "whatItMeasures": "Combinatorial search, optimization under constraints, and checking alternatives rather than stopping at the first valid set.",
+  "problemData": {
+    "budget": 10,
+    "items": [
+      {"id": "A", "cost": 4, "gain": 11},
+      {"id": "B", "cost": 5, "gain": 14},
+      {"id": "C", "cost": 6, "gain": 17},
+      {"id": "D", "cost": 3, "gain": 8},
+      {"id": "E", "cost": 2, "gain": 5}
+    ]
+  },
+  "evaluationConfig": {
+    "requireKnownItems": true,
+    "allowDuplicateItems": false,
+    "requireReportedCost": true,
+    "requireReportedGain": true,
+    "objective": "maximize_gain",
+    "acceptAnyOptimalCombination": true
+  }
+}

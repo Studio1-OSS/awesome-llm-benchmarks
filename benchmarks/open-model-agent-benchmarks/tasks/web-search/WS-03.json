@@ -1,0 +1,170 @@
+{
+  "taskId": "WS-03",
+  "resultTaskId": "web-search-WS-03",
+  "categoryId": "web-search",
+  "title": "Previously-Owned Clean Vehicle Credit: acquisition cutoff and possession date",
+  "version": "1.0.0",
+  "prompt": "A buyer in Texas plans to purchase a used electric vehicle from a dealer on October 15, 2026. They have not signed a binding purchase contract or made a payment for this vehicle on or before September 30, 2025.\n\nThe buyer found a 2024 article saying eligible used electric vehicle purchases may qualify for a federal clean vehicle tax credit of up to $4,000.\n\nUse the native web_search tool to research current, official IRS sources and determine whether this planned purchase can qualify for the federal Previously-Owned Clean Vehicle Credit.\n\nYour answer must:\n1. State the conclusion for this buyer and identify the relevant cutoff date.\n2. Explain why the 2024 article may have been accurate when published but may no longer apply to this purchase.\n3. Explain what the IRS means by a vehicle being \"acquired.\" Distinguish acquisition from taking possession of the vehicle, and explain the relevance of a binding written contract and payment made by the cutoff date.\n4. Explain whether taking possession after the cutoff could ever be consistent with eligibility when the vehicle was acquired by the deadline.\n5. Cite official IRS URLs for the material claims.\n\nDo not rely on memory alone. Use the official source evidence, distinguish the general rule from its exception, and state any limitations in what you can verify. Do not treat this as individualized tax advice.\nDo not use shell commands such as curl or wget as a substitute for the native web_search tool.",
+  "objective": "Evaluate whether the planned used-EV purchase qualifies for the federal Previously-Owned Clean Vehicle Credit, requiring current official IRS research and correct treatment of the September 30, 2025 acquisition cutoff, contract-plus-payment test, and later vehicle possession.",
+  "expectedOutcome": {
+    "conclusion": "No. On the facts given, the purchase planned for October 15, 2026 cannot qualify for the federal Previously-Owned Clean Vehicle Credit under IRC section 25E because the vehicle was not acquired on or before September 30, 2025.",
+    "keyPoints": [
+      "The relevant cutoff date is September 30, 2025. Official IRS guidance says the Previously-Owned Clean Vehicle Credit is not available for vehicles acquired after that date.",
+      "A 2024 article describing a used clean vehicle credit of up to $4,000 may have been accurate when published. Under the earlier rule, the amount was the lesser of 30% of the sale price or $4,000, subject to vehicle, buyer, dealer, income, and other eligibility requirements. Later legislation accelerated the credit's termination for vehicles acquired after September 30, 2025.",
+      "For purposes of the terminated clean-vehicle credits, the IRS says a vehicle is acquired as of the date a written binding contract is entered into and a payment has been made. A payment may include a nominal down payment or a vehicle trade-in. Both the binding contract and payment must occur on or before September 30, 2025, to establish acquisition by that deadline.",
+      "Acquisition and placed-in-service are distinct. The IRS describes a vehicle as placed in service when the buyer takes possession. The credit is claimed when the vehicle is placed in service, but eligibility under the termination rule depends on acquisition by the cutoff.",
+      "Taking possession after September 30, 2025 can still be consistent with eligibility when the vehicle was acquired on or before September 30, 2025 through a binding written contract and payment. That exception does not apply to the buyer in the prompt because neither a binding contract nor payment occurred by the cutoff.",
+      "Cite current official IRS URLs and align the sources to the claims they support. Do not treat a URL in the response alone as evidence that a page was actually searched or retrieved.",
+      "The answer should be framed as general information, not individualized tax advice. Other eligibility conditions need not be fully adjudicated because the stated acquisition date already makes this buyer ineligible."
+    ],
+    "recommendedReasoning": "Apply the acquisition cutoff to the facts first. Then explain the historical $4,000 credit and the statutory change, define acquisition through a binding written contract plus payment, and distinguish that date from possession/placed-in-service. Explain the late-possession exception and why it does not save this buyer.",
+    "authoritativeSources": [
+      {
+        "organization": "Internal Revenue Service",
+        "title": "Used Clean Vehicle Credit",
+        "url": "https://www.irs.gov/credits-deductions/used-clean-vehicle-credit",
+        "supports": [
+          "The Previously-Owned Clean Vehicle Credit is unavailable for vehicles acquired after September 30, 2025.",
+          "A vehicle placed in service after the cutoff must have been acquired on or before the cutoff.",
+          "Acquisition can be demonstrated by a binding written contract and payment by the cutoff; possession is when the vehicle is placed in service.",
+          "The earlier credit amount was 30% of the sale price up to $4,000 for otherwise qualifying vehicles acquired by the cutoff."
+        ]
+      },
+      {
+        "organization": "Internal Revenue Service",
+        "title": "FAQs for modification of sections 25C, 25D, 25E, 30C, 30D, 45L, 45W, and 179D under Public Law 119-21 (OBBB), FS-2025-05",
+        "url": "https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-obbb",
+        "supports": [
+          "The section 25E credit terminates for vehicles acquired after September 30, 2025.",
+          "For sections 25E, 30D, and 45W, acquisition is the date a binding written contract is entered into and a payment has been made.",
+          "A vehicle acquired by the deadline may be placed in service later, including by taking possession after the deadline, provided the other eligibility requirements are met."
+        ]
+      },
+      {
+        "organization": "Internal Revenue Service",
+        "title": "Clean vehicle tax credits",
+        "url": "https://www.irs.gov/clean-vehicle-tax-credits",
+        "supports": [
+          "The Previously-Owned Clean Vehicle Credit applies only if the vehicle was acquired on or before September 30, 2025.",
+          "The page distinguishes acquisition from placed-in-service and identifies possession as the time the vehicle is placed in service."
+        ]
+      },
+      {
+        "organization": "Internal Revenue Service",
+        "title": "Instructions for Form 8936 (2025)",
+        "url": "https://www.irs.gov/instructions/i8936",
+        "supports": [
+          "Taxpayers cannot claim clean vehicle credits for vehicles acquired after September 30, 2025.",
+          "The acquisition definition requires a written binding contract and payment, including a nominal down payment or vehicle trade-in."
+        ]
+      },
+      {
+        "organization": "Internal Revenue Service",
+        "title": "Clean vehicle credit seller or dealer requirements",
+        "url": "https://www.irs.gov/credits-deductions/clean-vehicle-credit-seller-or-dealer-requirements",
+        "supports": [
+          "A vehicle acquired on or before September 30, 2025 may still qualify when placed in service later, subject to requirements.",
+          "Dealer/seller reporting requirements associated with qualifying clean-vehicle credits."
+        ]
+      }
+    ]
+  },
+  "searchRequirements": {
+    "requiredCapability": "Use the native web_search capability available in the active harness to find and verify current official IRS sources.",
+    "preferredSourceTypes": [
+      "Current IRS Used Clean Vehicle Credit page",
+      "IRS OBBB clean-vehicle-credit FAQs (FS-2025-05)",
+      "IRS Clean vehicle tax credits hub",
+      "IRS Instructions for Form 8936"
+    ],
+    "minimumAuthoritativeSources": 2,
+    "mustRetrieveOrVerifySources": true,
+    "mustCiteSourceUrls": true,
+    "sourceClaimAlignmentRequired": true,
+    "notes": [
+      "Prioritize current IRS guidance for the cutoff and acquisition definition; use historical IRS material only to explain why a 2024 article may have been accurate at the time.",
+      "The task prompt should remain the same across models and harnesses; the configured search backend and tool name can differ by harness.",
+      "Do not require the model to prove every other vehicle or taxpayer eligibility condition when the acquisition date already determines the stated case.",
+      "A source URL included in the final response is not, by itself, proof that the page was retrieved or verified during the run.",
+      "Do not use curl or wget as a substitute for the required native web_search capability.",
+      "A technically correct answer without observable search evidence should not automatically receive an independently verified web-search status."
+    ]
+  },
+  "mcp": {
+    "requiredCapability": "web_search",
+    "expectedToolFlow": [
+      "Search current official IRS guidance for the Previously-Owned Clean Vehicle Credit and its September 30, 2025 termination date.",
+      "Retrieve or verify the IRS definition of acquisition as a binding written contract plus payment.",
+      "Verify that taking possession is the placed-in-service event and that timely acquisition can permit later possession, subject to remaining eligibility requirements.",
+      "Check official IRS material describing the former up-to-$4,000 credit to contextualize a 2024 article.",
+      "Synthesize the conclusion for the provided facts, cite sources in context, and state any verification limitations."
+    ],
+    "toolNameMayVaryByHarness": true
+  },
+  "evaluationConfig": {
+    "checks": [
+      {
+        "id": "buyer_conclusion",
+        "description": "Concludes that the buyer's planned October 15, 2026 purchase is not eligible for the federal Previously-Owned Clean Vehicle Credit on the facts provided."
+      },
+      {
+        "id": "cutoff_date",
+        "description": "Correctly identifies September 30, 2025 as the relevant acquisition cutoff."
+      },
+      {
+        "id": "historical_4000_credit",
+        "description": "Explains why a 2024 article could have been accurate under the earlier rule while making clear that the eligibility window has since closed for vehicles acquired after the cutoff."
+      },
+      {
+        "id": "acquisition_definition",
+        "description": "Correctly explains that acquisition requires both a binding written contract and a payment by the cutoff; recognizes that a nominal down payment or trade-in can count as payment under the IRS guidance."
+      },
+      {
+        "id": "possession_vs_acquisition",
+        "description": "Distinguishes acquisition from placed-in-service/possession and does not confuse the date the vehicle is acquired with the date it is delivered."
+      },
+      {
+        "id": "late_possession_exception",
+        "description": "Explains that possession after the cutoff may be compatible with eligibility if acquisition happened by the cutoff, and applies the exception correctly to the buyer's facts."
+      },
+      {
+        "id": "official_sources",
+        "description": "Cites at least two authoritative official IRS sources for material claims, preferably including the Used Clean Vehicle Credit page and the OBBB FAQs or Form 8936 instructions."
+      },
+      {
+        "id": "source_claim_alignment",
+        "description": "Connects citations to the claims they substantiate; does not cite unrelated or insufficient sources as support for material tax-law assertions."
+      },
+      {
+        "id": "search_execution_evidence",
+        "description": "Available logs or structured tool traces demonstrate native web search use and retrieval or verification of official IRS sources."
+      },
+      {
+        "id": "limitations_and_advice_scope",
+        "description": "States material verification limitations where applicable and frames the response as general information rather than individualized tax advice."
+      }
+    ],
+    "toolTrace": {
+      "requiredForIndependentSearchVerification": true,
+      "mustShowSearchQueriesOrRetrievedSourcesWhenAvailable": true,
+      "mustSupportCitedSourceVerification": true,
+      "toolNameMayVaryByHarness": true
+    },
+    "reviewPolicy": {
+      "manualReviewWhen": [
+        "The conclusion appears correct but available logs do not establish that native web search was used.",
+        "The response cites IRS URLs but the trace does not show search results or retrieved source content.",
+        "The response treats possession after the cutoff as automatically disqualifying without considering timely acquisition, or treats late acquisition as eligible merely because possession happens later.",
+        "The response explains the historical $4,000 credit but does not substantiate the current termination rule with official sources.",
+        "The trace is incomplete or unavailable, preventing independent verification of source use."
+      ],
+      "doNotInferSearchSuccessFromFinalAnswerAlone": true
+    }
+  },
+  "dataQualityNotes": [
+    "This file defines the benchmark task and expected outcome; it does not assign a score or status to any individual model or harness run.",
+    "The scenario dates are intentional: the planned purchase is October 15, 2026, and the relevant acquisition cutoff is September 30, 2025.",
+    "Keep recorded run status separate from independent evaluator status. If the final answer is sound but source-retrieval evidence is incomplete, use manual review rather than assuming a fully verified web-search pass.",
+    "This benchmark evaluates a general federal-credit research question, not the buyer's full individualized tax position or any state-level incentives."
+  ]
+}

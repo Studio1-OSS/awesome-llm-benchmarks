@@ -1,0 +1,127 @@
+{
+  "taskId": "WS-01",
+  "resultTaskId": "web-search-WS-01",
+  "categoryId": "web-search",
+  "title": "Consumer safety: reheating soup in an unmarked plastic container",
+  "version": "1.0.0",
+  "prompt": "A person wants to reheat soup in a plastic takeaway container. The container has no microwave-safe marking, and the manufacturer instructions are unavailable. They believe it must be safe because microwaves pass through plastic.\n\nUse the native web_search tool to research official, authoritative safety guidance. Determine whether the assumption is justified, explain the relevant safety guidance, and recommend the safest practical next step.\n\nCite the official source URLs and ensure each important claim is supported by the source that establishes it. Do not rely on memory alone.\n\nDo not claim that all plastic containers are unsafe, and do not make unsupported claims about toxic chemicals or health effects. If you cannot verify the answer from authoritative sources, state what remains uncertain.",
+  "objective": "Assess whether microwave penetration alone establishes that an unmarked plastic takeaway container is microwave-safe, using authoritative online sources and providing a practical, evidence-supported recommendation.",
+  "expectedOutcome": {
+    "conclusion": "The assumption is not justified. Microwaves passing through plastic does not establish that this particular container is suitable for reheating food.",
+    "keyPoints": [
+      "The FDA explains that microwaves pass through some materials used for microwave cooking, but containers can still become hot from the food inside; some plastic containers should not be used because heat from the food can melt them.",
+      "USDA FSIS guidance recommends using cookware specially manufactured for microwave use and warns against using one-time-use plastic storage and takeaway containers in microwave ovens because they may warp or melt.",
+      "The relevant question is whether the specific container is designed or identified as suitable for microwave use, not simply whether microwaves pass through plastic.",
+      "The safest practical recommendation is to transfer the soup to a container explicitly labeled microwave-safe, or to microwave-safe glass or ceramic cookware, and follow the applicable instructions.",
+      "The specific container's material and suitability cannot be verified from the prompt. The answer must not claim that every plastic container is unsafe or that this particular container will necessarily cause harm."
+    ],
+    "recommendedAction": "Transfer the soup to a clearly microwave-safe container, such as suitably labeled cookware or microwave-safe glass or ceramic, before reheating.",
+    "authoritativeSources": [
+      {
+        "organization": "U.S. Food and Drug Administration (FDA)",
+        "title": "Microwave Ovens",
+        "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens",
+        "supports": [
+          "Microwaves pass through some materials used in microwave cooking.",
+          "Containers can become hot from the food inside.",
+          "Some plastic containers should not be used in microwave ovens because heat from the food may melt them."
+        ]
+      },
+      {
+        "organization": "U.S. Department of Agriculture, Food Safety and Inspection Service (USDA FSIS)",
+        "title": "Cooking Safely in the Microwave Oven",
+        "url": "https://www.fsis.usda.gov/node/3355",
+        "supports": [
+          "Use cookware specially manufactured for microwave use.",
+          "Do not use one-time-use takeaway and other storage containers in microwave ovens because they may warp or melt."
+        ]
+      }
+    ]
+  },
+  "searchRequirements": {
+    "requiredCapability": "Use the web-search capability available in the active harness to find and verify authoritative sources.",
+    "preferredSourceTypes": [
+      "Official government safety guidance",
+      "The source-owning agency's own page"
+    ],
+    "minimumAuthoritativeSources": 2,
+    "mustRetrieveOrVerifySources": true,
+    "mustCiteSourceUrls": true,
+    "sourceClaimAlignmentRequired": true,
+    "notes": [
+      "The task prompt is shared across models and harnesses; the configured search backend may differ by harness.",
+      "Operator-provided setup notes say Codex runs used Tavily configured through Nebius Relay, while OpenCode used its built-in web-search capability without a Tavily API key. Record the actual search backend and evidence in each run record rather than treating the backend as part of the task's expected answer.",
+      "A URL written in the final answer is not, by itself, proof that the source was retrieved or verified during the run."
+    ]
+  },
+  "mcp": {
+    "requiredCapability": "web_search",
+    "expectedToolFlow": [
+      "Search for authoritative guidance about microwave use of plastic takeaway containers.",
+      "Retrieve or otherwise verify the official FDA guidance relevant to microwave-safe containers.",
+      "Retrieve or otherwise verify the official USDA FSIS guidance relevant to single-use takeaway containers.",
+      "Synthesize the sources, aligning each material claim with the source that supports it.",
+      "Provide a cautious recommendation and identify what cannot be determined about the specific container."
+    ],
+    "toolNameMayVaryByHarness": true
+  },
+  "evaluationConfig": {
+    "checks": [
+      {
+        "id": "conclusion",
+        "description": "Clearly states that microwave penetration alone does not prove the specific container is microwave-safe."
+      },
+      {
+        "id": "fda_evidence",
+        "description": "Uses authoritative FDA guidance for relevant claims about containers, heat from food, and plastic suitability."
+      },
+      {
+        "id": "usda_evidence",
+        "description": "Uses authoritative USDA FSIS guidance relevant to single-use takeaway or storage containers."
+      },
+      {
+        "id": "source_claim_alignment",
+        "description": "Cites source URLs and connects material claims to the source that supports them rather than presenting unsupported citations."
+      },
+      {
+        "id": "practical_recommendation",
+        "description": "Recommends transferring the soup to a container identified as microwave-safe, such as suitable microwave-safe glass or ceramic cookware."
+      },
+      {
+        "id": "avoids_overgeneralization",
+        "description": "Does not claim that every plastic container is unsafe or that the specific container is certainly harmful."
+      },
+      {
+        "id": "uncertainty_handling",
+        "description": "Acknowledges that the particular container's construction and microwave suitability cannot be established from the prompt."
+      },
+      {
+        "id": "search_execution_evidence",
+        "description": "Available logs or structured tool trace provide evidence that web search was actually used and the cited official sources were retrieved or verified."
+      },
+      {
+        "id": "no_memory_only_answer",
+        "description": "The run demonstrates source-based research rather than relying solely on an unsupported answer from memory."
+      }
+    ],
+    "toolTrace": {
+      "requiredForIndependentSearchVerification": true,
+      "mustShowSearchQueriesOrRetrievedSourcesWhenAvailable": true,
+      "mustSupportCitedSourceVerification": true,
+      "toolNameMayVaryByHarness": true
+    },
+    "reviewPolicy": {
+      "manualReviewWhen": [
+        "The final answer appears substantively correct but the available evidence does not establish that web search was used.",
+        "The answer cites official URLs but logs do not show whether those pages or results were retrieved or verified.",
+        "The execution trace is incomplete or unavailable, preventing independent verification of source use."
+      ],
+      "doNotInferSearchSuccessFromFinalAnswerAlone": true
+    }
+  },
+  "dataQualityNotes": [
+    "This file defines the task and expected outcome; it does not assign a status or score to any individual model or harness run.",
+    "The supplied GLM Codex response included FDA and USDA source URLs and a cautious practical recommendation. Its final response alone does not establish a complete native web-search tool trace.",
+    "Keep recorded run status separate from independent evaluator status. If answer quality is strong but search execution cannot be verified from the available evidence, use the framework's manual-review pathway rather than assuming a full pass."
+  ]
+}

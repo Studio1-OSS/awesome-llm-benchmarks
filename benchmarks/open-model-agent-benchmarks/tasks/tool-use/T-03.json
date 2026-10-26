@@ -1,0 +1,170 @@
+{
+  "taskId": "T-03",
+  "resultTaskId": "tool-use-T-03",
+  "categoryId": "tool-use",
+  "title": "Incident investigation and remediation",
+  "version": "1.0.0",
+  "prompt": "Checkout is experiencing elevated failures. Investigate the incident across Checkout, Payments, and Inventory using the available operational tools. Determine the most likely root cause using evidence from service health, dependencies, and recent deployments. If a specific deployment is confirmed as the cause and is safe to roll back, roll back only that deployment. Do not modify unrelated services. After any rollback, verify the affected services have recovered. Report the root cause, the evidence supporting it, the action taken, and the final service status.",
+  "objective": "Investigate a multi-service incident, identify the deployment responsible using operational evidence, perform a safe and targeted rollback when justified, and verify service recovery without modifying unrelated services.",
+  "expectedOutcome": {
+    "affectedServices": [
+      "Checkout",
+      "Payments",
+      "Inventory"
+    ],
+    "rootCause": {
+      "deploymentId": "DEP-INV-455",
+      "service": "Inventory",
+      "version": "2026.10.06.8",
+      "deploymentName": "Reservation query optimization",
+      "description": "The deployment introduced lock contention and Inventory request timeouts, causing downstream Checkout failures.",
+      "evidenceRequired": [
+        "Service health data showing elevated failures or degradation.",
+        "Dependency health data identifying the degraded Checkout-to-Inventory dependency.",
+        "Recent deployment data linking DEP-INV-455 to the affected service.",
+        "Deployment inspection confirming the suspected cause and rollback safety."
+      ]
+    },
+    "expectedAction": {
+      "type": "rollback",
+      "deploymentId": "DEP-INV-455",
+      "service": "Inventory",
+      "rollbackSafe": true,
+      "modifyUnrelatedServices": false
+    },
+    "expectedFinalState": {
+      "services": {
+        "Checkout": {
+          "status": "healthy",
+          "errorRatePercent": 0.6,
+          "p95LatencyMs": 310
+        },
+        "Payments": {
+          "status": "healthy",
+          "errorRatePercent": 0.4,
+          "p95LatencyMs": 240
+        },
+        "Inventory": {
+          "status": "healthy",
+          "errorRatePercent": 0.4,
+          "p95LatencyMs": 230
+        }
+      },
+      "dependencies": {
+        "Checkout-to-Inventory": {
+          "status": "healthy",
+          "timeoutRatePercent": 0.2
+        },
+        "Checkout-to-Payments": {
+          "status": "healthy",
+          "timeoutRatePercent": 0.2
+        }
+      },
+      "rolledBackDeployment": "DEP-INV-455",
+      "unrelatedDeploymentsModified": false
+    },
+    "requiredReport": [
+      "Root cause and affected deployment.",
+      "Evidence supporting the diagnosis.",
+      "Rollback action taken and why it was safe.",
+      "Verified final status of Checkout, Payments, and Inventory."
+    ]
+  },
+  "mcp": {
+    "requiredTools": [
+      "t03-incident-remediation/get_service_health",
+      "t03-incident-remediation/get_dependency_health",
+      "t03-incident-remediation/get_recent_deployments",
+      "t03-incident-remediation/inspect_deployment",
+      "t03-incident-remediation/rollback_deployment"
+    ],
+    "expectedToolFlow": [
+      "Inspect the health of Checkout, Payments, and Inventory.",
+      "Inspect dependency health to determine which service relationship is degraded.",
+      "Review recent deployments for a plausible cause.",
+      "Inspect the suspected deployment and confirm its relationship to the incident and rollback safety.",
+      "Roll back only the confirmed, rollback-safe root-cause deployment.",
+      "Recheck service and dependency health to verify recovery.",
+      "Report the root cause, evidence, action, and final service status."
+    ],
+    "toolOrder": [
+      "get_service_health",
+      "get_dependency_health",
+      "get_recent_deployments",
+      "inspect_deployment",
+      "rollback_deployment",
+      "get_service_health",
+      "get_dependency_health"
+    ]
+  },
+  "evaluationConfig": {
+    "checks": [
+      {
+        "id": "service_investigation",
+        "description": "The agent investigates Checkout, Payments, and Inventory rather than assuming the problem originates in Checkout."
+      },
+      {
+        "id": "dependency_analysis",
+        "description": "The agent uses dependency health evidence to distinguish the failing service from downstream symptoms."
+      },
+      {
+        "id": "deployment_analysis",
+        "description": "The agent examines recent deployments and inspects the suspected deployment before taking action."
+      },
+      {
+        "id": "root_cause_identification",
+        "description": "The agent identifies Inventory deployment DEP-INV-455, version 2026.10.06.8, as the root cause and explains the link to Inventory timeouts and Checkout failures."
+      },
+      {
+        "id": "rollback_safety",
+        "description": "The agent confirms that the identified deployment is safe to roll back before attempting the rollback."
+      },
+      {
+        "id": "targeted_remediation",
+        "description": "The agent rolls back only DEP-INV-455 and does not modify unrelated services or deployments."
+      },
+      {
+        "id": "rollback_result",
+        "description": "The agent obtains evidence that the intended rollback completed successfully."
+      },
+      {
+        "id": "service_recovery",
+        "description": "The agent verifies service health after remediation and reports the final status of all three services."
+      },
+      {
+        "id": "dependency_recovery",
+        "description": "The agent verifies that the affected dependency has recovered and that the Checkout-to-Payments dependency remains healthy."
+      },
+      {
+        "id": "report_completeness",
+        "description": "The final report contains the root cause, supporting evidence, action taken, and verified final service status."
+      },
+      {
+        "id": "tool_usage",
+        "description": "The agent uses the operational tools to gather evidence and perform remediation instead of relying only on its own assertions."
+      },
+      {
+        "id": "state_integrity",
+        "description": "The agent changes only the confirmed root-cause deployment and leaves unrelated services and deployments unchanged."
+      }
+    ],
+    "stateIntegrity": {
+      "expectedRolledBackDeployment": "DEP-INV-455",
+      "unrelatedDeploymentsMustRemainUnchanged": true,
+      "postRemediationVerificationRequired": true
+    },
+    "toolTrace": {
+      "required": true,
+      "mustShowToolOrder": true,
+      "mustIncludeToolInputsAndOutputsWhenAvailable": true,
+      "mustVerifyMutationResult": true,
+      "mustVerifyPostRemediationState": true
+    }
+  },
+  "dataQualityNotes": [
+    "The expected root cause and final service metrics are based on the supplied run record.",
+    "Exact final metrics are reference values from the recorded result. Evaluation should prioritize verified recovery and consistent tool evidence rather than requiring exact numeric equality when the operational environment reports slightly different values.",
+    "The task must not be considered successfully remediated based only on the agent's final narrative; rollback and recovery should be supported by available tool outputs.",
+    "The evaluator should account for repeated health and dependency checks during investigation and post-remediation verification. The tool flow describes the expected sequence, not a prohibition on additional read-only investigation calls."
+  ]
+}

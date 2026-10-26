@@ -5,6 +5,7 @@ import LandingPage from './LandingPage'
 import Blog from './Blog'
 import NotFound from './NotFound'
 import ContentPage from './ContentPage'
+import BenchmarkApp from './benchmarks/BenchmarkApp'
 
 export default function Root() {
   return (
@@ -12,6 +13,8 @@ export default function Root() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/dashboard" element={<App />} />
       <Route path="/llm-race" element={<LlmRace />} />
+      <Route path="/benchmarks/*" element={<BenchmarkApp />} />
+      <Route path="/benchmarks" element={<BenchmarkApp />} />
       <Route path="/blog/*" element={<Blog />} />
       <Route path="/methodologies" element={<ContentPage />} />
       <Route path="/about" element={<ContentPage />} />
@@ -25,3 +28,4 @@ export default function Root() {
     </Routes>
   )
 }
+

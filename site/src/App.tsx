@@ -819,6 +819,12 @@ function App() {
           </div>
           
           <div className="flex items-center gap-1 sm:gap-3">
+            <Link
+              to="/benchmarks"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#EEEEEE] border border-[#E5E3DF] rounded-lg shadow-sm hover:bg-[#E5E5E5] transition-colors text-[11.5px] sm:text-[13px] font-semibold text-[#2E2E2D] shrink-0"
+            >
+              <span className="whitespace-nowrap">Agent Bench</span>
+            </Link>
             {/* View Details Button */}
             {selectedGame && (
               <button 

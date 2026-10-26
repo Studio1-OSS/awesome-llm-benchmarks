@@ -1,0 +1,152 @@
+{
+  "taskId": "C-03",
+  "resultTaskId": "coding-C-03",
+  "categoryId": "coding",
+  "title": "Lossless cursor pagination for catalog records",
+  "version": "1.0.0",
+  "language": "python",
+  "difficulty": "medium",
+  "objective": "Fix cursor pagination so a client can traverse an unchanged catalog dataset without skipped or duplicated records, including when multiple records share the same update timestamp.",
+  "prompt": "# C-03 — Prevent skipped and duplicated records during cursor pagination\n\nA catalog sync service exposes records through a paginated API. The existing implementation uses each record's `updated_at` value as its continuation cursor. When several records share the same timestamp near a page boundary, a client can skip records or see inconsistent ordering. The implementation also needs to handle filters and malformed cursors predictably.\n\nInspect the existing implementation and tests in `src/catalog/pagination.py` and `tests/`. Fix the pagination behavior while preserving the public API and using only the Python standard library.\n\nThe module exposes `CatalogRecord(id: str, updated_at: str, category: str)`, `Page(records, next_cursor)`, and `paginate(records, *, limit=20, cursor=None, category=None)`. Keep these public names and the existing call signature.\n\n## Expected behavior\n\n- Results use deterministic ascending order by `(updated_at, id)`, with `id` as the tie-breaker when timestamps match.\n- A continuation cursor identifies the complete position in that ordering, not just the timestamp. Clients must not skip or repeat records when walking every page of an unchanged dataset.\n- The category filter, when supplied, applies consistently to every page. Pagination must not return records from other categories or skip matching records at a page boundary.\n- The next cursor resumes strictly after the last record returned on the previous page. The final page and an empty result set return `next_cursor=None`.\n- Invalid page limits and malformed cursors raise a clear `ValueError`; invalid cursors must not silently restart pagination from the first page. A page limit must be a positive integer; booleans are not valid limits.\n- Do not add runtime dependencies or delete/weaken existing tests.\n\nAdd focused regression tests for the bug and report the exact test commands and results. Treat the dataset as unchanged during a traversal; handling concurrent inserts or updates is outside the scope of this task.",
+  "workspace": {
+    "starterProject": "coding-benchmark-starter",
+    "targetFiles": [
+      "src/catalog/pagination.py",
+      "tests/test_pagination.py"
+    ],
+    "baselineDefect": "The continuation cursor identifies a record by updated_at alone, so records sharing a timestamp can be skipped. It should be replaced with a deterministic composite cursor while preserving the public API.",
+    "expectedWorkingDirectoryPattern": "coding-agent-workspaces/C-03-<model>-<harness>"
+  },
+  "expectedOutcome": {
+    "behavior": [
+      {
+        "id": "stable_sort_order",
+        "description": "Records are sorted by ascending updated_at and then ascending id, independently of their input order."
+      },
+      {
+        "id": "composite_cursor",
+        "description": "Continuation state distinguishes records that share an updated_at value, so a page boundary cannot skip a tied record."
+      },
+      {
+        "id": "complete_traversal",
+        "description": "Concatenating all pages for an unchanged dataset returns each matching record exactly once."
+      },
+      {
+        "id": "filter_consistency",
+        "description": "A supplied category filter applies to all pages and does not cause matching records to be omitted at cursor boundaries."
+      },
+      {
+        "id": "cursor_validation",
+        "description": "Malformed cursors raise ValueError instead of silently restarting or returning an unrelated page."
+      },
+      {
+        "id": "limit_validation",
+        "description": "Page limits must be positive integers; bool values are rejected even though bool is a subclass of int in Python."
+      },
+      {
+        "id": "end_of_results",
+        "description": "The final page and an empty result set return next_cursor=None."
+      },
+      {
+        "id": "public_api_preserved",
+        "description": "CatalogRecord, Page, and the existing paginate(...) call signature remain compatible, and no runtime dependency is added."
+      }
+    ],
+    "implementationGuidance": [
+      "Use a deterministic composite ordering key such as (updated_at, id).",
+      "Encode enough position information in the cursor to resume strictly after the last returned record, including when timestamps tie.",
+      "Apply filtering and ordering consistently before selecting the next page.",
+      "Keep the cursor opaque to callers; its internal representation is an implementation detail.",
+      "Avoid unrelated refactors. Add regression tests for tied timestamps and complete traversal."
+    ],
+    "completionReport": "The agent should summarize the code change and list the tests actually run. Test claims must match observed command output."
+  },
+  "evaluationConfig": {
+    "strategy": "Behavioral evaluation using existing public tests plus independent regression tests against the resulting code in a clean workspace. Use the same Python unittest-based evaluator for all model/harness runs.",
+    "checks": [
+      {
+        "id": "ordinary_pagination",
+        "description": "Simple datasets paginate correctly and the next cursor continues after the previous page."
+      },
+      {
+        "id": "timestamp_ties_across_boundary",
+        "description": "Multiple records sharing the same updated_at value across a page boundary are neither skipped nor duplicated."
+      },
+      {
+        "id": "deterministic_tie_breaking",
+        "description": "Records with matching timestamps are returned by ascending id regardless of input order."
+      },
+      {
+        "id": "full_traversal_no_gaps_or_duplicates",
+        "description": "Walking all pages returns every expected record exactly once for an unchanged dataset."
+      },
+      {
+        "id": "category_filter_all_pages",
+        "description": "Category filtering remains correct across multiple pages and tied timestamps."
+      },
+      {
+        "id": "malformed_cursor_rejected",
+        "description": "Malformed or structurally invalid cursors raise ValueError and do not restart the scan."
+      },
+      {
+        "id": "invalid_limit_rejected",
+        "description": "Zero, negative, non-integer, and boolean page limits are rejected with ValueError."
+      },
+      {
+        "id": "empty_and_final_pages",
+        "description": "Empty results and the final page have next_cursor=None."
+      },
+      {
+        "id": "api_and_dependency_constraints",
+        "description": "The documented public interface is preserved, no runtime dependency is added, and existing tests are not removed or weakened."
+      }
+    ],
+    "testRequirements": {
+      "runExistingTests": true,
+      "requireRegressionCoverageForPaginationBoundaries": true,
+      "includeIndependentTests": true,
+      "runInCleanWorkspace": true,
+      "testClaimsRequireCommandEvidence": true
+    },
+    "passPolicy": {
+      "mustPassAllRequiredBehavioralChecks": true,
+      "doNotAcceptAgentSelfReportAsSufficientEvidence": true,
+      "recordUnrunOrUnavailableTestsAsUnverified": true
+    },
+    "reviewPolicy": {
+      "manualReviewWhen": [
+        "The test command fails because Python or the test environment is unavailable, and no alternative test evidence is recorded.",
+        "The response claims tests passed but the log does not show a successful test command.",
+        "The implementation changes or deletes existing tests instead of adding regression coverage.",
+        "Public tests pass but independent boundary, filter, or full-traversal checks are unavailable.",
+        "The implementation relies on input ordering or timestamp uniqueness rather than a deterministic composite cursor."
+      ],
+      "keepRecordedRunStatusSeparateFromIndependentEvaluation": true
+    }
+  },
+  "executionGuidance": {
+    "samePromptAcrossRuns": true,
+    "cleanWorkspacePerModelAndHarnessAttempt": true,
+    "reuseSameStarterFixtureAndTestEnvironment": true,
+    "runtime": "Python standard library; unittest; intended to reuse the current Python 3.12 evaluator and Docker image configuration.",
+    "capture": [
+      "Exact prompt supplied to the harness",
+      "Harness and model identifier",
+      "Run command and working directory",
+      "Session identifier when available",
+      "Wall-clock, user, and system time when available",
+      "Reported cost and token usage when available",
+      "Tool transcript or source log",
+      "Final response",
+      "Test commands and their output",
+      "Warnings and environment limitations"
+    ]
+  },
+  "dataQualityNotes": [
+    "This file defines the C-03 benchmark task; it is not an individual model/harness run record and contains no run score, session ID, runtime, cost, or token totals.",
+    "C-03 is intended to be medium difficulty and uses Python to reuse the existing unittest-based evaluation environment.",
+    "The task assumes the dataset does not change while a client traverses its pages. Concurrency and snapshot isolation are out of scope so the task remains comparable and bounded.",
+    "Before model runs, create and validate a C-03 fixture with a deliberately faulty baseline, public tests, independent private tests, and a reference solution. Confirm that the baseline fails the intended hidden regression tests and the reference solution passes all required tests.",
+    "Keep model-reported test results separate from independent evaluator outcomes in results.json."
+  ]
+}

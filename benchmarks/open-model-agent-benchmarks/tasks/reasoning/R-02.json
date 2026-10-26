@@ -1,0 +1,10 @@
+{
+  "taskId": "R-02",
+  "categoryId": "reasoning",
+  "title": "Conditional probability",
+  "difficulty": "Medium-Hard",
+  "prompt": "A factory has three production lines: A makes 50% of units and has a 2% defect rate. B makes 30% and has a 5% defect rate. C makes 20% and has a 10% defect rate. An inspection system catches a defective unit with 90% probability and falsely flags a good unit with 4% probability. Given that a randomly selected unit was flagged by the inspection system, what is the probability that it came from Line C and is defective? Give the answer as a percentage.",
+  "expectedOutcome": "Approximately 22.87%.",
+  "evaluationCriteria": "PASS when the numerical answer is within ±0.10 percentage point of 22.87%, with no arithmetic inconsistency in the reasoning if a derivation is provided.",
+  "whatItMeasures": "Conditional probability, multi-stage calculation, and false-positive handling."
+}

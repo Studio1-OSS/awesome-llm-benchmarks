@@ -1,0 +1,136 @@
+{
+  "taskId": "C-01",
+  "resultTaskId": "coding-C-01",
+  "categoryId": "coding",
+  "title": "Payment idempotency: reject conflicting request parameters",
+  "version": "1.0.0",
+  "language": "python",
+  "objective": "Fix the payment service so an idempotency key can only reuse a cached result for the same logical request, and conflicting reuse is rejected before any additional gateway charge.",
+  "prompt": "# C-01 — Reject idempotency-key conflicts in payment requests\n\nThe checkout service uses an idempotency key so that a retry of the same payment request does not submit a second charge.\n\nA bug exists in `src/checkout_core/payments.py`: after a successful charge, the service returns the cached result whenever it sees the same idempotency key, without checking whether the new request has the same parameters. A caller can accidentally reuse a key for a different order or amount and receive a result for the wrong request.\n\n## Expected behavior\n\n- Repeating the same request with the same idempotency key returns the original result and does not call the gateway a second time.\n- Reusing a key with a different `order_id` or a different normalized amount must raise `ValueError` with a useful message mentioning the idempotency key/request conflict.\n- A conflicting request must be rejected before any additional gateway charge is attempted.\n- Equivalent decimal representations, such as `Decimal(\"12.5\")` and `Decimal(\"12.50\")`, represent the same amount.\n- Requests using different idempotency keys continue to be processed independently.\n- Keep the public `PaymentService.charge` signature and avoid new runtime dependencies.\n\nInspect the existing implementation and tests, implement a robust fix, and add a public regression test if useful. At the end, summarize the change and report the tests you ran. Do not modify or delete existing tests to make the suite pass.",
+  "workspace": {
+    "starterProject": "coding-benchmark-starter",
+    "targetFiles": [
+      "src/checkout_core/payments.py",
+      "tests/test_payments.py"
+    ],
+    "baselineDefect": "The starter caches PaymentResult values by idempotency key but does not compare the request parameters when the key is reused.",
+    "expectedWorkingDirectoryPattern": "coding-agent-workspaces/C-01-<model>-<harness>"
+  },
+  "expectedOutcome": {
+    "behavior": [
+      {
+        "id": "same_request_retry",
+        "description": "A retry with the same key, order_id, and normalized amount returns the original PaymentResult and does not call the payment gateway again."
+      },
+      {
+        "id": "order_id_conflict",
+        "description": "Reusing a key with a different order_id raises ValueError with a useful message identifying an idempotency-key or request conflict, before another gateway call."
+      },
+      {
+        "id": "amount_conflict",
+        "description": "Reusing a key with a different normalized amount raises ValueError with a useful conflict message, before another gateway call."
+      },
+      {
+        "id": "decimal_normalization",
+        "description": "Amounts that normalize to the same monetary value, such as Decimal('12.5') and Decimal('12.50'), are treated as equivalent for retries."
+      },
+      {
+        "id": "independent_keys",
+        "description": "Different idempotency keys are processed independently and can result in separate gateway charges."
+      },
+      {
+        "id": "public_api_preserved",
+        "description": "The public PaymentService.charge signature remains unchanged, and no new runtime dependency is introduced."
+      }
+    ],
+    "implementationGuidance": [
+      "Keep enough normalized request information alongside the cached result to validate later reuse of the key.",
+      "Compare the request parameters before returning a cached result.",
+      "Do not reserve or update idempotency state for a request that has not successfully completed at the gateway. Treat this as a robustness regression check if the evaluator includes gateway-failure cases."
+    ],
+    "completionReport": "The agent should summarize the implementation change and name the tests actually run. Test claims must match observed command output."
+  },
+  "evaluationConfig": {
+    "strategy": "Behavioral evaluation using the existing public test suite plus independent regression tests in a clean workspace. Evaluate the resulting code and test evidence, not the agent's self-reported conclusion alone.",
+    "checks": [
+      {
+        "id": "initial_charge",
+        "description": "A valid first request reaches the gateway and returns its result."
+      },
+      {
+        "id": "same_key_same_parameters",
+        "description": "An identical retry returns the cached result without an additional gateway call."
+      },
+      {
+        "id": "same_key_different_order",
+        "description": "A reused key with a different order_id raises ValueError before any additional gateway call."
+      },
+      {
+        "id": "same_key_different_amount",
+        "description": "A reused key with a different normalized amount raises ValueError before any additional gateway call."
+      },
+      {
+        "id": "equivalent_decimal_values",
+        "description": "Equivalent decimal representations are accepted as the same normalized amount."
+      },
+      {
+        "id": "different_keys_are_independent",
+        "description": "Different idempotency keys continue to produce independent processing."
+      },
+      {
+        "id": "gateway_failure_does_not_poison_key",
+        "description": "If included in the independent regression suite, a failed gateway attempt does not leave a successful cached result or permanently reserve the key. This check is a robustness check inferred from the supplied evaluation notes, rather than an explicit bullet in the original user prompt."
+      },
+      {
+        "id": "api_and_dependency_constraints",
+        "description": "The public charge signature is preserved, no new runtime dependency is added, and existing tests are not modified or deleted to force a pass."
+      }
+    ],
+    "testRequirements": {
+      "runExistingTests": true,
+      "requireRegressionCoverageForConflicts": true,
+      "includeIndependentTests": true,
+      "runInCleanWorkspace": true,
+      "testClaimsRequireCommandEvidence": true
+    },
+    "passPolicy": {
+      "mustPassAllRequiredBehavioralChecks": true,
+      "doNotAcceptAgentSelfReportAsSufficientEvidence": true,
+      "recordUnrunOrUnavailableTestsAsUnverified": true
+    },
+    "reviewPolicy": {
+      "manualReviewWhen": [
+        "The test command fails because the runtime or test dependency is unavailable, and no alternative test evidence is recorded.",
+        "The response claims tests passed but the log does not show a successful test command.",
+        "The implementation changes or deletes existing tests instead of adding regression coverage.",
+        "The implementation passes public tests but independent conflict or gateway-call-count checks are unavailable.",
+        "A robustness check not explicitly stated in the task prompt affects the reported score."
+      ],
+      "keepRecordedRunStatusSeparateFromIndependentEvaluation": true
+    }
+  },
+  "executionGuidance": {
+    "samePromptAcrossRuns": true,
+    "cleanWorkspacePerModelAndHarnessAttempt": true,
+    "reuseSameStarterFixtureAndTestEnvironment": true,
+    "capture": [
+      "Exact prompt supplied to the harness",
+      "Harness and model identifier",
+      "Run command and working directory",
+      "Session identifier when available",
+      "Wall-clock, user, and system time when available",
+      "Reported cost and token usage when available",
+      "Tool transcript or source log",
+      "Final response",
+      "Test commands and their output",
+      "Warnings and environment limitations"
+    ]
+  },
+  "dataQualityNotes": [
+    "This file defines the C-01 benchmark task; it is not an individual model/harness run record and contains no run score, session ID, runtime, cost, or token totals.",
+    "The supplied execution notes describe the task as C-01 Payment Idempotency and report that DeepSeek V4.1 Flash and GLM 5.3 Flash passed four independent public checks and four private regression checks. Treat those as recorded evaluation notes until the evaluator and corresponding test evidence are independently inspected.",
+    "The supplied Codex transcript shows an initial test attempt failed because `python` was not on PATH, a later `python3 -m pytest` attempt failed because pytest was unavailable, and `PYTHONPATH=src python3 -m unittest tests.test_payments -v` succeeded with six tests. Preserve this sequence in any corresponding run record rather than claiming pytest passed.",
+    "The gateway-failure/key-state scenario appears in the supplied evaluation summary but is not explicitly stated in the original C-01 prompt. If scored, identify it as an independent robustness check or update task wording consistently for future benchmark runs.",
+    "Keep run-level facts and the independent evaluator outcome separate in results.json."
+  ]
+}

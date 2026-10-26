@@ -1,0 +1,17 @@
+{
+  "taskId": "R-03",
+  "categoryId": "reasoning",
+  "title": "Rule precedence and exceptions",
+  "difficulty": "Hard",
+  "prompt": "A security system applies these rules:\n1. Unverified users are denied.\n2. Verified users may access only between 09:00 and 18:00.\n3. Emergency requests may bypass rule 2.\n4. Emergency requests from unverified users are still denied.\n5. A request with maintenance=true is allowed only when made by an administrator.\n6. An administrator is always considered verified.\n\nAt 22:30, determine whether each request is ALLOWED or DENIED:\nA) verified, emergency=false\nB) verified, emergency=true\nC) unverified, emergency=true\nD) administrator, maintenance=true\nE) administrator, maintenance=false, emergency=false\n\nGive one short reason for each.",
+  "expectedOutcome": {
+    "A": "DENIED",
+    "B": "ALLOWED",
+    "C": "DENIED",
+    "D": "ALLOWED",
+    "E": "DENIED"
+  },
+  "evaluationCriteria": "PASS only if all five decisions are correct and each reason cites the applicable rule(s). Treat the five decisions as a structured output, not a free-form score.",
+  "whatItMeasures": "Rule precedence, exception handling, and resisting incorrect global assumptions.",
+  "knownAmbiguity": "Rule 5 says maintenance requests are allowed only when made by an administrator, but does not explicitly state that administrator maintenance requests bypass the time restriction in rule 2. The current expected outcome says D is ALLOWED. Confirm this interpretation with the team."
+}

@@ -1,0 +1,161 @@
+{
+  "taskId": "WS-02",
+  "resultTaskId": "web-search-WS-02",
+  "categoryId": "web-search",
+  "title": "Next.js App Router: GET Route Handler caching defaults in v14 and v15",
+  "version": "1.0.0",
+  "prompt": "A team upgraded its Next.js App Router application from version 14 to version 15. After the upgrade, a GET Route Handler that previously behaved as a cached endpoint no longer behaves that way.\n\nUsing official Next.js documentation, determine whether this is an expected default change. Explain the behavior in each version and provide the documented configuration change that restores static caching when appropriate.\n\nCite the official release or upgrade documentation. Do not confuse GET Route Handler caching with the separate caching behavior of fetch requests.\n\nExplain the relevant behavior clearly enough for a developer to decide what to change in their application. Do not rely on memory alone; if you cannot verify a claim from official documentation, state that limitation.",
+  "objective": "Assess whether the change in a GET Route Handler's caching behavior after upgrading from Next.js 14 to Next.js 15 is expected, using official Next.js documentation and clearly distinguishing Route Handler caching from fetch-request caching.",
+  "expectedOutcome": {
+    "conclusion": "Yes. This is an expected, documented default change in Next.js 15. In Next.js 14, GET Route Handlers using the Response API were cached by default unless dynamic APIs or configuration made them dynamic. In Next.js 15, GET Route Handlers are not cached by default.",
+    "keyPoints": [
+      "The official Next.js 15 release blog documents the change from cached-by-default to uncached-by-default for GET Route Handlers.",
+      "The Next.js 14 Route Handlers documentation says GET handlers using the Response object are cached by default, subject to dynamic behavior or configuration that opts out of caching.",
+      "To opt a GET Route Handler into static caching in Next.js 15, the documented route segment configuration is export const dynamic = 'force-static'. The response should show a correct example or equivalent clear implementation guidance.",
+      "Route Handler response caching is distinct from caching of fetch requests made inside the handler. In Next.js 15, fetch requests are also uncached by default, but configuring a fetch call with cache: 'force-cache' controls that fetch request; it is not the same setting as the Route Handler's dynamic configuration.",
+      "Other supported HTTP methods such as POST are not cached by the Route Handler caching setting described for GET methods.",
+      "The answer should use official Next.js source URLs and connect the cited sources to the claims they support. If the source trace does not establish live retrieval or verification, that limitation should be stated rather than inferred away."
+    ],
+    "recommendedAction": "If the GET Route Handler is safe to render statically and should retain the previous caching behavior, add export const dynamic = 'force-static' to the route.ts/route.js file. Do not apply this blindly to handlers that require request-time data; check the official documentation and the behavior of the handler first.",
+    "example": "export const dynamic = 'force-static'\n\nexport async function GET() {\n  return Response.json({ ok: true })\n}",
+    "authoritativeSources": [
+      {
+        "organization": "Vercel / Next.js",
+        "title": "Next.js 15 release blog",
+        "url": "https://nextjs.org/blog/next-15",
+        "supports": [
+          "The default GET Route Handler caching behavior changed from cached by default in Next.js 14 to uncached by default in Next.js 15.",
+          "The documented opt-in mechanism for GET Route Handler caching includes export const dynamic = 'force-static'.",
+          "The separate default change for fetch requests."
+        ]
+      },
+      {
+        "organization": "Vercel / Next.js",
+        "title": "Route Handlers — Next.js 14 documentation",
+        "url": "https://nextjs.org/docs/14/app/building-your-application/routing/route-handlers",
+        "supports": [
+          "In Next.js 14, Route Handlers are cached by default when using the GET method with the Response object."
+        ]
+      },
+      {
+        "organization": "Vercel / Next.js",
+        "title": "Upgrading: Version 15",
+        "url": "https://nextjs.org/docs/app/guides/upgrading/version-15",
+        "supports": [
+          "GET functions in Route Handlers are no longer cached by default in Next.js 15.",
+          "The documented force-static configuration to opt GET methods into caching."
+        ]
+      },
+      {
+        "organization": "Vercel / Next.js",
+        "title": "Route Handlers — Next.js 15 documentation",
+        "url": "https://nextjs.org/docs/15/app/getting-started/route-handlers-and-middleware",
+        "supports": [
+          "Route Handlers are not cached by default, with an option to opt GET methods into caching.",
+          "Other supported HTTP methods are not cached."
+        ]
+      },
+      {
+        "organization": "Vercel / Next.js",
+        "title": "Route Segment Config — Next.js 15 documentation",
+        "url": "https://nextjs.org/docs/15/app/api-reference/file-conventions/route-segment-config",
+        "supports": [
+          "The dynamic route segment configuration and force-static behavior."
+        ]
+      }
+    ]
+  },
+  "searchRequirements": {
+    "requiredCapability": "Use the web-search capability available in the active harness to find and verify official Next.js documentation.",
+    "preferredSourceTypes": [
+      "Official Next.js release blog",
+      "Official version-specific Next.js documentation",
+      "Official Next.js upgrade guide"
+    ],
+    "minimumAuthoritativeSources": 2,
+    "mustRetrieveOrVerifySources": true,
+    "mustCiteSourceUrls": true,
+    "sourceClaimAlignmentRequired": true,
+    "notes": [
+      "Prefer the official Next.js 15 release or upgrade documentation for the version-change claim, and use the version 14 documentation to verify the previous default when available.",
+      "The task prompt should remain the same across models and harnesses; the configured search backend can differ by harness.",
+      "A URL included in the final answer is not, by itself, proof that the page was retrieved or verified during the run.",
+      "A technically correct answer without observable search evidence should not automatically receive a verified web-search execution status."
+    ]
+  },
+  "mcp": {
+    "requiredCapability": "web_search",
+    "expectedToolFlow": [
+      "Search official Next.js sources for the Next.js 15 caching-default change.",
+      "Verify the previous GET Route Handler caching default using the Next.js 14 documentation or an official Next.js 15 migration/release source that explicitly describes the previous behavior.",
+      "Verify the Next.js 15 default and the documented dynamic = 'force-static' opt-in from the official release or upgrade guide.",
+      "Verify that GET Route Handler caching and fetch-request caching are separate mechanisms, using official documentation.",
+      "Synthesize a concise, implementation-ready answer with source URLs and appropriate caveats."
+    ],
+    "toolNameMayVaryByHarness": true
+  },
+  "evaluationConfig": {
+    "checks": [
+      {
+        "id": "version_14_behavior",
+        "description": "Correctly explains that, in Next.js 14, GET Route Handlers using the Response object were cached by default unless dynamic APIs or configuration changed that behavior."
+      },
+      {
+        "id": "version_15_behavior",
+        "description": "Correctly identifies uncached-by-default behavior for GET Route Handlers in Next.js 15 as an intentional documented change."
+      },
+      {
+        "id": "force_static_configuration",
+        "description": "Provides the documented export const dynamic = 'force-static' configuration to opt an appropriate GET Route Handler into static caching."
+      },
+      {
+        "id": "official_sources",
+        "description": "Uses official Next.js release, upgrade, or version-specific documentation to support material claims."
+      },
+      {
+        "id": "source_claim_alignment",
+        "description": "Cites source URLs and aligns each key claim with the documentation that supports it."
+      },
+      {
+        "id": "route_handler_vs_fetch_cache",
+        "description": "Clearly distinguishes GET Route Handler response caching from fetch request caching and does not present cache: 'force-cache' as an equivalent replacement for the route-level setting."
+      },
+      {
+        "id": "implementation_guidance",
+        "description": "Gives clear, correct guidance a developer can apply to an appropriate route.ts or route.js file."
+      },
+      {
+        "id": "caveats_and_scope",
+        "description": "Does not suggest blindly forcing static caching for handlers that require request-time data; where relevant, notes that dynamic behavior and other HTTP methods have different semantics."
+      },
+      {
+        "id": "search_execution_evidence",
+        "description": "Available logs or structured tool trace demonstrate that web search was used and official sources were retrieved or verified."
+      },
+      {
+        "id": "no_memory_only_answer",
+        "description": "The run demonstrates source-based research rather than relying solely on an unsupported answer from memory."
+      }
+    ],
+    "toolTrace": {
+      "requiredForIndependentSearchVerification": true,
+      "mustShowSearchQueriesOrRetrievedSourcesWhenAvailable": true,
+      "mustSupportCitedSourceVerification": true,
+      "toolNameMayVaryByHarness": true
+    },
+    "reviewPolicy": {
+      "manualReviewWhen": [
+        "The technical answer appears correct but available logs do not establish that web search was used.",
+        "The answer cites official documentation URLs but the trace does not show that the pages or search results were retrieved or verified.",
+        "The execution trace is incomplete or unavailable, preventing independent verification of source use.",
+        "The answer conflates Route Handler caching with fetch-request caching or cites unversioned documentation without adequately supporting the Next.js 14 versus 15 distinction."
+      ],
+      "doNotInferSearchSuccessFromFinalAnswerAlone": true
+    }
+  },
+  "dataQualityNotes": [
+    "This file defines the benchmark task and expected outcome; it does not assign a score or status to any individual model or harness run.",
+    "The supplied DeepSeek Codex response reports that the core behavior was confirmed by official Next.js 15 release and upgrade documentation, but says it did not independently load a live Next.js 14 documentation page during that run.",
+    "Keep the recorded run status separate from independent evaluator status. If a result has a strong technical answer but incomplete source-retrieval evidence, use the manual-review pathway instead of assuming a fully verified web-search pass."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "taskId": "T-02",
+  "resultTaskId": "tool-use-T-02",
+  "categoryId": "tool-use",
+  "title": "Customer account tier upgrade",
+  "version": "1.0.0",
+  "prompt": "For Priya Mehta (priya.mehta@example.test), inspect her customer account. If she is eligible for a tier upgrade, upgrade her from silver to gold. If she is not eligible, do not modify the account. Use the available customer-account tools to complete the task and report the final tier.",
+  "objective": "Determine whether the specified customer is eligible for a tier upgrade, perform the appropriate conditional action, and report the final account tier without modifying an ineligible account.",
+  "expectedOutcome": {
+    "customer": {
+      "name": "Priya Mehta",
+      "email": "priya.mehta@example.test"
+    },
+    "initialAccountState": {
+      "tier": "silver"
+    },
+    "upgradeEligibility": true,
+    "expectedAction": "upgrade_tier",
+    "targetTier": "gold",
+    "finalAccountState": {
+      "tier": "gold"
+    },
+    "accountModified": true
+  },
+  "mcp": {
+    "requiredTools": [
+      "t02-customer-account/search_customer",
+      "t02-customer-account/get_customer_account",
+      "t02-customer-account/update_customer_tier"
+    ],
+    "expectedToolFlow": [
+      "Search for the customer using the supplied identity.",
+      "Inspect the customer's account and determine upgrade eligibility.",
+      "Upgrade the customer from silver to gold only if eligible.",
+      "Report the final account tier."
+    ],
+    "toolOrder": [
+      "t02-customer-account/search_customer",
+      "t02-customer-account/get_customer_account",
+      "t02-customer-account/update_customer_tier"
+    ]
+  },
+  "evaluationConfig": {
+    "checks": [
+      {
+        "id": "customer_identity",
+        "description": "The agent identifies Priya Mehta using the supplied email address."
+      },
+      {
+        "id": "initial_tier",
+        "description": "The agent inspects the account and establishes that the starting tier is silver."
+      },
+      {
+        "id": "eligibility_decision",
+        "description": "The agent bases the upgrade decision on the account's eligibility information."
+      },
+      {
+        "id": "conditional_action",
+        "description": "The agent upgrades the account to gold only when the customer is eligible and does not modify an ineligible account."
+      },
+      {
+        "id": "final_tier",
+        "description": "The reported final tier matches the account's resulting state."
+      },
+      {
+        "id": "state_integrity",
+        "description": "The agent changes only the intended customer's tier and does not modify unrelated account data."
+      },
+      {
+        "id": "tool_usage",
+        "description": "The agent uses the customer-account tools to locate and inspect the account before attempting an update."
+      },
+      {
+        "id": "tool_order",
+        "description": "The customer is searched for and the account is inspected before the tier update."
+      }
+    ],
+    "stateIntegrity": {
+      "startingTier": "silver",
+      "expectedFinalTier": "gold",
+      "expectedMutation": {
+        "field": "tier",
+        "from": "silver",
+        "to": "gold"
+      },
+      "unrelatedFieldsMustRemainUnchanged": true
+    },
+    "toolTrace": {
+      "required": true,
+      "mustShowToolOrder": true,
+      "mustIncludeToolInputsAndOutputsWhenAvailable": true
+    }
+  },
+  "dataQualityNotes": [
+    "The expected outcome reflects the recorded test scenario in which Priya Mehta is eligible and her tier changes from silver to gold.",
+    "The eligibility criteria themselves must come from the customer-account tool data; this task definition does not invent additional eligibility rules.",
+    "The recorded DeepSeek run did not include a separate post-update account read, while the recorded GLM run did. The evaluator should use available state evidence and tool outputs when assessing the final tier."
+  ]
+}
